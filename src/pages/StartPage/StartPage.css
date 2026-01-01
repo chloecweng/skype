@@ -17,19 +17,60 @@
 
 .chat-field {
     display: flex;
-    width: 793px;
-    height: 488px;
-    padding: 8px;
     flex-direction: column;
     justify-content: space-between;
-    align-items: center;
-    border-radius: 0 5px 5px 5px;
-    border: 1px solid #C9C9C9;
+    align-items: center; 
+    width: 777px;
+    height: 472px;
+    padding: 8px 8px 8px 8px;
     background: #FFF;
+    border: 1px solid #C9C9C9;
+    border-radius: 0 5px 5px 5px;
+    box-sizing: border-box;
+    z-index: 1;
+}
+
+.chat-column {
+    display: flex;
+    flex-direction: column; /* Stacks tab on top of box */
+    align-items: flex-start; /* Keeps the tab on the left side */
     position: absolute;
     bottom: 4px;
     right: 4px;
-    box-sizing: border-box;
+}
+
+.skype-tab {
+    display: flex;
+    width: 58px;
+    height: 19px;
+    padding: 4px 4px 8px 4px;
+    align-items: flex-end;
+    gap: 4px;
+    border-radius: 5px 5px 0 0;
+    border-top: 1px solid #C9C9C9;
+    border-right: 1px solid #C9C9C9;
+    border-left: 1px solid #C9C9C9;
+    background: #FFF;
+    margin-bottom: -1px;
+    z-index: 2;
+}
+
+.skype-tab-icon {
+    width: 17px; 
+    height: 17px;
+    object-fit: contain;
+    margin-bottom: 1px; 
+}
+
+.skype-text {
+    color: #4A4A4A;
+    font-family: "Segoe UI", sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    opacity: 0.8;
+    margin-left: -2px;
 }
 
 .history-container {
@@ -178,4 +219,570 @@
     font-family: "Segoe UI", sans-serif;
     font-size: 12px;
     cursor: pointer;
+}
+
+.chat-buttons {
+    display: flex;
+    /* This pushes the left-buttons and right-button to opposite sides */
+    justify-content: space-between; 
+    align-items: center; /* Vertically centers both groups on the same line */
+    width: 100%;
+    padding: 10px 16px;
+    background-color: #FFF;
+    box-sizing: border-box;
+}
+
+.left-buttons {
+    display: flex;
+    gap: 8px; /* Spacing between "Call" and "Video Call" */
+    margin-left: -14px;
+    margin-top: -10px;
+}
+
+.skype-call-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 68x;
+    height: 29px;
+    padding: 4px 10px;
+    border-radius: 75px;
+    border: 1px solid #00AE00;
+    background: linear-gradient(180deg, #FFF 0%, #00AE00 50%);
+    color: white;
+    font-family: "Segoe UI", sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+.call-icon {
+    width: 18px;
+    height: 18px;
+    filter: brightness(0) invert(1);
+}
+
+.add-people-button {
+    display: flex;
+    width: 74px;
+    height: 16px;
+    padding: 0 8px;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    border-radius: 10px;
+    background: #FFF;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.25);
+    position: absolute;
+    right: 8px;
+    cursor: pointer;
+}
+
+.add-icon {
+    width: 8px;
+    height: 8px;
+}
+
+.add-people-text {  
+    color: #6B6B6B;
+    font-family: "Segoe UI", sans-serif;
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.right-button {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-right: -14px;
+    margin-top: -10px;
+}
+
+.info-dropdown-pill {
+    display: flex;
+    flex-direction: row;
+    width: 36px;
+    height: 17px;
+    padding: 6px;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    border-radius: 100px;
+    background: #FFF;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+}
+
+.dropdown-arrow-svg {
+    width: 12px;
+    height: 8px;
+    align-self: flex-end;
+}
+
+.info-icon-wrapper {
+    position: relative; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+}
+
+.info-char {
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #6B6B6B;
+    font-family: "Fira Mono", monospace;
+    font-size: 12px;
+    font-weight: 500;
+    pointer-events: none;
+}
+
+.info-icon-svg {
+    width: 18px;
+    height: 8px;
+    display: block;
+}
+
+.skype-sidebar {
+  width: 365px; /* Adjust based on your screen size */
+  background-color: #DEF8FF;
+  display: flex;
+  flex-direction: column;
+  padding: 4px;
+  height: 100vh;
+}
+
+.chat-header {
+    width: 100%;             /* Let flexbox handle the width */
+    max-width: 777px;        /* Match the width of .chat-field below it */
+    background-color: transparent; /* Background should come from the container */
+    display: flex;
+    flex-direction: column;
+    padding: 0;              /* Remove the 100vh and extra padding */
+    margin-top: 4px;         /* Nudge it down to match the sidebar's top profile card */
+    height: 161px;            /* Allow it to shrink to its content */
+    position: absolute;
+    right: 6px;
+}
+
+.status-icon {
+    width: 20px;
+    height: 20px;
+    position: relative;
+    left: -4px;
+}
+
+.polygon-icon {
+    width: 12px;
+    height: 8px;
+    position: relative;
+    left: -6px;
+}
+
+.user-display-name {
+    color: #6B6B6B;
+    font-family: "Segoe UI", sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.status-row {
+    display: flex;
+    padding: 0 8px; /* Give internal spacing for the icons */
+    width: 100%;    /* Let it fill the card's width */
+    height: 24px;
+    justify-content: flex-start;
+    align-items: center;
+    box-sizing: border-box; /* Ensures padding doesn't break the width */
+    border-radius: 5px 5px 0 0;
+    border: 1px solid #C9C9C9;
+    background: #FFF;
+    gap: 6px;
+    margin: 0 auto;
+}
+
+/* The white boxes */
+.user-profile-card {
+  background: #C7DBEF;;
+  /* border: 1px solid #A5C7E9; */
+  border-radius: 5px 5px 0 0;
+  position: relative;
+  margin-bottom: 4px;
+}
+
+.august-profile-card {
+  background: #C7DBEF;;
+  /* border: 1px solid #C9C9C9; */
+  border-radius: 5px 5px 5px 5px;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.profile-content {
+  display: flex;
+  gap: 10px;
+  padding: 8px;
+  position: relative; /* This allows the button to anchor here */
+}
+
+.mood-area {
+    display: flex;
+    flex: 1;                /* Allow it to fill the space next to the avatar */
+    height: 56px;
+    padding: 6px 8px;       /* Specified padding */
+    background: #FFF;
+    border-radius: 5px;
+    box-sizing: border-box; /* Ensure padding is included in the size */
+}
+
+.mood-area2 {
+    display: flex;
+    flex: 1;
+    width: 678px;
+    height: 117px;
+    align-items: center;
+    background: #FFF;
+    position: relative;
+    border-radius: 5px 5px 5px 5px;
+}
+
+.time-area {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    width: 339px;
+    height: 32px;
+    /* padding: 0px 0px 8px 0px; */
+    align-items: center;
+    gap: 8px;
+    border-top: 1px solid #CCD3E1;
+    border-right: 1px solid #CCD3E1;
+    background: #F3FAFF;
+    border-bottom-left-radius: 5px;
+}
+
+.language-area {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    width: 331px;
+    height: 39px;
+    /* padding: 8px; */
+    align-items: center;
+    flex: 1 0 0;
+    align-self: stretch;
+    border-left: 1px solid #CCD3E1;
+    background: #F3FAFF;
+    border-top-right-radius: 5px;
+}
+
+.gender-area {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    width: 331px;
+    height: 39px;
+    /* padding: 8px; */
+    align-items: center;
+    gap: 8px;
+    flex: 1 0 0;
+    align-self: stretch;
+    border-top: 1px solid #CCD3E1;
+    border-left: 1px solid #CCD3E1;
+    background: #F3FAFF;
+}
+
+.name-area {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    width: 331px;
+    height: 39px;
+    /* padding: 8px; */
+    align-items: center;
+    gap: 8px;
+    flex: 1 0 0;
+    align-self: stretch;
+    border-top: 1px solid #CCD3E1;
+    border-left: 1px solid #CCD3E1;
+    background: #F3FAFF;
+    border-bottom-right-radius: 5px;
+}
+
+.right-arrow {
+    display: flex;
+    padding: 4px 6px 4px 8px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0 10px 10px 0;
+    background: #FFF;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.25);
+    width: 12px;
+    height: 8px;
+    position: static;
+    left: 0;
+    margin: 0
+}
+
+.left-arrow {
+    display: flex;
+    padding: 4px 6px 4px 8px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px 0 0 10px;
+    background: #FFF;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.25);
+    width: 12px;
+    height: 8px;
+    position: static;
+    left: 0;
+    margin: 0
+}
+
+.language-icon {
+    width: 21px;
+    height: 20px;
+    position: relative;
+    left: 8px;
+}
+
+.gender-icon {
+    position: relative;
+    left: 8px;
+}
+
+.skype2-icon {
+    position: relative;
+    left: 8px;
+    opacity: 0.3;
+}
+
+.mood-bubble {
+    color: #000;
+    font-family: Verdana;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.clapper-icon {
+    width: 19px;
+    height: 19px;
+    aspect-ratio: 1/1;
+    margin-left: auto;      /* Pushes it to the far right */
+}
+
+.personalize-btn {
+    display: flex;
+    position: absolute;      /* Detach from flex flow */
+    bottom: 8px;             /* 8px from bottom edge of blue area */
+    right: 8px;              /* 8px from right edge */
+    width: auto;             /* Let text define width */
+    height: 18px;            /* Standard pill height */
+    padding: 2px 10px;
+    border-radius: 12px;
+    border: 1px solid #C9C9C9;
+    background: #FFF;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+    cursor: pointer;
+    z-index: 5;
+}
+
+.personalize-text {
+    color: #6B6B6B;
+    font-family: "Segoe UI", sans-serif;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.avatar-placeholder {
+  width: 88px;
+  height: 88px;
+  background: #DCE6F2; /* Grey-blue for empty avatar */
+  border: 1px solid #A5C7E9;
+}
+
+.august-placeholder {
+    width: 109px;
+    height: 109px;
+    background: #DCE6F2; /* Grey-blue for empty avatar */
+    border: 1px solid #A5C7E9;
+    position: relative;
+    top: 2px;
+}
+
+.promo-link-row {
+    display: flex;
+    padding: 2px 4px 4px 4px;
+    align-items: flex-end;
+    gap: 2px;
+    align-self: stretch;
+    background: #C7DBEF;
+    margin-bottom: 8px;
+    border-radius: 0px 0px 5px 5px;
+}
+
+.promo-text {
+    color: #07F;
+    font-family: "Segoe UI", sans-serif;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    opacity: 0.8;
+}
+
+.contacts-container {
+  flex-grow: 1; /* Makes the contact list fill the remaining height */
+  display: flex;
+  flex-direction: column;
+}
+
+.search-bar-row {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 8px;
+}
+
+.add-contact-btn {
+    display: flex;
+    padding: 2px 8px;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    border-radius: 20px;
+    background: #FFF;
+    border: 1px solid #C9C9C9;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+}
+
+.add-user-icon {
+    display: flex;
+    /* padding: 7px 1px 1px 7px; */
+}
+
+.add-btn-text {
+    font-size: 14px; 
+    font-family: "Segoe UI", sans-serif;
+    color: #333;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.contact-search {
+    display: flex;
+    padding: 4px;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+    border-radius: 2px;
+    border: 1px solid #C9C9C9;
+    background: #FFF;
+}
+
+.contact-search::placeholder {
+    color: #A5A5A5;
+    font-family: "Segoe UI", sans-serif;
+    font-size: 11.5px;
+    font-style: normal;
+    font-weight: 350;
+    line-height: normal;
+}
+
+.tab-headers {
+    display: flex;
+    width: 100%;
+    margin-bottom: 0; /* Remove bottom margin so they touch the box */
+    align-items: flex-end;
+}
+
+.tab-active {
+    display: flex;
+    padding: 6px 12px; /* Authentic Skype padding */
+    background: #FFF;
+    border: 1px solid #C9C9C9;
+    border-bottom: 1px solid #FFF; /* Masks the box border */
+    border-radius: 5px 5px 0 0;
+    margin-bottom: -1px; /* The "overlap" trick */
+    z-index: 2; /* Sits on top */
+    font-family: "Segoe UI", sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 580;
+    line-height: normal;
+    color: #545454;
+}
+
+.tab {
+    display: flex;
+    width: 300px;
+    position: relative;
+    bottom: -1px;
+    left: -1px;
+    padding: 6px 12px;
+    background: #FFF; /* Inactive tabs are usually slightly darker */
+    border: 1px solid #C9C9C9;
+    border-radius: 5px 5px 0 0;
+    margin-bottom: 0; 
+    z-index: 1;
+    font-family: "Segoe UI", sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 580;
+    line-height: normal;
+    color: #545454;
+    cursor: pointer;
+}
+
+.contacts-list {
+    flex-grow: 1; /* Fills the sidebar */
+    border: 1px solid #C9C9C9;
+    background: #FFF;
+    border-radius: 0 5px 5px 5px; /* Top-left is sharp where the active tab sits */
+    z-index: 1;
+    min-height: 200px; /* Temporary height while list is empty */
+    padding: 2px;
+}
+
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Higher than other elements */
+}
+
+/* The actual window */
+.popup-content {
+    background: white;
+    /* border-radius: 8px; */
+    /* box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); */
+    width: 753px;
+    height: 611px;
+    text-align: center;
+    gap: 48px;
 }
