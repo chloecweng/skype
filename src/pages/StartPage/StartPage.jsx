@@ -63,15 +63,15 @@ const StartPage = () => {
             </div>
             <div className="profile-content">
                 <div className="avatar-placeholder"></div>
+                <div className="mood-area-container">
                 <div className="mood-area">
                     <div className="mood-bubble">Ill talk most of the time :)</div>
                     <img src="/public/assets/clapper.png" className="clapper-icon" alt="" />
                 </div>
-                
-                {/* Move button here so it anchors to the bottom-right of the blue area */}
                 <button className="personalize-btn">
                     <span className="personalize-text">Personalize ▾</span>
                 </button>
+                </div>
             </div>
           </div>
 
@@ -88,7 +88,8 @@ const StartPage = () => {
             <div className="search-bar-row">
               <button className="add-contact-btn" onClick={togglePopup}>
                 <img src="/public/assets/person.png" className="add-user-icon" alt="" />
-                <span className="add-btn-text">New ▾</span>
+                <span className="add-btn-text">New</span>
+                <img src="/public/assets/polygon2-black.svg" className="dropdown-arrow-svg" style={{width: "10px"}} alt="" />
               </button>
               <input
                 type="text"
