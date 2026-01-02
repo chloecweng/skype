@@ -137,19 +137,13 @@ const StartPage = () => {
                             className="language-icon"
                             alt=""
                         />
-                        <div className="left-arrow">
-                            <img
-                                src="/public/assets/left.svg"
-                                className="arrow-icon"
-                                alt=""
-                            />
-                        </div>
-                        <div className="right-arrow">
-                            <img
-                                src="/public/assets/right.svg"
-                                className="arrow-icon"
-                                alt=""
-                            />
+                        <div className="arrow-group">
+                            <div className="left-arrow">
+                                <img src="/public/assets/left.svg" alt="" />
+                            </div>
+                            <div className="right-arrow">
+                                <img src="/public/assets/right.svg" alt="" />
+                            </div>
                         </div>
                     </div>
                     <div className="gender-area">

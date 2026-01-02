@@ -481,7 +481,6 @@
     display: flex;
     width: 331px;
     height: 39px;
-    /* padding: 8px; */
     align-items: center;
     flex: 1 0 0;
     align-self: stretch;
@@ -526,34 +525,33 @@
     border-bottom-right-radius: 5px;
 }
 
-.right-arrow {
+.arrow-group {
     display: flex;
-    padding: 4px 6px 4px 8px;
+    gap: 0; /* Keep them touching like the Skype UI */
+    margin-left: auto;
+    position: relative;
+    right: 8px;
+}
+
+.left-arrow, .right-arrow {
+    display: flex;
+    width: 24px;  /* Adjusted for clickable area */
+    height: 18px;
     justify-content: center;
     align-items: center;
-    border-radius: 0 10px 10px 0;
     background: #FFF;
+    border: 1px solid #C9C9C9;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.25);
-    width: 12px;
-    height: 8px;
-    position: static;
-    left: 0;
-    margin: 0
+    cursor: pointer;
 }
 
 .left-arrow {
-    display: flex;
-    padding: 4px 6px 4px 8px;
-    justify-content: center;
-    align-items: center;
     border-radius: 10px 0 0 10px;
-    background: #FFF;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.25);
-    width: 12px;
-    height: 8px;
-    position: static;
-    left: 0;
-    margin: 0
+}
+
+.right-arrow {
+    border-radius: 0 10px 10px 0;
+    margin-left: -1px; /* Overlap borders to prevent a double-thick line */
 }
 
 .language-icon {
