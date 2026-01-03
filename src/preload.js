@@ -3,5 +3,15 @@
 const { contextBridge, ipcRenderer } = require('electron');
 
 contextBridge.exposeInMainWorld('electronAPI', {
-  openAddContactWindow: () => ipcRenderer.send('open-add-contact-window')
+  openAddContactWindow: () => ipcRenderer.send('open-add-contact-window'),
+  addContact: (contactData) => ipcRenderer.send('add-contact', contactData),
+  onContactAdded: (callback) => {
+    ipcRenderer.on('contact-added', (event, contactData) => callback(contactData));
+  },
+  removeContactAddedListener: () => {
+    ipcRenderer.removeAllListeners('contact-added');
+  },
+  resizeWindow: (width, height) => {
+    ipcRenderer.send('resize-add-contact-window', { width, height });
+  }
 });

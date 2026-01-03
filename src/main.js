@@ -10,9 +10,10 @@ if (started) {
 ipcMain.on('open-add-contact-window', () => {
   const addContactWin = new BrowserWindow({
     width: 753,
-    height: 398,
+    height: 600, // Increased to accommodate all steps
     modal: true,
-    resizable: false,      // Prevents the user from dragging the edges
+    resizable: true,      // Allow resizing to fit content
+    minimizable: true,
     maximizable: false,    // Disables the 'square' maximize button
     fullscreenable: false, // Prevents accidental full-screen mode
     useContentSize: true,
@@ -33,6 +34,23 @@ ipcMain.on('open-add-contact-window', () => {
     addContactWin.loadFile(path.join(__dirname, `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`), {
       hash: 'add-contact'
     });
+  }
+});
+
+// Handle window resize requests from AddContactPage
+ipcMain.on('resize-add-contact-window', (event, { width, height }) => {
+  const addContactWin = BrowserWindow.fromWebContents(event.sender);
+  if (addContactWin) {
+    addContactWin.setSize(width, height, true);
+  }
+});
+
+// Handle contact addition from AddContactPage
+ipcMain.on('add-contact', (event, contactData) => {
+  // Send to main window to update contacts list
+  const mainWindow = BrowserWindow.getAllWindows().find(win => !win.isModal());
+  if (mainWindow) {
+    mainWindow.webContents.send('contact-added', contactData);
   }
 });
 

@@ -1,17 +1,73 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./StartPage.css";
-// import AddContact from "../../components/AddContact"; // No longer needed
 
 const StartPage = () => {
-  // Removed isPopupOpen, setIsPopupOpen, and togglePopup
   const [message, setMessage] = useState("");
   const [chatHistory, setChatHistory] = useState([]);
   const [currentSceneKey, setCurrentSceneKey] = useState("NORMAL");
   const scrollRef = useRef(null);
 
+  // Contact management state
+  const [contacts, setContacts] = useState([]);
+  const [selectedContactId, setSelectedContactId] = useState(null);
+  const [contactChatHistories, setContactChatHistories] = useState({});
+
   const handleAddContact = () => {
     window.electronAPI.openAddContactWindow();
   };
+
+  // Listen for new contacts from AddContactPage
+  useEffect(() => {
+    if (window.electronAPI && window.electronAPI.onContactAdded) {
+      window.electronAPI.onContactAdded((contactData) => {
+        // Initialize chat history for new contact
+        setContactChatHistories((prev) => ({
+          ...prev,
+          [contactData.id]: []
+        }));
+        // Add contact to list
+        setContacts((prev) => [...prev, contactData]);
+        // Select the new contact
+        setSelectedContactId(contactData.id);
+      });
+    }
+
+    return () => {
+      if (window.electronAPI && window.electronAPI.removeContactAddedListener) {
+        window.electronAPI.removeContactAddedListener();
+      }
+    };
+  }, []);
+
+  // Update chat history when contact is selected
+  useEffect(() => {
+    if (selectedContactId && contactChatHistories[selectedContactId]) {
+      setChatHistory(contactChatHistories[selectedContactId]);
+    } else if (!selectedContactId) {
+      setChatHistory([]);
+    }
+  }, [selectedContactId, contactChatHistories]);
+
+  const handleContactClick = (contactId) => {
+    setSelectedContactId(contactId);
+  };
+
+  const getStatusIcon = (status) => {
+    switch (status) {
+      case 'online':
+        return '/assets/online.svg';
+      case 'busy':
+        return '/assets/busy.svg';
+      case 'dnd':
+        return '/assets/busy.svg'; // Use busy icon as DND placeholder
+      case 'offline':
+        return '/assets/busy.svg'; // Use busy icon as offline placeholder
+      default:
+        return '/assets/busy.svg';
+    }
+  };
+
+  const selectedContact = contacts.find(c => c.id === selectedContactId);
 
   // 1. DATA CONFIGURATION
   const SCENES = {
@@ -58,8 +114,10 @@ const StartPage = () => {
     return () => window.removeEventListener("keydown", handleDirectorKeys);
   }, []);
 
-  // 3. SCENE LOGIC
+  // 3. SCENE LOGIC (only applies when no contact is selected)
   useEffect(() => {
+    if (selectedContactId) return; // Don't apply scenes when a contact is selected
+    
     const scene = SCENES[currentSceneKey];
     
     // Immediately set the missed messages (with unique IDs)
@@ -86,7 +144,7 @@ const StartPage = () => {
     });
 
     return () => timeoutIds.forEach((id) => clearTimeout(id));
-  }, [currentSceneKey]);
+  }, [currentSceneKey, selectedContactId]);
 
   // 4. AUTO-SCROLL
   useEffect(() => {
@@ -96,7 +154,7 @@ const StartPage = () => {
   }, [chatHistory]);
 
   const handleSendMessage = () => {
-    if (message.trim() !== "") {
+    if (message.trim() !== "" && selectedContactId) {
       const newMessage = {
         id: Date.now(),
         text: message,
@@ -106,7 +164,15 @@ const StartPage = () => {
           minute: "2-digit",
         }),
       };
-      setChatHistory([...chatHistory, newMessage]);
+      
+      // Update the contact's chat history
+      setContactChatHistories((prev) => ({
+        ...prev,
+        [selectedContactId]: [...(prev[selectedContactId] || []), newMessage]
+      }));
+      
+      // Update current chat history
+      setChatHistory((prev) => [...prev, newMessage]);
       setMessage("");
     }
   };
@@ -121,6 +187,13 @@ const StartPage = () => {
       e.preventDefault();
       handleSendMessage();
     }
+  };
+
+  const getPlaceholderText = () => {
+    if (selectedContact) {
+      return `Type a message to ${selectedContact.name} here`;
+    }
+    return "Type a message to August27 here";
   };
 
   return (
@@ -166,15 +239,38 @@ const StartPage = () => {
               <div className="tab-active">Contacts</div>
               <div className="tab">Conversations</div>
             </div>
-            <div className="contacts-list"></div>
+            <div className="contacts-list">
+              <div className="contacts-list-scrollable">
+                {contacts.map((contact) => (
+                  <div
+                    key={contact.id}
+                    className={`contact-item ${selectedContactId === contact.id ? 'contact-selected' : ''}`}
+                    onClick={() => handleContactClick(contact.id)}
+                  >
+                    <div className="contact-status-icon">
+                      <img src={getStatusIcon(contact.status)} alt="" />
+                    </div>
+                    <p className="contact-name">{contact.name}</p>
+                    <p className="contact-status-message">({contact.statusMessage})</p>
+                  </div>
+                ))}
+              </div>
+              <div className="usercount-footer">
+                <p>16,175,278 people online</p>
+              </div>
+            </div>
           </div>
         </div>
 
         <div className="chat-header">
           <div className="august-profile-card">
             <div className="status-row">
-              <img src="/assets/busy.svg" className="status-icon" alt="" />
-              <span className="user-display-name">August27</span>
+              <img 
+                src={selectedContact ? getStatusIcon(selectedContact.status) : "/assets/busy.svg"} 
+                className="status-icon" 
+                alt="" 
+              />
+              <span className="user-display-name">{selectedContact ? selectedContact.name : "August27"}</span>
               <div className="add-people-button">
                 <img src="/assets/add.svg" className="add-icon" alt="" />
                 <span className="add-people-text">Add people</span>
@@ -256,10 +352,11 @@ const StartPage = () => {
                   </div>
                   <textarea
                     className="chat-input"
-                    placeholder="Type a message to August27 here"
+                    placeholder={getPlaceholderText()}
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     onKeyDown={handleKeyDown}
+                    disabled={!selectedContactId}
                   />
                 </div>
                 <div className="message-button" onClick={handleSendMessage}>
@@ -270,8 +367,6 @@ const StartPage = () => {
           </div>
         </div>
       </div>
-
-      {/* Removed modal rendering for AddContact */}
 
       {/* DIRECTOR PANEL */}
       <div className="director-panel">

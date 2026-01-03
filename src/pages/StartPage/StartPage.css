@@ -765,6 +765,111 @@
     z-index: 1;
     min-height: 200px; /* Temporary height while list is empty */
     padding: 2px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.contacts-list-scrollable {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-item {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    padding: 3px 2px;
+    position: relative;
+    border-radius: 5px;
+    flex-shrink: 0;
+    width: 100%;
+    cursor: pointer;
+    background: #FFF;
+}
+
+.contact-item:hover {
+    background: #f5f5f5;
+}
+
+.contact-selected {
+    background: linear-gradient(180deg, #4ec3ff 0%, #1fb3ff 100%);
+}
+
+.contact-selected:hover {
+    background: linear-gradient(180deg, #4ec3ff 0%, #1fb3ff 100%);
+}
+
+.contact-status-icon {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
+.contact-status-icon img {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.contact-name {
+    font-family: "Segoe UI", sans-serif;
+    font-weight: 400;
+    line-height: normal;
+    font-style: normal;
+    position: relative;
+    flex-shrink: 0;
+    font-size: 12px;
+    color: #000;
+    white-space: nowrap;
+    margin: 0;
+}
+
+.contact-selected .contact-name {
+    color: #FFF;
+}
+
+.contact-status-message {
+    font-family: "Segoe UI", sans-serif;
+    font-weight: 300;
+    line-height: normal;
+    font-style: normal;
+    position: relative;
+    flex-shrink: 0;
+    font-size: 12px;
+    color: #6f6f6f;
+    white-space: nowrap;
+    margin: 0;
+}
+
+.contact-selected .contact-status-message {
+    color: #efefef;
+}
+
+.usercount-footer {
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    position: relative;
+    flex-shrink: 0;
+    width: 100%;
+    background: #FFF;
+}
+
+.usercount-footer p {
+    font-family: "Segoe UI", sans-serif;
+    font-weight: 300;
+    line-height: normal;
+    font-style: normal;
+    position: relative;
+    flex-shrink: 0;
+    color: #a5a5a5;
+    font-size: 12px;
+    white-space: nowrap;
+    margin: 0;
 }
 
 .popup-overlay {
