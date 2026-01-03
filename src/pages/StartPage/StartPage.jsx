@@ -1,13 +1,94 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./StartPage.css";
-import AddContact from "../../components/AddContact";
+// import AddContact from "../../components/AddContact"; // No longer needed
 
 const StartPage = () => {
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  // Removed isPopupOpen, setIsPopupOpen, and togglePopup
   const [message, setMessage] = useState("");
   const [chatHistory, setChatHistory] = useState([]);
+  const [currentSceneKey, setCurrentSceneKey] = useState("NORMAL");
   const scrollRef = useRef(null);
 
+  const handleAddContact = () => {
+    window.electronAPI.openAddContactWindow();
+  };
+
+  // 1. DATA CONFIGURATION
+  const SCENES = {
+    NORMAL: {
+      initialHistory: [],
+      incomingScript: []
+    },
+    SCENE_2: {
+      initialHistory: [
+        { sender: "August27", text: "Hello. Can u call tonight?", time: "10:14 PM" },
+        { sender: "August27", text: "Please. I will payy u..", time: "10:15 PM" },
+        { sender: "August27", text: "Are yu there? Hello. Can u ucal tonite?", time: "10:22 PM" },
+        { sender: "August27", text: "Can u call tonight.", time: "10:30 PM" }
+      ],
+      incomingScript: [] // No new messages pop up here
+    },
+    SCENE_4: {
+      initialHistory: [
+        { sender: "August27", text: "TEMP", time: "11:00 PM" }
+      ],
+      incomingScript: [
+        { sender: "August27", text: "Where rrr u?", delay: 1000 },
+        { sender: "August27", text: "WHys did you aleave!", delay: 4500 },
+        { sender: "August27", text: "I'[m still herea wating", delay: 10500 },
+        { sender: "August27", text: "come back. I pAid you", delay: 14500 },
+        { sender: "August27", text: "I love you", delay: 17500 },
+        { sender: "August27", text: "I will kill you for this.", delay: 23000 },
+      ]
+    }
+  };
+
+  // 2. KEYBOARD LISTENER (Director's Remote)
+  useEffect(() => {
+    const handleDirectorKeys = (e) => {
+      // Don't trigger if James is typing
+      if (e.target.tagName === "TEXTAREA" || e.target.tagName === "INPUT") return;
+
+      if (e.key === "1") setCurrentSceneKey("NORMAL");
+      if (e.key === "2") setCurrentSceneKey("SCENE_2");
+      if (e.key === "4") setCurrentSceneKey("SCENE_4"); // Map '4' key to SCENE_4
+    };
+
+    window.addEventListener("keydown", handleDirectorKeys);
+    return () => window.removeEventListener("keydown", handleDirectorKeys);
+  }, []);
+
+  // 3. SCENE LOGIC
+  useEffect(() => {
+    const scene = SCENES[currentSceneKey];
+    
+    // Immediately set the missed messages (with unique IDs)
+    setChatHistory(scene.initialHistory.map(msg => ({
+        ...msg,
+        id: `initial-${Math.random()}`
+    })));
+
+    // Set timers for incoming messages if they exist
+    const timeoutIds = (scene.incomingScript || []).map((msg) => {
+      return setTimeout(() => {
+        setChatHistory((prev) => [
+          ...prev,
+          {
+            id: `incoming-${Math.random()}`,
+            sender: msg.sender,
+            text: msg.text,
+            time: new Date().toLocaleTimeString([], {
+              hour: "2-digit",
+              minute: "2-digit",
+            }),
+          }]);
+      }, msg.delay);
+    });
+
+    return () => timeoutIds.forEach((id) => clearTimeout(id));
+  }, [currentSceneKey]);
+
+  // 4. AUTO-SCROLL
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
@@ -42,176 +123,109 @@ const StartPage = () => {
     }
   };
 
-  const togglePopup = () => {
-    setIsPopupOpen(!isPopupOpen);
-  };
-
   return (
     <div className="start-page-container">
       <div className="skype-background-layer">
         <div className="skype-sidebar">
-          {/* 1. TOP USER BOX */}
+          {/* USER BOX */}
           <div className="user-profile-card">
             <div className="status-row">
-              <img
-                src="/public/assets/online.svg"
-                className="status-icon"
-                alt=""
-              />
-              <img src="/public/assets/polygon2.svg" className="polygon-icon" alt="" />
+              <img src="/assets/online.svg" className="status-icon" alt="" />
+              <img src="/assets/polygon2.svg" className="polygon-icon" alt="" />
               <span className="user-display-name">User</span>
             </div>
             <div className="profile-content">
-                <div className="avatar-placeholder"></div>
-                <div className="mood-area-container">
+              <div className="avatar-placeholder"></div>
+              <div className="mood-area-container">
                 <div className="mood-area">
-                    <div className="mood-bubble">Ill talk most of the time :)</div>
-                    <img src="/public/assets/clapper.png" className="clapper-icon" alt="" />
+                  <div className="mood-bubble">Ill talk most of the time :)</div>
+                  <img src="/assets/clapper.png" className="clapper-icon" alt="" />
                 </div>
                 <button className="personalize-btn">
-                    <span className="personalize-text">Personalize ▾</span>
+                  <span className="personalize-text">Personalize ▾</span>
                 </button>
-                </div>
+              </div>
             </div>
           </div>
 
-          {/* 2. MIDDLE LINK */}
           <div className="promo-link-row">
-            <img src="/public/assets/landline.svg" className="promo-icon" alt="" />
-            <span className="promo-text">
-              Make your free call to an ordinary phone
-            </span>
+            <img src="/assets/landline.svg" className="promo-icon" alt="" />
+            <span className="promo-text">Make your free call to an ordinary phone</span>
           </div>
 
-          {/* 3. BOTTOM CONTACTS BOX */}
           <div className="contacts-container">
             <div className="search-bar-row">
-              <button className="add-contact-btn" onClick={togglePopup}>
-                <img src="/public/assets/person.png" className="add-user-icon" alt="" />
+              <button className="add-contact-btn" onClick={handleAddContact}>
+                <img src="/assets/person.png" className="add-user-icon" alt="" />
                 <span className="add-btn-text">New</span>
-                <img src="/public/assets/polygon2-black.svg" className="dropdown-arrow-svg" style={{width: "10px"}} alt="" />
+                <img src="/assets/polygon2-black.svg" className="dropdown-arrow-svg" style={{width: "10px"}} alt="" />
               </button>
-              <input
-                type="text"
-                className="contact-search"
-                placeholder="Search Contacts, Groups, and Conversation Topics"
-              />
+              <input type="text" className="contact-search" placeholder="Search Contacts..." />
             </div>
-
             <div className="tab-headers">
               <div className="tab-active">Contacts</div>
               <div className="tab">Conversations</div>
             </div>
-
-            <div className="contacts-list">
-              {/* Contact rows like 'Arnas' go here */}
-            </div>
+            <div className="contacts-list"></div>
           </div>
         </div>
-        {/* CHAT AREA */}
+
         <div className="chat-header">
-            <div className="august-profile-card">
+          <div className="august-profile-card">
             <div className="status-row">
-              <img
-                src="/public/assets/busy.svg"
-                className="status-icon"
-                alt=""
-              />
+              <img src="/assets/busy.svg" className="status-icon" alt="" />
               <span className="user-display-name">August27</span>
               <div className="add-people-button">
-                  <img
-                      src="/public/assets/add.svg"
-                      className="add-icon"
-                      alt=""
-                  />
-                  <span className="add-people-text">Add people</span>
+                <img src="/assets/add.svg" className="add-icon" alt="" />
+                <span className="add-people-text">Add people</span>
               </div>
             </div>
             <div className="profile-content">
-                <div className="august-placeholder"></div>
-                <div className="mood-area2">
-                    <div className="time-area"></div>
-                    <div className="language-area">
-                        <img
-                            src="/public/assets/language.svg"
-                            className="language-icon"
-                            alt=""
-                        />
-                        <div className="arrow-group">
-                            <div className="left-arrow">
-                                <img src="/public/assets/left.svg" alt="" />
-                            </div>
-                            <div className="right-arrow">
-                                <img src="/public/assets/right.svg" alt="" />
-                            </div>
-                        </div>
-                    </div>
-                    <div className="gender-area">
-                        <img
-                            src="/public/assets/gender.svg"
-                            className="gender-icon"
-                            alt=""
-                        />
-                    </div>
-                    <div className="name-area">
-                        <img
-                            src="/public/assets/skype.png"
-                            className="skype2-icon"
-                            alt=""
-                        />
-                    </div>
+              <div className="august-placeholder"></div>
+              <div className="mood-area2">
+                <div className="time-area"></div>
+                <div className="language-area">
+                  <img src="/assets/language.svg" className="language-icon" alt="" />
+                  <div className="arrow-group">
+                    <div className="left-arrow"><img src="/assets/left.svg" alt="" /></div>
+                    <div className="right-arrow"><img src="/assets/right.svg" alt="" /></div>
+                  </div>
                 </div>
+                <div className="gender-area"><img src="/assets/gender.svg" className="gender-icon" alt="" /></div>
+                <div className="name-area"><img src="/assets/skype.png" className="skype2-icon" alt="" /></div>
+              </div>
             </div>
           </div>
         </div>
-        {/** CHAT COLUMN */}
+
         <div className="chat-column">
           <div className="skype-tab">
-            <img
-              src="/public/assets/skype.png"
-              className="skype-tab-icon"
-              alt=""
-            />
+            <img src="/assets/skype.png" className="skype-tab-icon" alt="" />
             <span className="skype-text">Skype</span>
           </div>
           <div className="chat-field">
             <div className="chat-buttons">
               <div className="left-buttons">
                 <button className="skype-call-button">
-                  <img
-                    src="/public/assets/call.svg"
-                    className="call-icon"
-                    alt=""
-                  />
+                  <img src="/assets/call.svg" className="call-icon" alt="" />
                   <span>Call</span>
                 </button>
                 <button className="skype-call-button">
-                  <img
-                    src="/public/assets/video.svg"
-                    className="call-icon"
-                    alt=""
-                  />
+                  <img src="/assets/video.svg" className="call-icon" alt="" />
                   <span>Video Call</span>
                 </button>
               </div>
               <div className="right-button">
                 <div className="info-dropdown-pill">
                   <div className="info-icon-wrapper">
-                    <img
-                      src="/public/assets/ellipse2.svg"
-                      className="info-icon-svg"
-                      alt="Info"
-                    />
+                    <img src="/assets/ellipse2.svg" className="info-icon-svg" alt="" />
                     <span className="info-char">i</span>
                   </div>
-                  <img
-                    src="/public/assets/polygon2.svg"
-                    className="dropdown-arrow-svg"
-                    alt=""
-                  />
+                  <img src="/assets/polygon2.svg" className="dropdown-arrow-svg" alt="" />
                 </div>
               </div>
             </div>
+
             <div className="history-container" ref={scrollRef}>
               {chatHistory.map((msg) => (
                 <div key={msg.id} className="chat-bubble-grid">
@@ -224,11 +238,7 @@ const StartPage = () => {
 
             <div className="message-box">
               <div className="show-messages">
-                <img
-                  src="/public/assets/clock.svg"
-                  className="tool-icon-clock"
-                  alt=""
-                />
+                <img src="/assets/clock.svg" className="tool-icon-clock" alt="" />
                 <span className="tool-text">Show messages from:</span>
                 <span className="blue-text">Yesterday</span>
                 <span className="tool-text">•</span>
@@ -238,38 +248,11 @@ const StartPage = () => {
                 <span className="tool-text">•</span>
                 <span className="blue-text">From Beginning</span>
               </div>
-
               <div className="input-row-wrapper">
                 <div className="message-field">
                   <div className="message-tools">
-                    <div className="tool-item">
-                      <img
-                        src="/public/assets/smile.svg"
-                        className="tool-icon"
-                        alt=""
-                      />
-                      <img
-                        src="/public/assets/polygon2.svg"
-                        className="tool-icon-small"
-                        alt=""
-                      />
-                    </div>
-                    <div className="tool-item">
-                      <img
-                        src="/public/assets/file.svg"
-                        className="tool-icon"
-                        alt=""
-                      />
-                      <span className="tool-text">Send file</span>
-                    </div>
-                    <div className="tool-item">
-                      <img
-                        src="/public/assets/puzzle.svg"
-                        className="tool-icon"
-                        alt=""
-                      />
-                      <span className="tool-text">Extras</span>
-                    </div>
+                    <div className="tool-item"><img src="/assets/smile.svg" className="tool-icon" alt="" /></div>
+                    <div className="tool-item"><span className="tool-text">Send file</span></div>
                   </div>
                   <textarea
                     className="chat-input"
@@ -280,18 +263,22 @@ const StartPage = () => {
                   />
                 </div>
                 <div className="message-button" onClick={handleSendMessage}>
-                  <img
-                    src="/public/assets/icon.svg"
-                    className="send-icon"
-                    alt="Send"
-                  />
+                  <img src="/assets/icon.svg" className="send-icon" alt="Send" />
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      {isPopupOpen && <AddContact onClose={togglePopup} />}
+
+      {/* Removed modal rendering for AddContact */}
+
+      {/* DIRECTOR PANEL */}
+      <div className="director-panel">
+        <button onClick={() => setCurrentSceneKey("NORMAL")}>1: Reset</button>
+        <button onClick={() => setCurrentSceneKey("SCENE_2")}>2: Scene 2</button>
+        <button onClick={() => setCurrentSceneKey("SCENE_4")}>4: Scene 4</button>
+      </div>
     </div>
   );
 };

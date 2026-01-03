@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, ipcMain } from 'electron';
 import path from 'node:path';
 import started from 'electron-squirrel-startup';
 
@@ -6,6 +6,35 @@ import started from 'electron-squirrel-startup';
 if (started) {
   app.quit();
 }
+
+ipcMain.on('open-add-contact-window', () => {
+  const addContactWin = new BrowserWindow({
+    width: 753,
+    height: 398,
+    modal: true,
+    resizable: false,      // Prevents the user from dragging the edges
+    maximizable: false,    // Disables the 'square' maximize button
+    fullscreenable: false, // Prevents accidental full-screen mode
+    useContentSize: true,
+    parent: BrowserWindow.getFocusedWindow(),
+    webPreferences: {
+      preload: path.join(__dirname, 'preload.js'),
+      contextIsolation: true,
+    }
+  });
+
+  // Check if we are in Development using the same variable as your mainWindow
+  if (MAIN_WINDOW_VITE_DEV_SERVER_URL) {
+    // Development: Use the dev server URL + the hash route
+    addContactWin.loadURL(`${MAIN_WINDOW_VITE_DEV_SERVER_URL}#/add-contact`);
+  } else {
+    // Production: Use the same path logic as your mainWindow + the hash
+    // We use MAIN_WINDOW_VITE_NAME here because it's the folder name Vite creates
+    addContactWin.loadFile(path.join(__dirname, `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`), {
+      hash: 'add-contact'
+    });
+  }
+});
 
 const createWindow = () => {
   // Create the browser window.

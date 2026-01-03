@@ -1,0 +1,80 @@
+.add-contact-window {
+    display: flex;
+    width: 753px;
+    height: 398px;
+    flex-direction: column;
+    align-items: center;
+    gap: 48px;
+    background: #FFF;
+}
+
+.add-people-icon {
+    width: 79px;
+    height: 79px;
+    aspect-ratio: 1/1;
+}
+
+.add-text {
+    display: flex;
+    color: #000;
+    font-family: "Segoe UI", sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.contact-header {
+    display: flex;
+    padding: 0 20px;
+    align-items: flex-start;
+    gap: 10px;
+    align-self: stretch;
+    background: #EBEBEB;
+}
+
+.contact-body {
+    display: flex;
+    width: 753px;
+    height: 302px;
+    flex-direction: column;
+    align-items: center;
+    gap: 48px;
+    padding-left: 87px;
+    padding-right: 87px;
+}
+
+.contact-box {
+    display: flex;
+    width: 563px;
+    height: 102px;
+    padding: 12px 8px 8px 8px;
+    align-items: flex-start;
+    gap: 4px;
+    border-radius: 5px;
+    border: 1px solid #C9C9C9;
+    background: linear-gradient(0deg, #FFF 73.08%, #CECECE 100%);
+}
+
+.number-box {
+    display: flex;
+    width: 571px;
+    height: 20px;
+    padding: 12px 4px;
+    align-items: center;
+    gap: 4px;
+    border-radius: 10px;
+    border: 1px solid #C9C9C9;
+}
+
+.contact-footer {
+    display: flex;
+    width: 737px;
+    height: 20px;
+    padding: 12px 8px;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+    align-self: stretch;
+    background: #EBEBEB;
+}

@@ -790,3 +790,20 @@
     text-align: center;
     gap: 48px;
 }
+
+.director-panel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100px;
+    height: 10px; /* Very thin sliver at the top */
+    background: transparent;
+    opacity: 0; /* Hidden from camera */
+    z-index: 9999;
+}
+
+.director-panel:hover {
+    opacity: 1; /* Only appears when you hover your mouse over the top left corner */
+    background: rgba(0,0,0,0.8);
+    height: auto;
+}
