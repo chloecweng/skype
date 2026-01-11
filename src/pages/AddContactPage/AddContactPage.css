@@ -1,7 +1,7 @@
 .add-contact-window {
   display: flex;
   width: 753px;
-  min-height: 400px;
+  /* min-height: 393px; */
   flex-direction: column;
   align-items: center;
   gap: 48px;
@@ -35,6 +35,7 @@
   width: 79px;
   height: 79px;
   flex-shrink: 0;
+  left: 20px;
 }
 
 .addUserImg img {
@@ -50,10 +51,10 @@
 
 .header-title {
   display: flex;
+  align-items: center;
   flex-direction: column;
   font-family: "Segoe UI", sans-serif;
-  height: 33px;
-  justify-content: flex-end;
+  justify-content: center;
   line-height: 0;
   font-style: normal;
   position: relative;
@@ -61,7 +62,7 @@
   font-size: 16px;
   color: #000;
   font-weight: 700;
-  width: 107px;
+  margin-left: 18px;
 }
 
 .header-title p {
@@ -78,6 +79,7 @@
   width: 579px;
   z-index: 2;
   min-height: fit-content;
+  align-items: center;
 }
 
 .contact-email-container {
@@ -226,9 +228,10 @@
   flex-shrink: 0;
   font-size: 12px;
   color: #000;
-  text-align: right;
-  width: 51px;
+  text-align: left; /* Changed from right to left */
+  width: auto; /* Changed from 51px to auto */
   margin: 0;
+  margin-left: -510px;
 }
 
 .add-phone {
@@ -287,6 +290,8 @@
   flex-shrink: 0;
   width: 100%;
   z-index: 1;
+  height: 44px;
+  box-sizing: border-box;
 }
 
 .add-contact-btn-inactive {
@@ -351,6 +356,7 @@
   color: #000;
   white-space: nowrap;
   cursor: pointer;
+  margin-right: 8px
 }
 
 /* Progress Bar */
@@ -361,39 +367,32 @@
   border-radius: 10px;
   flex-shrink: 0;
   width: 524px;
+  margin: 0 auto;
 }
 
 .progress-bar-background {
   position: absolute;
-  height: 8px;
-  left: 0;
-  border-radius: 10px;
-  top: 0;
-  width: 588px;
-  background: url("http://localhost:3845/assets/ba64d42b3c6a80deb40d425562b0ff788f4fda72.png");
-  background-size: cover;
-  border: 1px solid #c9c9c9;
   height: 10px;
-  left: -1px;
-  border-radius: 11px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 10px;
   top: -1px;
-  width: 590px;
+  width: 524px;
+  background: #eee url("/assets/progress-bar-background.svg");
+  background-size: cover;
 }
 
 .progress-bar-fill {
   position: absolute;
-  display: flex;
-  flex-direction: column;
   height: 8px;
-  align-items: flex-start;
-  left: 294px;
+  left: 0; /* This will be animated */
   opacity: 0.583;
   border-radius: 10px;
   top: 0;
-  width: 107px;
-  background: url("http://localhost:3845/assets/f4f3649a0e43bfaadcfff389c069b1cdbb9a0303.png");
+  width: 107px; /* Fixed width - doesn't grow */
+  background: url("/assets/progress-bar-foreground.svg");
   background-size: cover;
-  transition: width 0.1s ease;
+  transition: left 0.1s ease; /* Animate position, not width */
 }
 
 /* Results Table */
@@ -408,12 +407,18 @@
   box-shadow: 2px 2px 1px 0px rgba(0, 0, 0, 0.5);
   width: 100%;
   border-collapse: collapse;
+  margin: 0 auto;
 }
 .results-table th,
 .results-table td {
   text-align: left;
   vertical-align: middle;
 }
+
+.results-table td:nth-child(1) { width: 140px; }
+.results-table td:nth-child(2) { width: 115px; }
+.results-table td:nth-child(3) { width: 230px; }
+.results-table td:nth-child(4) { width: 34px; }
 
 .column-labels {
   display: flex;
@@ -427,6 +432,7 @@
 .column-header {
   background: #fff;
   padding: 0 8px;
+  border-right: 1px solid #c9c9c9;
   position: relative;
   flex-shrink: 0;
   font-family: "Segoe UI", sans-serif;
@@ -436,6 +442,11 @@
   font-size: 12px;
   color: #000;
 }
+
+.column-header:nth-child(1) { width: 119px; } /* Full Name */
+.column-header:nth-child(2) { width: 99px; } /* Skype Name */
+.column-header:nth-child(3) { width: 230px; }  /* Country - This takes the remaining space */
+.column-header:nth-child(4) { width: 34px; border-right: none; }
 
 .result-row {
   background: #00abfb;
@@ -640,6 +651,7 @@
   font-size: 12px;
   padding: 8px;
   resize: none;
+  max-width: 485px;
 }
 
 .contact-country {
@@ -688,6 +700,7 @@
   color: #000;
   white-space: nowrap;
   cursor: pointer;
+  margin-left: 8px;
 }
 
 .footer-btn-wrapper {
@@ -747,14 +760,14 @@
   width: 100%;
 }
 
-.hurray-icon {
+.checkmark-icon {
   position: relative;
   width: 19px;
   height: 19px;
   flex-shrink: 0;
 }
 
-.hurray-icon > div {
+.checkmark-icon > div {
   position: absolute;
   inset: 0;
   overflow: hidden;
@@ -780,6 +793,7 @@
   color: #000;
   white-space: nowrap;
   margin: 0;
+  top: 2px;
 }
 
 .status-example {

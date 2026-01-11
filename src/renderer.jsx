@@ -3,6 +3,7 @@ import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import './index.css';
 import StartPage from './pages/StartPage/StartPage';
 import AddContactPage from './pages/AddContactPage/AddContactPage';
+import CallPopupWindow from './pages/CallPopup/CallPopup';
 
 const App = () => {
   return (
@@ -10,6 +11,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<StartPage />} />
         <Route path="/add-contact" element={<AddContactPage />} />
+        <Route path="/call-popup" element={<CallPopupWindow />} />
       </Routes>
     </Router>
   );

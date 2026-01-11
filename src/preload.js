@@ -1,17 +1,29 @@
 // See the Electron documentation for details on how to use preload scripts:
 // https://www.electronjs.org/docs/latest/tutorial/process-model#preload-scripts
-const { contextBridge, ipcRenderer } = require('electron');
+const { contextBridge, ipcRenderer } = require("electron");
 
-contextBridge.exposeInMainWorld('electronAPI', {
-  openAddContactWindow: () => ipcRenderer.send('open-add-contact-window'),
-  addContact: (contactData) => ipcRenderer.send('add-contact', contactData),
+contextBridge.exposeInMainWorld("electronAPI", {
+  openAddContactWindow: () => ipcRenderer.send("open-add-contact-window"),
+  addContact: (contactData) => ipcRenderer.send("add-contact", contactData),
   onContactAdded: (callback) => {
-    ipcRenderer.on('contact-added', (event, contactData) => callback(contactData));
+    ipcRenderer.on("contact-added", (event, contactData) =>
+      callback(contactData)
+    );
   },
   removeContactAddedListener: () => {
-    ipcRenderer.removeAllListeners('contact-added');
+    ipcRenderer.removeAllListeners("contact-added");
   },
   resizeWindow: (width, height) => {
-    ipcRenderer.send('resize-add-contact-window', { width, height });
-  }
+    ipcRenderer.send("resize-add-contact-window", { width, height });
+  },
+  openCallWindow: () => ipcRenderer.send("open-call-window"),
+  answerVideoCall: (callData) => ipcRenderer.send("answer-video-call", callData), // Add callData parameter
+
+  onVideoCallAnswered: (callback) => {
+    ipcRenderer.on("video-call-answered", (event, data) => callback(data));
+  },
+
+  removeVideoCallListener: () => {
+    ipcRenderer.removeAllListeners("video-call-answered");
+  },
 });

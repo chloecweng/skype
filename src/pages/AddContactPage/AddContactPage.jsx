@@ -11,13 +11,12 @@ const AddContactPage = () => {
   // Resize window based on current step
   useEffect(() => {
     if (window.electronAPI && window.electronAPI.resizeWindow) {
-      // Step heights: 1=~350px, 2=~350px, 3=~500px, 4=~450px, 5=~600px
       const stepHeights = {
-        1: 400,
-        2: 400,
-        3: 486,
-        4: 422,
-        5: 629,
+        1: 393,
+        2: 329,
+        3: 475,
+        4: 412,
+        5: 611,
       };
       const height = stepHeights[currentStep] || 600;
       window.electronAPI.resizeWindow(753, height);
@@ -30,13 +29,13 @@ const AddContactPage = () => {
       setLoadingProgress(0);
       const interval = setInterval(() => {
         setLoadingProgress((prev) => {
-          if (prev >= 50) {
+          if (prev >= 100) {
             clearInterval(interval);
-            return 50;
+            return 100;
           }
-          return prev + 2;
+          return prev + 1;
         });
-      }, 100);
+      }, 35);
 
       const timeout = setTimeout(() => {
         setCurrentStep(3);
@@ -63,10 +62,13 @@ const AddContactPage = () => {
   const handleAddSkypeContact = () => {
     if (currentStep === 3) {
       setSelectedContact({
-        name: "James",
-        skypeName: "cashflowtubes",
-        fullName: "Nick Lannan",
-        country: "United States, ohio",
+        name: "August 27",
+        skypeName: "Aug27",
+        fullName: "August 27",
+        country: "United States, Ohio",
+        language: 'English', // Add this
+        gender: 'Male', // Add this
+        localTime: '4:55 PM', // Add this
       });
       setCurrentStep(4);
     }
@@ -81,11 +83,24 @@ const AddContactPage = () => {
     if (window.electronAPI && window.electronAPI.addContact) {
       window.electronAPI.addContact({
         id: `contact-${Date.now()}`,
-        name: selectedContact?.name || "James",
-        skypeName: selectedContact?.skypeName || "cashflowtubes",
+        name: selectedContact?.name || "August 27",
+        skypeName: selectedContact?.skypeName || "Aug27",
         status: "offline",
-        statusMessage: message.trim() || "(happy)",
+        statusMessage: "(happy)", // to do: august's status message
         country: selectedContact?.country || "United States",
+        language: 'English', // Add this
+        gender: 'Male', // Add this
+        localTime: '4:55 PM', // Add this
+        chatHistory: [
+        { 
+          sender: "HarborLine", 
+          text: message.trim() || "Hey.",
+          time: new Date().toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit",
+          }),
+        }
+        ],
       });
     }
     window.close();
@@ -141,7 +156,7 @@ const AddContactPage = () => {
               <p className="or-text">...or</p>
               <div className="add-phone">
                 <div className="landline-icon">
-                  <img src="/assets/landline.svg" alt="" />
+                  <img src="/assets/landline-plus.svg" alt="" />
                 </div>
                 <p className="phone-link">
                   Add an ordinary phone number as a SkypeOut contact
@@ -199,8 +214,8 @@ const AddContactPage = () => {
               <div className="progress-bar-container">
                 <div className="progress-bar-background"></div>
                 <div
-                  className="progress-bar-fill"
-                  style={{ width: `${loadingProgress}%` }}
+                className="progress-bar-fill"
+                style={{ left: `${(loadingProgress / 100) * (524 - 107)}px` }}
                 ></div>
               </div>
             </div>
@@ -256,7 +271,7 @@ const AddContactPage = () => {
                 <div className="progress-bar-background"></div>
                 <div
                   className="progress-bar-fill"
-                  style={{ width: "50%" }}
+                  style={{ left: `${(loadingProgress / 100) * (524)}px` }}
                 ></div>
               </div>
               <table class="results-table">
@@ -271,8 +286,8 @@ const AddContactPage = () => {
                 </thead>
                 <tbody className="result-row">
                   <tr>
-                    <td>Nick Lannan</td>
-                    <td>cashflowtubes</td>
+                    <td>August 27</td>
+                    <td>Aug27</td>
                     <td>
                       <div class="result-location">
                         <img
@@ -314,7 +329,7 @@ const AddContactPage = () => {
           <>
             <div className="contact-message-container">
               <p className="intro-text">
-                Add <span className="bold-text">James</span> to your Contact
+                Add <span className="bold-text">August 27</span> to your Contact
                 List and request his/her contact details.
               </p>
               <div className="contact-message-wrapper">
@@ -322,7 +337,7 @@ const AddContactPage = () => {
                   <div className="online-icon-small">
                     <img src="/assets/online.svg" alt="" />
                   </div>
-                  <p className="contact-name-header">James ???</p>
+                  <p className="contact-name-header">August 27</p>
                 </div>
                 <div className="contact-message">
                   <div className="contact-profile-placeholder">
@@ -362,14 +377,14 @@ const AddContactPage = () => {
           <>
             <div className="completion-wrapper">
               <div className="hurray-banner">
-                <div className="hurray-icon">
+                <div className="checkmark-icon">
                   <img
-                    src="http://localhost:3845/assets/f3a0799cbdea4e3fac10e046ce98cb12aaad73e9.png"
+                    src="/assets/checkmark.svg"
                     alt=""
                   />
                 </div>
                 <p className="hurray-text">
-                  Hurray! You've added Darragh Delaney to your Contact list
+                  Hurray! You've added August 27 to your Contact list
                 </p>
               </div>
               <div className="status-example">
@@ -380,7 +395,7 @@ const AddContactPage = () => {
                   </p>
                   <div className="offline-icon">
                     <img
-                      src="http://localhost:3845/assets/003d50ea9afe645ee50b637e83d825215cf3db14.svg"
+                      src="/assets/offline-icon.svg"
                       alt=""
                     />
                   </div>

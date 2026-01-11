@@ -1,8 +1,7 @@
-import { app, BrowserWindow, ipcMain } from 'electron';
+import { app, BrowserWindow, ipcMain, screen } from 'electron';
 import path from 'node:path';
 import started from 'electron-squirrel-startup';
 
-// Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (started) {
   app.quit();
 }
@@ -10,7 +9,7 @@ if (started) {
 ipcMain.on('open-add-contact-window', () => {
   const addContactWin = new BrowserWindow({
     width: 753,
-    height: 600, // Increased to accommodate all steps
+    height: 393, // Decreased
     modal: true,
     resizable: true,      // Allow resizing to fit content
     minimizable: true,
@@ -54,6 +53,30 @@ ipcMain.on('add-contact', (event, contactData) => {
   }
 });
 
+ipcMain.on('open-call-window', () => {
+  createCallWindow();
+});
+
+ipcMain.on('answer-video-call', (event, callData) => {
+  console.log('Received answer-video-call:', callData);
+  
+  const allWindows = BrowserWindow.getAllWindows();
+  console.log('All windows:', allWindows.length);
+  
+  // Find the main window (not modal, not the call popup)
+  const mainWindow = allWindows.find(win => 
+    win.webContents !== event.sender && !win.isModal()
+  );
+
+  console.log('Main window found:', !!mainWindow);
+
+  if (mainWindow) {
+    mainWindow.webContents.send('video-call-answered', callData);
+    mainWindow.focus();
+    mainWindow.show();
+  }
+});
+
 const createWindow = () => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
@@ -68,7 +91,14 @@ const createWindow = () => {
     },
   });
 
-  // and load the index.html of the app.
+  mainWindow.on('close', (e) => {
+    console.log('Main window is trying to close');
+  });
+
+  mainWindow.on('closed', () => {
+    console.log('Main window closed');
+  });
+
   if (MAIN_WINDOW_VITE_DEV_SERVER_URL) {
     mainWindow.loadURL(MAIN_WINDOW_VITE_DEV_SERVER_URL);
   } else {
@@ -79,14 +109,39 @@ const createWindow = () => {
   // mainWindow.webContents.openDevTools();
 };
 
+function createCallWindow() {
+  const { width: screenWidth, height: screenHeight } = screen.getPrimaryDisplay().workAreaSize;
+
+  const callWindow = new BrowserWindow({
+    width: 506,
+    height: 147,
+    x: Math.round((screenWidth - 506) / 2),
+    y: Math.round((screenHeight - 137) / 2),
+    frame: false,
+    alwaysOnTop: true,
+    transparent: true,
+    resizable: false,
+    webPreferences: {
+      preload: path.join(__dirname, 'preload.js'),
+      contextIsolation: true,
+    },
+  });
+
+  if (MAIN_WINDOW_VITE_DEV_SERVER_URL) {
+    callWindow.loadURL(`${MAIN_WINDOW_VITE_DEV_SERVER_URL}#/call-popup`);
+  } else {
+    callWindow.loadFile(path.join(__dirname, `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`), {
+      hash: 'call-popup'
+    });
+  }
+}
+
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
   createWindow();
 
-  // On OS X it's common to re-create a window in the app when the
-  // dock icon is clicked and there are no other windows open.
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
       createWindow();
@@ -94,13 +149,8 @@ app.whenReady().then(() => {
   });
 });
 
-// Quit when all windows are closed, except on macOS. There, it's common
-// for applications and their menu bar to stay active until the user quits
-// explicitly with Cmd + Q.
 app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit();
-  }
+  app.quit();
 });
 
 // In this file you can include the rest of your app's specific main process

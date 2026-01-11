@@ -346,12 +346,13 @@
 }
 
 .skype-sidebar {
-  width: 365px; /* Adjust based on your screen size */
+  width: 365px;
   background-color: #DEF8FF;
   display: flex;
   flex-direction: column;
   padding: 4px;
-  height: 100vh;
+  min-height: 0;
+  max-height: 100vh;
 }
 
 .chat-header {
@@ -416,11 +417,87 @@
 
 .august-profile-card {
   background: #C7DBEF;;
-  /* border: 1px solid #C9C9C9; */
   border-radius: 5px 5px 5px 5px;
   position: relative;
   width: 100%;
   height: 100%;
+}
+
+.black-bg {
+    background: linear-gradient(to bottom, #000000 0%, #3a3a3a 100%);
+    width: 777px;
+    height: 616px;
+    padding: 12px 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    right: 2px;
+    box-sizing: border-box;
+    gap: 12px;
+}
+
+.august-profile-card-video, .self-view-card {
+    width: 393.33px;
+    height: 295px;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.video-call, .video-self {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* This fills the square perfectly */
+}
+
+/* Mirror the self-view so it feels natural to the user */
+.video-self {
+    transform: scaleX(-1);
+}
+
+.video-call-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #fffdf6;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.end-call-btn {
+  background: linear-gradient(180deg, #ffb6b6 0%, #eb2424 50%);
+  border: 1px solid #eb2424;
+  border-radius: 75px;
+  padding: 8px 20px;
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  font-family: "Segoe UI", sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.stop-video-btn {
+  background: linear-gradient(180deg, #7ecef3 0%, #02bce2 50%);
+  border: 1px solid #02bce2;
+  border-radius: 75px;
+  padding: 8px 20px;
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  font-family: "Segoe UI", sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
 }
 
 .profile-content {
@@ -436,15 +513,26 @@
     gap: 16px;
     flex: 1 0 0;
 }
+
+.status-message {
+    padding: 4px 8px;
+    font-family: "Segoe UI", sans-serif;
+    font-size: 14px;
+    position: relative;
+    bottom: 40px;
+}
+
 .mood-area {
     display: flex;
-    flex: 1;                /* Allow it to fill the space next to the avatar */
+    flex: 1;
     height: 56px;
-    padding: 6px 8px;       /* Specified padding */
+    padding: 6px 8px;
     background: #FFF;
     border-radius: 5px;
     width: 100%;
-    box-sizing: border-box; /* Ensure padding is included in the size */
+    box-sizing: border-box;
+    font-family: "Segoe UI", sans-serif;
+    font-size: 14px;
 }
 
 .mood-area2 {
@@ -456,6 +544,8 @@
     background: #FFF;
     position: relative;
     border-radius: 5px 5px 5px 5px;
+    font-family: "Segoe UI", sans-serif;
+    font-size: 14px;
 }
 
 .time-area {
@@ -472,6 +562,9 @@
     border-right: 1px solid #CCD3E1;
     background: #F3FAFF;
     border-bottom-left-radius: 5px;
+    font-family: "Segoe UI", sans-serif;
+    font-size: 14px;
+    gap: 14px;
 }
 
 .language-area {
@@ -487,6 +580,9 @@
     border-left: 1px solid #CCD3E1;
     background: #F3FAFF;
     border-top-right-radius: 5px;
+    font-family: "Segoe UI", sans-serif;
+    font-size: 14px;
+    gap: 14px;
 }
 
 .gender-area {
@@ -505,6 +601,9 @@
     border-top: 1px solid #CCD3E1;
     border-left: 1px solid #CCD3E1;
     background: #F3FAFF;
+    font-family: "Segoe UI", sans-serif;
+    font-size: 14px;
+    gap: 14px;
 }
 
 .name-area {
@@ -523,6 +622,16 @@
     border-left: 1px solid #CCD3E1;
     background: #F3FAFF;
     border-bottom-right-radius: 5px;
+    font-family: "Segoe UI", sans-serif;
+    font-size: 14px;
+    gap: 14px;
+}
+
+.flag-icon {
+    width: 21px;
+    height: 15px;
+    position: relative;
+    left: 8px;
 }
 
 .arrow-group {
@@ -651,9 +760,10 @@
 }
 
 .contacts-container {
-  flex-grow: 1; /* Makes the contact list fill the remaining height */
   display: flex;
   flex-direction: column;
+  /* Remove flex-grow: 1 so it doesn't fill the page */
+  height: auto;
 }
 
 .search-bar-row {
@@ -758,16 +868,15 @@
 }
 
 .contacts-list {
-    flex-grow: 1; /* Fills the sidebar */
-    border: 1px solid #C9C9C9;
-    background: #FFF;
-    border-radius: 0 5px 5px 5px; /* Top-left is sharp where the active tab sits */
-    z-index: 1;
-    min-height: 200px; /* Temporary height while list is empty */
-    padding: 2px;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
+  /* Remove flex-grow: 1 so it doesn't fill the page */
+  height: auto;
+  border: 1px solid #C9C9C9;
+  background: #FFF;
+  border-radius: 0 5px 5px 5px;
+  z-index: 1;
+  padding: 2px;
+  overflow-y: auto;
+  transition: height 0.2s;
 }
 
 .contacts-list-scrollable {
@@ -857,6 +966,7 @@
     flex-shrink: 0;
     width: 100%;
     background: #FFF;
+    margin-bottom: 2px;
 }
 
 .usercount-footer p {

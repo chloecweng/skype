@@ -1,0 +1,134 @@
+/* The main container for the popup window */
+.incoming-call-window {
+  width: 100%; /* Changed from 506px to fill the window */
+  height: 100%;
+  min-height: 137px;
+  background: #5a5a5a;
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  overflow: visible;
+}
+
+/* The thin top bar with the logo and X */
+.call-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 10px;
+  background: #5a5a5a;
+  border-bottom: 1px solid #3a3a3a;
+  min-height: 28px;
+  flex-shrink: 0;
+}
+
+.skype-call-logo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: bold;
+  color: white;
+}
+
+.skype-call-logo img {
+  width: 18px;
+  height: 18px;
+}
+
+.close-x {
+  background: white;
+  border: none;
+  color: #333;
+  cursor: pointer;
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  padding: 0;
+}
+
+/* The middle section with the avatar and text */
+.call-body {
+  display: flex;
+  align-items: center;
+  padding: 12px 15px 8px 15px;
+  gap: 15px;
+}
+
+.caller-avatar-large {
+  width: 90px;
+  height: 90px;
+  background: #eee url('/assets/avatar-placeholder.png') no-repeat center;
+  background-size: cover;
+  border: 2px solid #999;
+  flex-shrink: 0;
+}
+
+.call-info-text {
+  flex: 1;
+}
+
+.caller-name-title {
+  font-size: 18px;
+  font-weight: 400;
+  margin: 0;
+  color: white;
+  font-family: "Segoe UI", sans-serif;
+  margin-top: -40px;
+}
+
+/* The footer with those specific glossy buttons */
+.call-footer-actions {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  padding: 0 15px 12px 15px;
+  margin-top: -40px;
+  margin-right: -100px;
+}
+
+.btn-call-action {
+  border-radius: 18px;
+  padding: 6px 14px;
+  font-weight: bold;
+  font-size: 14px;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  justify-content: center;
+  white-space: nowrap;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.btn-call-action img {
+  width: 12px;
+  height: 12px;
+}
+
+/* Green Answer Buttons */
+.accept-audio, .accept-video {
+    border: 1px solid #00AE00;
+  background: linear-gradient(180deg, #FFF 0%, #00AE00 50%);
+}
+
+.accept-audio:hover, .accept-video:hover {
+  background: linear-gradient(180deg, #FFF 0%, #00AE00 50%);
+}
+
+/* Red Decline Button */
+.decline-call {
+    border: 1px solid #D32020;
+  background: linear-gradient(180deg, #FF5E5E 0%, #D32020 50%);
+}
+
+.decline-call:hover {
+  background: linear-gradient(180deg, #FF7070 0%, #E02828 50%);
+}
