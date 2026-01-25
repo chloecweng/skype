@@ -4,6 +4,7 @@ const { contextBridge, ipcRenderer } = require("electron");
 
 contextBridge.exposeInMainWorld("electronAPI", {
   openAddContactWindow: () => ipcRenderer.send("open-add-contact-window"),
+  openBlockedWindow: () => ipcRenderer.send('open-blocked-window'),
   addContact: (contactData) => ipcRenderer.send("add-contact", contactData),
   onContactAdded: (callback) => {
     ipcRenderer.on("contact-added", (event, contactData) =>

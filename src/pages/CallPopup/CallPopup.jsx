@@ -32,7 +32,7 @@ const CallPopupWindow = () => {
       <div className="incoming-call-window">
         <div className="call-header">
           <div className="skype-call-logo">
-            <img src="/assets/skype.png" alt="Skype" />
+            <img src="/assets/skype-wordmark.svg" alt="Skype" />
           </div>
           <button className="close-x" onClick={handleDecline}>
             ×
@@ -42,29 +42,31 @@ const CallPopupWindow = () => {
         <div className="call-body">
           <div className="caller-avatar-large"></div>
           <div className="call-info-text">
-            <p className="caller-name-title">August 27 is video calling</p>
+            <p className="caller-name-title">August27 is video calling</p>
           </div>
         </div>
 
         <div className="call-footer-actions">
-          <button className="btn-call-action accept-audio">
-            <img src="/assets/call.svg" alt="" />
-            Answer
-          </button>
-          <button
-            className="btn-call-action accept-video"
-            onClick={handleAnswerVideo}
-          >
-            <img src="/assets/video.svg" alt="" /> Answer with video
-          </button>
-          <button
-            className="btn-call-action decline-call"
-            onClick={handleDecline}
-          >
-            <img src="/assets/call.svg" alt="" />
-            Decline
-          </button>
-        </div>
+            <div className="answer-button">
+                <img src="/assets/answer-button.svg" alt="" />
+            </div>
+            <div className="answer-video-button">
+                <img 
+                src="/assets/answer-w-video-button.svg" 
+                alt="" 
+                onClick={handleAnswerVideo}
+                style={{ cursor: 'pointer' }}
+                />
+            </div>
+            <div className="decline-button">
+                <img 
+                src="/assets/decline-button.svg" 
+                alt="" 
+                onClick={handleDecline}
+                style={{ cursor: 'pointer' }}
+                />
+            </div>
+</div>
       </div>
     </div>
   );

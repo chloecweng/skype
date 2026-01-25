@@ -23,6 +23,19 @@ const AddContactPage = () => {
     }
   }, [currentStep]);
 
+  useEffect(() => {
+    const imagesToPreload = [
+      "/assets/offline-icon.svg",
+      "/assets/checkmark.svg",
+      "/assets/flower.png"
+    ];
+    
+    imagesToPreload.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+  }, []);
+
   // Auto-advance from step 2 to step 3 after 3-5 seconds
   useEffect(() => {
     if (currentStep === 2) {
@@ -62,9 +75,9 @@ const AddContactPage = () => {
   const handleAddSkypeContact = () => {
     if (currentStep === 3) {
       setSelectedContact({
-        name: "August 27",
+        name: "August27",
         skypeName: "Aug27",
-        fullName: "August 27",
+        fullName: "August27",
         country: "United States, Ohio",
         language: 'English', // Add this
         gender: 'Male', // Add this
@@ -83,23 +96,23 @@ const AddContactPage = () => {
     if (window.electronAPI && window.electronAPI.addContact) {
       window.electronAPI.addContact({
         id: `contact-${Date.now()}`,
-        name: selectedContact?.name || "August 27",
+        name: selectedContact?.name || "August27",
         skypeName: selectedContact?.skypeName || "Aug27",
         status: "offline",
-        statusMessage: "(happy)", // to do: august's status message
+        statusMessage: "", 
         country: selectedContact?.country || "United States",
-        language: 'English', // Add this
-        gender: 'Male', // Add this
-        localTime: '4:55 PM', // Add this
+        language: 'English',
+        gender: 'Male',
+        localTime: '3:31 PM', 
         chatHistory: [
-        { 
-          sender: "HarborLine", 
-          text: message.trim() || "Hey.",
-          time: new Date().toLocaleTimeString([], {
-            hour: "2-digit",
-            minute: "2-digit",
-          }),
-        }
+          { 
+            // Ensure every message has a unique ID for React's .map()
+            id: `first-msg-${Date.now()}`, 
+            sender: "HarborLine", 
+            // Trim the message or use "Hey." as a fallback
+            text: message.trim() || "Hey.",
+            time: "3:31 PM", 
+          }
         ],
       });
     }
@@ -267,13 +280,7 @@ const AddContactPage = () => {
                   </p>
                 </div>
               </div>
-              <div className="progress-bar-container">
-                <div className="progress-bar-background"></div>
-                <div
-                  className="progress-bar-fill"
-                  style={{ left: `${(loadingProgress / 100) * (524)}px` }}
-                ></div>
-              </div>
+              <div className="progress-bar-placeholder" style={{ height: '4px', margin: '2px 0' }}></div>
               <table class="results-table">
                 
                 <thead className="column-labels">
@@ -286,12 +293,12 @@ const AddContactPage = () => {
                 </thead>
                 <tbody className="result-row">
                   <tr>
-                    <td>August 27</td>
+                    <td>August27</td>
                     <td>Aug27</td>
                     <td>
                       <div class="result-location">
                         <img
-                          src="http://localhost:3845/assets/576b925393e9f8836fe35e7a0bf63b06be778c70.png"
+                          src="/assets/usflag-icon.png"
                           alt=""
                           className="country-flag"
                         />
@@ -301,7 +308,7 @@ const AddContactPage = () => {
                     <td>
                       <button class="info-btn" aria-label="View profile">
                         <img
-                          src="http://localhost:3845/assets/e853ffaadec779819f9cad9e7686fffa45be5ec6.png"
+                          src="/assets/flower.png"
                           alt=""
                         />
                       </button>
@@ -329,7 +336,7 @@ const AddContactPage = () => {
           <>
             <div className="contact-message-container">
               <p className="intro-text">
-                Add <span className="bold-text">August 27</span> to your Contact
+                Add <span className="bold-text">August27</span> to your Contact
                 List and request his/her contact details.
               </p>
               <div className="contact-message-wrapper">
@@ -337,12 +344,12 @@ const AddContactPage = () => {
                   <div className="online-icon-small">
                     <img src="/assets/online.svg" alt="" />
                   </div>
-                  <p className="contact-name-header">August 27</p>
+                  <p className="contact-name-header">August27</p>
                 </div>
                 <div className="contact-message">
                   <div className="contact-profile-placeholder">
                     <img
-                      src="http://localhost:3845/assets/55cf134af09579ef8d97b246684104b49ba04034.png"
+                      src="/assets/flower.png"
                       alt=""
                     />
                   </div>
@@ -384,7 +391,7 @@ const AddContactPage = () => {
                   />
                 </div>
                 <p className="hurray-text">
-                  Hurray! You've added August 27 to your Contact list
+                  Hurray! You've added August27 to your Contact list
                 </p>
               </div>
               <div className="status-example">

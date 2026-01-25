@@ -3,7 +3,7 @@
   width: 100%; /* Changed from 506px to fill the window */
   height: 100%;
   min-height: 137px;
-  background: #5a5a5a;
+  background: #ffffff;
   display: flex;
   flex-direction: column;
   border-radius: 8px;
@@ -16,8 +16,8 @@
   justify-content: space-between;
   align-items: center;
   padding: 4px 10px;
-  background: #5a5a5a;
-  border-bottom: 1px solid #3a3a3a;
+  background: #ffffff;
+  border-bottom: 1px solid #d2d2d2;
   min-height: 28px;
   flex-shrink: 0;
 }
@@ -31,15 +31,23 @@
   color: white;
 }
 
+.skype-call-logo {
+  display: flex;
+  align-items: center;
+}
+
 .skype-call-logo img {
-  width: 18px;
-  height: 18px;
+  height: 24px; /* Keeps the wordmark proportional */
+  width: auto;
+  filter: drop-shadow(0px 1px 0px rgba(255, 255, 255, 0.8)); /* Subtle 2008-style "lift" */
+  user-select: none;
+  pointer-events: none;
 }
 
 .close-x {
   background: white;
-  border: none;
-  color: #333;
+  border: 2px solid #bababa;
+  color: #808080;
   cursor: pointer;
   font-size: 16px;
   width: 16px;
@@ -63,9 +71,8 @@
 .caller-avatar-large {
   width: 90px;
   height: 90px;
-  background: #eee url('/assets/avatar-placeholder.png') no-repeat center;
+  background: #eee url('/assets/flower.png') no-repeat center;
   background-size: cover;
-  border: 2px solid #999;
   flex-shrink: 0;
 }
 
@@ -77,7 +84,7 @@
   font-size: 18px;
   font-weight: 400;
   margin: 0;
-  color: white;
+  color: rgb(0, 0, 0);
   font-family: "Segoe UI", sans-serif;
   margin-top: -40px;
 }
@@ -106,16 +113,17 @@
   justify-content: center;
   white-space: nowrap;
   font-family: "Segoe UI", sans-serif;
+  transform: scale(0.9);
 }
 
 .btn-call-action img {
-  width: 12px;
-  height: 12px;
+  width: 14px;
+  height: 14px;
 }
 
 /* Green Answer Buttons */
 .accept-audio, .accept-video {
-    border: 1px solid #00AE00;
+  border: 1px solid #00AE00;
   background: linear-gradient(180deg, #FFF 0%, #00AE00 50%);
 }
 
@@ -123,10 +131,8 @@
   background: linear-gradient(180deg, #FFF 0%, #00AE00 50%);
 }
 
-/* Red Decline Button */
-.decline-call {
-    border: 1px solid #D32020;
-  background: linear-gradient(180deg, #FF5E5E 0%, #D32020 50%);
+.decline-button {
+  cursor: pointer;
 }
 
 .decline-call:hover {

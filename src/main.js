@@ -57,6 +57,32 @@ ipcMain.on('open-call-window', () => {
   createCallWindow();
 });
 
+ipcMain.on('open-blocked-window', () => {
+  const blockedWin = new BrowserWindow({
+    width: 753,
+    height: 396,
+    modal: true,
+    resizable: true,      // Allow resizing to fit content
+    minimizable: true,
+    maximizable: false,    // Disables the 'square' maximize button
+    fullscreenable: false, // Prevents accidental full-screen mode
+    useContentSize: true,
+    parent: BrowserWindow.getFocusedWindow(),
+    webPreferences: {
+      preload: path.join(__dirname, 'preload.js'),
+      contextIsolation: true,
+    }
+  });
+
+  if (MAIN_WINDOW_VITE_DEV_SERVER_URL) {
+    blockedWin.loadURL(`${MAIN_WINDOW_VITE_DEV_SERVER_URL}#/blocked`);
+  } else {
+    blockedWin.loadFile(path.join(__dirname, `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`), {
+      hash: 'blocked'
+    });
+  }
+});
+
 ipcMain.on('answer-video-call', (event, callData) => {
   console.log('Received answer-video-call:', callData);
   

@@ -425,7 +425,7 @@
   align-items: center;
   position: relative;
   flex-shrink: 0;
-  border: 1px solid #c9c9c9;
+  /* border: 1px solid #c9c9c9; */
   width: 100%;
 }
 
@@ -450,7 +450,7 @@
 
 .result-row {
   background: #00abfb;
-  border: 1px solid #c9c9c9;
+  border: 0.5px solid #c9c9c9;
   font-family: "Segoe UI", sans-serif;
   font-weight: 400;
   line-height: normal;

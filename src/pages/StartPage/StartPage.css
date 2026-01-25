@@ -242,25 +242,36 @@
 .skype-call-button {
     display: flex;
     align-items: center;
-    gap: 8px;
-    width: 68x;
-    height: 29px;
-    padding: 4px 10px;
-    border-radius: 75px;
-    border: 1px solid #00AE00;
-    background: linear-gradient(180deg, #FFF 0%, #00AE00 50%);
-    color: white;
-    font-family: "Segoe UI", sans-serif;
-    font-size: 14px;
-    font-weight: bold;
+    justify-content: center;
+    border: none;
+    background: transparent;
+    padding: 0;
     cursor: pointer;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
 }
 
 .call-icon {
-    width: 18px;
-    height: 18px;
-    filter: brightness(0) invert(1);
+    width: 68px; /* Or whatever size you want */
+    height: 29px;
+    display: block;
+}
+
+.video-call-icon {
+    width: 110px; /* Or whatever size you want */
+    height: 36px;
+    display: block;
+}
+
+.unread-alert-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.unread-alert-img {
+  height: 20px;
+  width: auto;
+  pointer-events: none;
+  user-select: none;
 }
 
 .add-people-button {
@@ -450,10 +461,43 @@
     align-items: center;
 }
 
+.video-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, #006FA3 0%, #00AEFF 50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.placeholder-flower {
+  width: 100px; 
+  height: 100px;
+  object-fit: contain;
+  z-index: 2;
+  position: absolute;
+  box-shadow: 6px 6px 12px -3px rgba(0, 0, 0, 0.5);
+}
+
+.video-call.hidden {
+  display: block; /* Changed from opacity: 0 */
+  opacity: 0;
+}
+
+.video-call.visible {
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  z-index: 3;
+}
+
 .video-call, .video-self {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* This fills the square perfectly */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 /* Mirror the self-view so it feels natural to the user */
@@ -725,8 +769,18 @@
 .avatar-placeholder {
   width: 88px;
   height: 88px;
-  background: #DCE6F2; /* Grey-blue for empty avatar */
+  background: #DCE6F2;
   border: 1px solid #A5C7E9;
+  overflow: hidden; /* Add this to prevent image overflow */
+  display: flex; /* Add this */
+  align-items: center; /* Add this */
+  justify-content: center; /* Add this */
+}
+
+.james-profile {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* This ensures the image fills the container */
 }
 
 .august-placeholder {
@@ -736,6 +790,14 @@
     border: 1px solid #A5C7E9;
     position: relative;
     top: 2px;
+    overflow: hidden;
+}
+
+.august-icon {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
 .promo-link-row {
@@ -1006,6 +1068,29 @@
     gap: 48px;
 }
 
+.chat-date-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 0;
+    width: 100%;
+}
+
+.chat-date-divider hr {
+    flex: 1;
+    border: 0;
+    border-top: 1px solid #E0E0E0;
+    margin: 0 10px;
+}
+
+.chat-date-divider span {
+    color: #888888;
+    font-family: "Segoe UI", Tahoma, sans-serif;
+    font-size: 11px;
+    /* font-weight: bold; */
+    text-transform: uppercase;
+}
+
 .director-panel {
     position: fixed;
     top: 0;
@@ -1021,4 +1106,34 @@
     opacity: 1; /* Only appears when you hover your mouse over the top left corner */
     background: rgba(0,0,0,0.8);
     height: auto;
+}
+
+.sidebar-footer-nav {
+  /* border-top: 1px solid #ccc; */
+  background: #DEF8FF;
+  /* padding: 4px; */
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  padding: 4px 8px;
+  border: 1px solid #dcdcdc;
+  border-radius: 5px;
+  margin-top: 4px;
+  cursor: pointer;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 13px;
+  color: #444;
+  background: #FFF;
+}
+
+.nav-item:hover {
+  background: #f5f5f5;
+}
+
+.nav-icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
 }

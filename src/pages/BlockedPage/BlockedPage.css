@@ -1,0 +1,10 @@
+.contact-email-container-2 {
+  display: flex;
+  gap: 4px;
+  align-items: flex-start;
+  padding: 12px 8px 8px 8px;
+  position: relative;
+  border-radius: 5px;
+  flex-shrink: 0;
+  width: 100%;
+}
