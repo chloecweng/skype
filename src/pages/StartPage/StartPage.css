@@ -484,6 +484,7 @@
 .video-call.hidden {
   display: block; /* Changed from opacity: 0 */
   opacity: 0;
+  
 }
 
 .video-call.visible {
@@ -1162,6 +1163,7 @@
   justify-content: center;
   gap: 10px;
   z-index: 10;
+  position: absolute;
 }
 
 .loading-state {
