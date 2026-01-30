@@ -5,13 +5,15 @@ import "./BlockedPage.css";
 const BlockedPage = () => {
   const [blockedUsers, setBlockedUsers] = useState([
     {
+      id: "contact-august",
       fullName: "August27",
       skypeName: "Aug27",
       location: "United States, Ohio",
       flag: "/assets/usflag-icon.png",
-      profilePic: "/assets/flower.png"
-    }
+      profilePic: "/assets/flower.png",
+    },
   ]);
+  const [selectedBlockedId, setSelectedBlockedId] = useState(null);
 
   useEffect(() => {
     if (window.electronAPI && window.electronAPI.resizeWindow) {
@@ -21,13 +23,12 @@ const BlockedPage = () => {
   }, []);
 
   const handleUnblock = () => {
-    // alert("August has been unblocked!");
-    
-    // if (window.electronAPI && window.electronAPI.unblockContact) {
-    //   // Just send the string "AUGUST" as the signal
-    window.electronAPI.unblockContact("AUGUST");
-    // }
-    setBlockedUsers([]);
+    if (!selectedBlockedId) return;
+    if (window.electronAPI?.unblockContact) {
+      window.electronAPI.unblockContact(selectedBlockedId);
+    }
+    setBlockedUsers((prev) => prev.filter((u) => u.id !== selectedBlockedId));
+    setSelectedBlockedId(null);
   };
 
   const handleClose = () => {
@@ -51,13 +52,17 @@ const BlockedPage = () => {
         <div className="contact-email-container-2">
           <div className="contact-email">
             <p className="contact-instructions">
-              This list shows <span className="bold-text">contacts you have blocked on Skype</span>. 
-              Blocked users cannot send you messages, call you, or see your online status.
+              This list shows{" "}
+              <span className="bold-text">
+                contacts you have blocked on Skype
+              </span>
+              . Blocked users cannot send you messages, call you, or see your
+              online status.
             </p>
           </div>
         </div>
 
-        <table className="results-table" style={{ marginTop: '10px' }}>
+        <table className="results-table" style={{ marginTop: "10px" }}>
           <thead className="column-labels">
             <tr>
               <th className="column-header">Full Name</th>
@@ -67,8 +72,12 @@ const BlockedPage = () => {
             </tr>
           </thead>
           <tbody className="result-row">
-            {blockedUsers.map((user, index) => (
-              <tr key={index}>
+            {blockedUsers.map((user) => (
+              <tr
+                key={user.id}
+                className={`blocked-user-row ${selectedBlockedId === user.id ? "blocked-row-selected" : ""}`}
+                onClick={() => setSelectedBlockedId(user.id)}
+              >
                 <td>{user.fullName}</td>
                 <td>{user.skypeName}</td>
                 <td>
@@ -89,11 +98,18 @@ const BlockedPage = () => {
       </div>
 
       <div className="footer">
-        <div className="footer-right-align" style={{ display: 'flex', gap: '10px', marginLeft: 'auto' }}>
-          <button 
-            className={blockedUsers.length > 0 ? "add-contact-btn-active" : "add-contact-btn-inactive"} 
+        <div
+          className="footer-right-align"
+          style={{ display: "flex", gap: "10px", marginLeft: "auto" }}
+        >
+          <button
+            className={
+              selectedBlockedId
+                ? "add-contact-btn-active"
+                : "add-contact-btn-inactive"
+            }
             onClick={handleUnblock}
-            disabled={blockedUsers.length === 0}
+            disabled={!selectedBlockedId}
           >
             Unblock
           </button>

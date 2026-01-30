@@ -8,3 +8,16 @@
   flex-shrink: 0;
   width: 100%;
 }
+
+.result-row {
+  background-color: #FFF;
+  width: fit-content;
+}
+.blocked-user-row {
+  cursor: pointer;
+  background-color: #e0e0e0;
+}
+
+.blocked-row-selected {
+  background-color: #00ABFB;
+}
