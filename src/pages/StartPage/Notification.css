@@ -1,0 +1,99 @@
+.skype-toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 300px;
+  background: white;
+  border-radius: 4px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  overflow: hidden; /* Crucial: hides the text while expanding */
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  z-index: 10001;
+  
+  /* Slide in from right FIRST, then expand */
+  animation: popUpOnly 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.1) forwards,
+             splitOpen 0.4s ease-out 0.2s forwards;
+}
+
+.toast-header {
+  background: linear-gradient(to bottom, #FF8E43, #FF6600); /* Classic Orange */
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+}
+
+.toast-content-reveal {
+  max-height: 200px;
+}
+
+.toast-body {
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  opacity: 0;
+  animation: fadeIn 0.2s ease-in 0.1s forwards;
+}
+
+.toast-avatar {
+  width: 15px;
+  height: 15px;
+  position: relative;
+  top: -16px;
+  left: -4px;
+}
+
+.toast-text-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.toast-name {
+  font-size: 14px;
+  font-weight: 525;
+  color: #000;
+  position: relative;
+  top: -8px;
+  left: -8px;
+}
+
+.toast-message {
+  font-size: 13px;
+  color: #555;
+  margin-top: 2px;
+  opacity: 0.8;
+  position: relative;
+  top: -2px;
+  left: -8px;
+}
+
+.toast-footer {
+  background: linear-gradient(to bottom, #FF8E43, #FF6600);
+  height: 8px; /* A thin orange strip at the very bottom */
+  width: 100%;
+}
+
+@keyframes popUpOnly {
+  from { 
+    transform: translateY(150%);
+    max-height: 32px; /* Start closed (header + footer) */
+  }
+  to { 
+    transform: translateY(0);
+    max-height: 32px; /* Stay closed when it hits the bottom */
+  }
+}
+
+@keyframes splitOpen {
+  from { 
+    max-height: 32px; 
+  }
+  to { 
+    max-height: 200px; /* Expand to reveal white body */
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

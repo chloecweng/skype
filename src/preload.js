@@ -27,4 +27,19 @@ contextBridge.exposeInMainWorld("electronAPI", {
   removeVideoCallListener: () => {
     ipcRenderer.removeAllListeners("video-call-answered");
   },
+
+  unblockContact: (signal) => ipcRenderer.send("unblock-contact", signal),
+
+  onContactUnblocked: (callback) => {
+    const listener = (event, data) => callback(data);
+    ipcRenderer.on("contact-unblocked", listener);
+    return () => ipcRenderer.removeListener("contact-unblocked", listener);
+  },
+
+  showContextMenu: (contactId) => ipcRenderer.send("show-context-menu", contactId),
+  onBlockCommand: (callback) => {
+    const subscription = (event, contactId) => callback(contactId);
+    ipcRenderer.on("block-user-command", subscription);
+    return () => ipcRenderer.removeListener("block-user-command", subscription);
+  },
 });

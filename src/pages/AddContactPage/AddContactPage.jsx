@@ -82,6 +82,7 @@ const AddContactPage = () => {
         language: 'English', // Add this
         gender: 'Male', // Add this
         localTime: '4:55 PM', // Add this
+        blocked: false,
       });
       setCurrentStep(4);
     }
@@ -93,9 +94,10 @@ const AddContactPage = () => {
 
   const handleFinish = () => {
     // Send contact data to main window via IPC
+    const isAugust = selectedContact?.skypeName === "Aug27";
     if (window.electronAPI && window.electronAPI.addContact) {
       window.electronAPI.addContact({
-        id: `contact-${Date.now()}`,
+        id: isAugust ? "contact-august" : `contact-${Date.now()}`,
         name: selectedContact?.name || "August27",
         skypeName: selectedContact?.skypeName || "Aug27",
         status: "offline",

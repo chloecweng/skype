@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./StartPage.css";
+import "./Notification.css";
 
 const StartPage = () => {
   const [message, setMessage] = useState("");
@@ -8,6 +9,42 @@ const StartPage = () => {
   const scrollRef = useRef(null);
   const remoteVideoRef = useRef(null);
   const [isAugustVideoPlaying, setIsAugustVideoPlaying] = useState(false);
+  const [notification, setNotification] = useState({ show: false, name: "", msg: "" });
+  const [isConnecting, setIsConnecting] = useState(false);
+
+  const triggerNotification = (name, msg) => {
+    setNotification({ show: true, name, msg });
+    // Auto-hide after 5 seconds
+    setTimeout(() => setNotification({ show: false, name: "", msg: "" }), 5000);
+  };
+
+  const startVideoSequence = () => {
+    setIsInVideoCall(true); // Open the window
+    setIsConnecting(true);  // Show the loading GIF
+    setIsAugustVideoPlaying(false);
+
+    // Simulate a 2-second connection delay
+    setTimeout(() => {
+      setIsConnecting(false); // Hide GIF
+      setIsAugustVideoPlaying(true); // Show and play video
+      
+      if (remoteVideoRef.current) {
+        remoteVideoRef.current.currentTime = 0; // Restart video from beginning
+        remoteVideoRef.current.play();
+      }
+    }, 10000); // Adjust this timing for how long you want the loading to last
+  };
+
+  // Keypress Listener
+  useEffect(() => {
+    const handleKeyPress = (e) => {
+      if (e.key === 'n') { // Example: press 'n' for notification
+        triggerNotification("August27", "Hiiii");
+      }
+    };
+    window.addEventListener('keydown', handleKeyPress);
+    return () => window.removeEventListener('keydown', handleKeyPress);
+  }, []);
 
   const AUGUST_CONTACT = {
     id: "contact-august",
@@ -20,13 +57,45 @@ const StartPage = () => {
     gender: "Male",
     localTime: "3:31 PM United States",
     image: "/assets/flower.png",
+    blocked: false,
+  };
+
+  const [contextMenu, setContextMenu] = useState({
+    visible: false,
+    x: 0,
+    y: 0,
+    contactId: null
+  });
+
+  const handleBlockUser = () => {
+    if (contextMenu.contactId) {
+      setContacts(prev => prev.filter(c => c.id !== contextMenu.contactId));
+      if (selectedContactId === contextMenu.contactId) {
+        setSelectedContactId('contact-1');
+      }
+    }
+    setContextMenu({ visible: false, x: 0, y: 0, contactId: null });
+  };
+
+  const closeContextMenu = () => {
+    setContextMenu({ visible: false, x: 0, y: 0, contactId: null });
   };
 
   const ensureAugustExists = () => {
     setContacts((prev) => {
-      const exists = prev.some((c) => c.skypeName === "Aug27");
-      if (exists) return prev;
-      return [...prev, AUGUST_CONTACT];
+      const existing = prev.find(c => c.id === "contact-august");
+
+      // ✅ If he exists → FORCE unblock
+      if (existing) {
+        return prev.map(c =>
+          c.id === "contact-august"
+            ? { ...c, blocked: false }
+            : c
+        );
+      }
+
+      // ✅ If he does not exist → add unblocked
+      return [...prev, { ...AUGUST_CONTACT, blocked: false }];
     });
 
     setContactChatHistories((prev) => {
@@ -163,6 +232,18 @@ const StartPage = () => {
       skypeName: "AdmiralBi0tch",
       status: "online",
       statusMessage: "Hello internet",
+      country: "United States",
+      language: "English",
+      gender: "Male",
+      localTime: "4:55 PM",
+      chatHistory: [],
+    },
+    {
+      id: "contact-11",
+      name: "bdfksj",
+      skypeName: "bdfksj",
+      status: "dnd",
+      statusMessage: "stronger than the average human",
       country: "United States",
       language: "English",
       gender: "Male",
@@ -481,69 +562,69 @@ const StartPage = () => {
         {
           sender: "August27",
           text: "come bac;k please",
-          delay: 6000,
+          delay: 3000,
           time: "2:23 AM",
         },
         {
           sender: "August27",
           text: "caan we plaese talk",
-          delay: 9000,
+          delay: 5000,
           time: "2:23 AM",
         },
         {
           sender: "August27",
           text: "Can wwe talk/",
-          delay: 12000,
+          delay: 8000,
           time: "2:23 AM",
         },
         {
           sender: "August27",
           text: "Wh? hhwhy?",
-          delay: 15000,
+          delay: 11000,
           time: "2:23 AM",
         },
-        { sender: "August27", text: "Miss yu", delay: 17000, time: "2:23 AM" },
+        { sender: "August27", text: "Miss yu", delay: 13000, time: "2:23 AM" },
         {
           sender: "August27",
           text: "Jamess I miss you..",
-          delay: 21000,
+          delay: 16000,
           time: "2:23 AM",
         },
-        { sender: "August27", text: "Helloooo", delay: 23000, time: "2:23 AM" },
+        { sender: "August27", text: "Helloooo", delay: 19000, time: "2:23 AM" },
         {
           sender: "August27",
           text: "Where rrr u?",
-          delay: 27000,
+          delay: 22000,
           time: "2:23 AM",
         },
         {
           sender: "August27",
           text: "WHys did you aleave!",
-          delay: 32000,
+          delay: 25000,
           time: "2:23 AM",
         },
         {
           sender: "August27",
           text: "I'[m still herea wating",
-          delay: 37000,
+          delay: 29000,
           time: "2:23 AM",
         },
         {
           sender: "August27",
           text: "come back. I pAid you",
-          delay: 43000,
+          delay: 33000,
           time: "2:24 AM",
         },
         {
           sender: "August27",
           text: "I love you",
-          delay: 46000,
+          delay: 36000,
           time: "2:24 AM",
         },
         {
           sender: "August27",
           text: "I will kill you for this.",
-          delay: 54000,
+          delay: 40000,
           time: "2:24 AM",
         },
       ],
@@ -591,11 +672,12 @@ const StartPage = () => {
       else if (e.key === "v" || e.key === "V") {
         console.log("V was pressed!");
         console.log("Current Ref:", remoteVideoRef.current);
-        if (remoteVideoRef.current) {
-          console.log("V2 was pressed!");
-          remoteVideoRef.current.play();
-          setIsAugustVideoPlaying(true);
-        }
+        startVideoSequence();
+        // if (remoteVideoRef.current) {
+        //   console.log("V2 was pressed!");
+        //   remoteVideoRef.current.play();
+        //   setIsAugustVideoPlaying(true);
+        // }
       }
     };
 
@@ -815,6 +897,86 @@ const StartPage = () => {
     return "Type a message to August27 here";
   };
 
+  // 1. You can delete the useState for contextMenu entirely now.
+
+// 2. Updated right-click handler
+  const handleContactRightClick = (e, contactId) => {
+    e.preventDefault();
+    // Call the native system menu
+    window.electronAPI.showContextMenu(contactId);
+  };
+
+  // 3. Effect to listen for the Block command
+  useEffect(() => {
+    if (!window.electronAPI?.onBlockCommand) return;
+
+    const removeListener = window.electronAPI.onBlockCommand((id) => {
+      console.log("Blocking user via native menu:", id);
+
+      setContacts(prev => {
+        const exists = prev.some(c => c.id === id);
+
+        // 🟢 If contact already exists → just mark blocked
+        if (exists) {
+          return prev.map(c =>
+            c.id === id
+              ? { ...c, blocked: true }
+              : c
+          );
+        }
+
+        // 🟢 If contact does NOT exist yet → add as blocked
+        if (id === "contact-august") {
+          return [...prev, { ...AUGUST_CONTACT, blocked: true }];
+        }
+
+        return prev;
+      });
+
+      if (selectedContactId === id) {
+        setSelectedContactId("contact-1");
+      }
+    });
+
+    return () => removeListener();
+  }, []);
+
+
+  useEffect(() => {
+    if (!window.electronAPI?.onContactUnblocked) return;
+
+    const unsubscribe = window.electronAPI.onContactUnblocked((signal) => {
+      if (signal !== "AUGUST") return;
+
+      setContacts(prev => {
+        const existing = prev.find(c => c.id === "contact-august");
+
+        // 🟢 Case 1: August already exists → just unblock
+        if (existing) {
+          return prev.map(c =>
+            c.id === "contact-august"
+              ? { ...c, blocked: false }
+              : c
+          );
+        }
+
+        // 🟢 Case 2: August does NOT exist → add him
+        return [...prev, AUGUST_CONTACT];
+      });
+
+      setSelectedContactId("contact-august");
+    });
+
+    return unsubscribe;
+  }, []);
+
+
+  // console.log("Current Contacts in Render:", contacts.map(c => c.name));
+  console.table(contacts.map(c => ({
+    id: c.id,
+    blocked: c.blocked
+  })));
+
   if (isInVideoCall) {
     console.log("In video call");
     return (
@@ -890,13 +1052,16 @@ const StartPage = () => {
                 <div className="tab">Conversations</div>
               </div>
               <div className="contacts-list">
-                <div className="contacts-list-scrollable">
-                  {contacts.map((contact) => (
-                    <div
-                      key={contact.id}
-                      className={`contact-item ${selectedContactId === contact.id ? "contact-selected" : ""}`}
-                      onClick={() => handleContactClick(contact.id)}
-                    >
+                <div className="contacts-list-scrollable" onClick={closeContextMenu}>
+                  {contacts
+                    .filter(contact => !contact.blocked)
+                    .map((contact) => (
+                      <div
+                        key={contact.id}
+                        className={`contact-item ${selectedContactId === contact.id ? "contact-selected" : ""}`}
+                        onClick={() => handleContactClick(contact.id)}
+                        onContextMenu={(e) => handleContactRightClick(e, contact.id)}
+                      >
                       <div className="contact-status-icon">
                         <img
                           src={getStatusIcon(contact.status, contact.name)}
@@ -975,9 +1140,8 @@ const StartPage = () => {
             <div className="black-bg">
               <div className="august-profile-card-video">
                 <div className="video-container">
-                  {/* 1. The Placeholder Image */}
-                  {console.log("isAugustVideoPlaying:", isAugustVideoPlaying)}
-                  {!isAugustVideoPlaying && (
+                  {/* PHASE 1: Show flower ONLY if not connecting AND not playing video */}
+                  {!isConnecting && !isAugustVideoPlaying && (
                     <img
                       src="/assets/flower.png"
                       className="placeholder-flower"
@@ -985,7 +1149,18 @@ const StartPage = () => {
                     />
                   )}
 
-                  {/* 2. The Video Element - only render when playing */}
+                  {/* PHASE 2: Show loading GIF during the connection phase */}
+                  {isConnecting && (
+                    <div className="loading-overlay">
+                      <img 
+                        src="/assets/loading.gif" 
+                        className="loading-state" 
+                        alt="Connecting..." 
+                      />
+                    </div>
+                  )}
+
+                  {/* PHASE 3: The Video Element */}
                   <video
                     ref={remoteVideoRef}
                     className={`video-call ${isAugustVideoPlaying ? 'visible' : 'hidden'}`}
@@ -1028,6 +1203,25 @@ const StartPage = () => {
             </div>
           </div>
         </div>
+        {notification.show && (
+        <div className="skype-toast">
+          <div className="toast-header">
+            <img src="/assets/skype-white.svg" height="12" alt="Skype" />
+          </div>
+          
+          <div className="toast-content-reveal">
+            <div className="toast-body">
+              <img src="/assets/online.svg" className="toast-avatar" alt="status" />
+              <div className="toast-text-content">
+                <span className="toast-name">{notification.name}</span>
+                <span className="toast-message">{notification.msg}</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="toast-footer"></div>
+        </div>
+      )}
       </div>
     );
   }
@@ -1098,24 +1292,27 @@ const StartPage = () => {
             </div>
             <div className="contacts-list">
               <div className="contacts-list-scrollable">
-                {contacts.map((contact) => (
-                  <div
-                    key={contact.id}
-                    className={`contact-item ${selectedContactId === contact.id ? "contact-selected" : ""}`}
-                    onClick={() => handleContactClick(contact.id)}
-                  >
-                    <div className="contact-status-icon">
-                      <img
-                        src={getStatusIcon(contact.status, contact.name)}
-                        alt=""
-                      />
+                {contacts
+                  .filter(contact => !contact.blocked)
+                  .map((contact) => (
+                    <div
+                      key={contact.id}
+                      className={`contact-item ${selectedContactId === contact.id ? "contact-selected" : ""}`}
+                      onClick={() => handleContactClick(contact.id)}
+                      onContextMenu={(e) => handleContactRightClick(e, contact.id)}
+                    >
+                      <div className="contact-status-icon">
+                        <img
+                          src={getStatusIcon(contact.status, contact.name)}
+                          alt=""
+                        />
+                      </div>
+                      <p className="contact-name">{contact.name}</p>
+                      <p className="contact-status-message">
+                        {contact.statusMessage}
+                      </p>
                     </div>
-                    <p className="contact-name">{contact.name}</p>
-                    <p className="contact-status-message">
-                      {contact.statusMessage}
-                    </p>
-                  </div>
-                ))}
+                  ))}
               </div>
               <div className="usercount-footer">
                 <p>16,175,278 people online</p>

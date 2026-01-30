@@ -21,6 +21,12 @@ const BlockedPage = () => {
   }, []);
 
   const handleUnblock = () => {
+    // alert("August has been unblocked!");
+    
+    // if (window.electronAPI && window.electronAPI.unblockContact) {
+    //   // Just send the string "AUGUST" as the signal
+    window.electronAPI.unblockContact("AUGUST");
+    // }
     setBlockedUsers([]);
   };
 

@@ -1,10 +1,33 @@
-import { app, BrowserWindow, ipcMain, screen } from 'electron';
+import { Menu, app, BrowserWindow, ipcMain, screen } from 'electron';
 import path from 'node:path';
 import started from 'electron-squirrel-startup';
 
 if (started) {
   app.quit();
 }
+
+let mainWindow;
+
+ipcMain.on('show-context-menu', (event, contactId) => {
+  const template = [
+    { label: 'Call' },
+    { label: 'Video Call' },
+    { label: 'Chat' },
+    { label: 'Send File...' },
+    { label: 'View Profile' },
+    { label: 'Rename' },
+    { label: 'Add to Group >' },
+    { label: 'Remove from Contacts' },
+    { type: 'separator' },
+    { 
+      label: 'Block this User', 
+      click: () => { event.sender.send('block-user-command', contactId); } 
+    }
+  ];
+  const menu = Menu.buildFromTemplate(template);
+  const win = BrowserWindow.fromWebContents(event.sender);
+  menu.popup({ window: win });
+});
 
 ipcMain.on('open-add-contact-window', () => {
   const addContactWin = new BrowserWindow({
@@ -80,6 +103,18 @@ ipcMain.on('open-blocked-window', () => {
     blockedWin.loadFile(path.join(__dirname, `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`), {
       hash: 'blocked'
     });
+  }
+});
+
+ipcMain.on("unblock-contact", (event, data) => {
+  console.log("MAIN PROCESS: Received unblock signal");
+  
+  if (mainWindow) {
+    // We send it specifically to the window that holds StartPage
+    mainWindow.webContents.send("contact-unblocked", data);
+    console.log("MAIN PROCESS: Signal relayed to StartPage");
+  } else {
+    console.error("MAIN PROCESS ERROR: mainWindow is undefined!");
   }
 });
 

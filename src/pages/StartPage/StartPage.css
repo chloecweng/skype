@@ -1137,3 +1137,35 @@
   height: 16px;
   margin-right: 8px;
 }
+
+.context-menu-item {
+  padding: 6px 20px;
+  cursor: pointer;
+  color: #000;
+}
+
+.context-menu-item:hover {
+  background: #3399ff;
+  color: white;
+}
+
+.context-menu-separator {
+  height: 1px;
+  background: #ccc;
+  margin: 2px 0;
+}
+
+.loading-overlay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  z-index: 10;
+}
+
+.loading-state {
+  width: 393.33px;
+  height: 295px;
+  object-fit: cover;
+}
