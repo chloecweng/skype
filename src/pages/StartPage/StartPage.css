@@ -1,264 +1,264 @@
 .start-page-container {
-    width: 1158px;
-    height: 682px;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #DEF8FF;
+  height: 100%;
+  display: flex;
+  background: #def8ff;
+  padding: 8px;
+  gap: 8px;
 }
 
 .skype-background-layer {
-    display: flex;
-    width: 100%;
-    height: 100%;
+  display: flex;
+  width: 100%;
+  height: 100%;
 }
 
 .chat-field {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center; 
-    width: 777px;
-    height: 472px;
-    padding: 8px 8px 8px 8px;
-    background: #FFF;
-    border: 1px solid #C9C9C9;
-    border-radius: 0 5px 5px 5px;
-    box-sizing: border-box;
-    z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 600px;
+  padding: 8px 8px 8px 8px;
+  background: #fff;
+  border: 1px solid #c9c9c9;
+  border-radius: 0 5px 5px 5px;
+  box-sizing: border-box;
+  z-index: 1;
 }
 
 .chat-column {
-    display: flex;
-    flex-direction: column; /* Stacks tab on top of box */
-    align-items: flex-start; /* Keeps the tab on the left side */
-    position: absolute;
-    bottom: 4px;
-    right: 4px;
+  display: flex;
+  flex-direction: column; /* Stacks tab on top of box */
+  align-items: flex-start; /* Keeps the tab on the left side */
+  min-width: 0;
+  justify-content: flex-end;
 }
 
 .skype-tab {
-    display: flex;
-    width: 58px;
-    height: 19px;
-    padding: 4px 4px 8px 4px;
-    align-items: flex-end;
-    gap: 4px;
-    border-radius: 5px 5px 0 0;
-    border-top: 1px solid #C9C9C9;
-    border-right: 1px solid #C9C9C9;
-    border-left: 1px solid #C9C9C9;
-    background: #FFF;
-    margin-bottom: -1px;
-    z-index: 2;
+  display: flex;
+  width: 58px;
+  height: 19px;
+  padding: 4px 4px 8px 4px;
+  align-items: flex-end;
+  gap: 4px;
+  border-radius: 5px 5px 0 0;
+  border-top: 1px solid #c9c9c9;
+  border-right: 1px solid #c9c9c9;
+  border-left: 1px solid #c9c9c9;
+  background: #fff;
+  margin-bottom: -1px;
+  z-index: 2;
 }
 
 .skype-tab-icon {
-    width: 17px; 
-    height: 17px;
-    object-fit: contain;
-    margin-bottom: 1px; 
+  width: 17px;
+  height: 17px;
+  object-fit: contain;
+  margin-bottom: 1px;
 }
 
 .skype-text {
-    color: #4A4A4A;
-    font-family: "Segoe UI", sans-serif;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    opacity: 0.8;
-    margin-left: -2px;
+  color: #4a4a4a;
+  font-family: "Segoe UI", sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  opacity: 0.8;
+  margin-left: -2px;
 }
 
 .history-container {
-    width: 100%;
-    flex: 1; 
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    padding: 15px 0; /* Vertical padding only; grid handles horizontal */
-    box-sizing: border-box;
+  width: 100%;
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 15px 0; /* Vertical padding only; grid handles horizontal */
+  box-sizing: border-box;
 }
 
-/* Updated Grid for exact alignment */
+/* Updated Grid for exact alignment - flexible columns for responsive layout */
 .chat-bubble-grid {
-    display: grid;
-    /* Col 1 (Name): 100px | Col 2 (Text): matches box 506px | Col 3 (Time): fills remaining space */
-    grid-template-columns: 100px 506px 1fr; 
-    column-gap: 12px;
-    align-items: baseline;
-    width: 100%;
+  display: grid;
+  grid-template-columns: minmax(80px, 100px) minmax(200px, 90%) minmax(
+      60px,
+      65px
+    );
+  column-gap: 12px;
+  align-items: baseline;
+  width: 100%;
 }
 
 .msg-user {
-    color: #A5A5A5;
-    font-family: "Segoe UI", sans-serif;
-    font-size: 12px;
-    text-align: right; /* Pushes name toward the text gutter */
+  color: #a5a5a5;
+  font-family: "Segoe UI", sans-serif;
+  font-size: 12px;
+  text-align: right; /* Pushes name toward the text gutter */
 }
 
 .msg-text {
-    font-family: "Segoe UI", sans-serif;
-    font-size: 12px;
-    color: #000000;
-    line-height: 1.3;
+  font-family: "Segoe UI", sans-serif;
+  font-size: 12px;
+  color: #000000;
+  line-height: 1.3;
 }
 
 .msg-time {
-    color: #A5A5A5;
-    font-family: "Segoe UI", sans-serif;
-    font-size: 12px;
-    text-align: left; /* Starts right where the text box area ends */
+  color: #a5a5a5;
+  font-family: "Segoe UI", sans-serif;
+  font-size: 12px;
+  text-align: left; /* Starts right where the text box area ends */
 }
 
 .message-box {
-    display: flex;
-    flex-direction: column;
-    width: 553px; 
-    gap: 8px;
-    margin-bottom: 8px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 553px;
+  gap: 8px;
+  margin-bottom: 8px;
 }
 
 .show-messages {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding-left: 4px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding-left: 4px;
 }
 
 .input-row-wrapper {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px; 
-    width: 100%;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  width: 100%;
 }
 
 .message-field {
-    display: flex;
-    width: 506px; 
-    height: 102px; 
-    padding: 8px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-    background: #FFF;
-    border-radius: 5px;
-    border: 1px solid #C9C9C9;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1) inset;
-    box-sizing: border-box;
+  display: flex;
+  width: 100%;
+  max-width: 506px;
+  height: 102px;
+  padding: 8px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  background: #fff;
+  border-radius: 5px;
+  border: 1px solid #c9c9c9;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1) inset;
+  box-sizing: border-box;
 }
 
 .message-tools {
-    display: flex;
-    align-items: center;
-    gap: 22px;
+  display: flex;
+  align-items: center;
+  gap: 22px;
 }
 
 .tool-item {
-    display: flex;
-    align-items: center;
-    gap: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .tool-text {
-    color: #A5A5A5;
-    font-family: "Segoe UI", sans-serif;
-    font-size: 12px;
+  color: #a5a5a5;
+  font-family: "Segoe UI", sans-serif;
+  font-size: 12px;
 }
 
 .chat-input {
-    width: 100%;
-    flex: 1;
-    border: none;
-    outline: none;
-    resize: none;
-    background: transparent;
-    font-family: "Segoe UI", sans-serif;
-    font-size: 12px;
-    color: #000000;
-    padding: 0;
+  width: 100%;
+  flex: 1;
+  border: none;
+  outline: none;
+  resize: none;
+  background: transparent;
+  font-family: "Segoe UI", sans-serif;
+  font-size: 12px;
+  color: #000000;
+  padding: 0;
 }
 
 .chat-input::placeholder {
-    color: #A5A5A5;
-    font-weight: 350;
-    opacity: 0.7;
+  color: #a5a5a5;
+  font-weight: 350;
+  opacity: 0.7;
 }
 
 .message-button {
-    width: 35px; 
-    height: 35px;
-    flex-shrink: 0;
-    border-radius: 50%;
-    border: 1px solid #00C5F6;
-    background: linear-gradient(180deg, #CFF6FF 0%, #00C5F6 100%);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    margin-top: 4px;
+  width: 35px;
+  height: 35px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: 1px solid #00c5f6;
+  background: linear-gradient(180deg, #cff6ff 0%, #00c5f6 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin-top: 4px;
 }
 
 .send-icon {
-    width: 15px; 
-    height: 15px;
+  width: 15px;
+  height: 15px;
 }
 
 .tool-icon-clock {
-    width: 16px;
-    height: 16px;
-    opacity: 0.7;
+  width: 16px;
+  height: 16px;
+  opacity: 0.7;
 }
 
 .blue-text {
-    color: #00BFFF;
-    font-family: "Segoe UI", sans-serif;
-    font-size: 12px;
-    cursor: pointer;
+  color: #00bfff;
+  font-family: "Segoe UI", sans-serif;
+  font-size: 12px;
+  cursor: pointer;
 }
 
 .chat-buttons {
-    display: flex;
-    /* This pushes the left-buttons and right-button to opposite sides */
-    justify-content: space-between; 
-    align-items: center; /* Vertically centers both groups on the same line */
-    width: 100%;
-    padding: 10px 16px;
-    background-color: #FFF;
-    box-sizing: border-box;
+  display: flex;
+  /* This pushes the left-buttons and right-button to opposite sides */
+  justify-content: space-between;
+  align-items: center; /* Vertically centers both groups on the same line */
+  width: 100%;
+  padding: 10px 16px;
+  background-color: #fff;
+  box-sizing: border-box;
 }
 
 .left-buttons {
-    display: flex;
-    gap: 8px; /* Spacing between "Call" and "Video Call" */
-    margin-left: -14px;
-    margin-top: -10px;
+  display: flex;
+  gap: 8px; /* Spacing between "Call" and "Video Call" */
+  margin-left: -14px;
+  margin-top: -10px;
 }
 
 .skype-call-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    background: transparent;
-    padding: 0;
-    cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
 }
 
 .call-icon {
-    width: 68px; /* Or whatever size you want */
-    height: 29px;
-    display: block;
+  width: 68px; /* Or whatever size you want */
+  height: 29px;
+  display: block;
 }
 
 .video-call-icon {
-    width: 110px; /* Or whatever size you want */
-    height: 36px;
-    display: block;
+  width: 110px; /* Or whatever size you want */
+  height: 36px;
+  display: block;
 }
 
 .unread-alert-wrapper {
@@ -275,151 +275,153 @@
 }
 
 .add-people-button {
-    display: flex;
-    width: 74px;
-    height: 16px;
-    padding: 0 8px;
-    justify-content: center;
-    align-items: center;
-    gap: 6px;
-    border-radius: 10px;
-    background: #FFF;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.25);
-    position: absolute;
-    right: 8px;
-    cursor: pointer;
+  display: flex;
+  width: 74px;
+  height: 16px;
+  padding: 0 8px;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.25);
+  position: absolute;
+  right: 8px;
+  cursor: pointer;
 }
 
 .add-icon {
-    width: 8px;
-    height: 8px;
+  width: 8px;
+  height: 8px;
 }
 
-.add-people-text {  
-    color: #6B6B6B;
-    font-family: "Segoe UI", sans-serif;
-    font-size: 11px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
+.add-people-text {
+  color: #6b6b6b;
+  font-family: "Segoe UI", sans-serif;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
 
 .right-button {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-right: -14px;
-    margin-top: -10px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-right: -14px;
+  margin-top: -10px;
 }
 
 .info-dropdown-pill {
-    display: flex;
-    padding: 0px 6px 6px 6px;
-    justify-content: center;
-    align-items: flex-end;
-    gap: 6px;
-    border-radius: 100px;
-    background: #FFF;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.25);
-    cursor: pointer;
+  display: flex;
+  padding: 0px 6px 6px 6px;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 6px;
+  border-radius: 100px;
+  background: #fff;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.25);
+  cursor: pointer;
 }
 
 .dropdown-arrow-svg {
-    width: 12px;
-    height: 8px;
+  width: 12px;
+  height: 8px;
 }
 
 .info-icon-wrapper {
-    position: relative; 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 18px;
-    height: 18px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
 }
 
 .info-char {
-    position: absolute;
-    top: 80%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: #6B6B6B;
-    font-family: "Fira Mono", monospace;
-    font-size: 12px;
-    font-weight: 500;
-    pointer-events: none;
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #6b6b6b;
+  font-family: "Fira Mono", monospace;
+  font-size: 12px;
+  font-weight: 500;
+  pointer-events: none;
 }
 
 .info-icon-svg {
-    width: 18px;
-    height: 8px;
-    display: block;
+  width: 18px;
+  height: 8px;
+  display: block;
 }
 
 .skype-sidebar {
-  width: 365px;
-  background-color: #DEF8FF;
+  display: flex;
+  max-width: 355px;
+  height: 500px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  flex: 1 0 0;
+  background-color: #def8ff;
+}
+.chat-main {
   display: flex;
   flex-direction: column;
-  padding: 4px;
-  min-height: 0;
-  max-height: 100vh;
+  gap: 8px;
+  width: 100%;
 }
-
 .chat-header {
-    width: 100%;             /* Let flexbox handle the width */
-    max-width: 777px;        /* Match the width of .chat-field below it */
-    background-color: transparent; /* Background should come from the container */
-    display: flex;
-    flex-direction: column;
-    padding: 0;              /* Remove the 100vh and extra padding */
-    margin-top: 4px;         /* Nudge it down to match the sidebar's top profile card */
-    height: 161px;            /* Allow it to shrink to its content */
-    position: absolute;
-    right: 6px;
+  width: auto; /* Flexible width within content area */
+  background-color: transparent; /* Background should come from the container */
+  display: flex;
+  flex-direction: column;
+  height: 161px; /* Allow it to shrink to its content */
 }
 
 .status-icon {
-    width: 20px;
-    height: 20px;
-    position: relative;
-    left: -4px;
+  width: 20px;
+  height: 20px;
+  position: relative;
+  left: -4px;
 }
 
 .polygon-icon {
-    width: 12px;
-    height: 8px;
-    position: relative;
-    left: -6px;
+  width: 12px;
+  height: 8px;
+  position: relative;
+  left: -6px;
 }
 
 .user-display-name {
-    color: #6B6B6B;
-    font-family: "Segoe UI", sans-serif;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
+  color: #6b6b6b;
+  font-family: "Segoe UI", sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
 }
 
 .status-row {
-    display: flex;
-    padding: 0 8px; /* Give internal spacing for the icons */
-    width: 100%;    /* Let it fill the card's width */
-    height: 24px;
-    justify-content: flex-start;
-    align-items: center;
-    box-sizing: border-box; /* Ensures padding doesn't break the width */
-    border-radius: 5px 5px 0 0;
-    border: 1px solid #C9C9C9;
-    background: #FFF;
-    gap: 6px;
-    margin: 0 auto;
+  display: flex;
+  padding: 0 8px; /* Give internal spacing for the icons */
+  width: 100%; /* Let it fill the card's width */
+  height: 24px;
+  justify-content: flex-start;
+  align-items: center;
+  box-sizing: border-box; /* Ensures padding doesn't break the width */
+  border-radius: 5px 5px 0 0;
+  border: 1px solid #c9c9c9;
+  background: #fff;
+  gap: 6px;
+  margin: 0 auto;
 }
 
 /* The white boxes */
 .user-profile-card {
-  background: #C7DBEF;;
+  width: 100%;
+  background: #c7dbef;
   /* border: 1px solid #A5C7E9; */
   border-radius: 5px 5px 0 0;
   position: relative;
@@ -427,7 +429,7 @@
 }
 
 .august-profile-card {
-  background: #C7DBEF;;
+  background: #c7dbef;
   border-radius: 5px 5px 5px 5px;
   position: relative;
   width: 100%;
@@ -435,37 +437,38 @@
 }
 
 .black-bg {
-    background: linear-gradient(to bottom, #000000 0%, #3a3a3a 100%);
-    width: 777px;
-    height: 616px;
-    padding: 12px 48px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    overflow: hidden;
-    position: relative;
-    right: 2px;
-    box-sizing: border-box;
-    gap: 12px;
+  background: linear-gradient(to bottom, #000000 0%, #3a3a3a 100%);
+  width: 777px;
+  height: 616px;
+  padding: 12px 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  right: 2px;
+  box-sizing: border-box;
+  gap: 12px;
 }
 
-.august-profile-card-video, .self-view-card {
-    width: 393.33px;
-    height: 295px;
-    background: #1a1a1a;
-    border: 1px solid #333;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.august-profile-card-video,
+.self-view-card {
+  width: 393.33px;
+  height: 295px;
+  background: #1a1a1a;
+  border: 1px solid #333;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .video-container {
   position: relative;
   width: 100%;
   height: 100%;
-  background: linear-gradient(180deg, #006FA3 0%, #00AEFF 50%);
+  background: linear-gradient(180deg, #006fa3 0%, #00aeff 50%);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -473,7 +476,7 @@
 }
 
 .placeholder-flower {
-  width: 100px; 
+  width: 100px;
   height: 100px;
   object-fit: contain;
   z-index: 2;
@@ -484,7 +487,6 @@
 .video-call.hidden {
   display: block; /* Changed from opacity: 0 */
   opacity: 0;
-  
 }
 
 .video-call.visible {
@@ -495,7 +497,8 @@
   z-index: 3;
 }
 
-.video-call, .video-self {
+.video-call,
+.video-self {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -503,7 +506,7 @@
 
 /* Mirror the self-view so it feels natural to the user */
 .video-self {
-    transform: scaleX(-1);
+  transform: scaleX(-1);
 }
 
 .video-call-controls {
@@ -549,229 +552,163 @@
   display: flex;
   gap: 10px;
   padding: 8px;
-  position: relative; /* This allows the button to anchor here */
 }
 .mood-area-container {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 16px;
-    flex: 1 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 16px;
+  width: 100%;
 }
 
 .status-message {
-    padding: 4px 8px;
-    font-family: "Segoe UI", sans-serif;
-    font-size: 14px;
-    position: relative;
-    bottom: 40px;
+  padding: 4px 8px;
+  font-family: "Segoe UI", sans-serif;
+  font-size: 14px;
+  height: 100%;
 }
 
 .mood-area {
-    display: flex;
-    flex: 1;
-    height: 56px;
-    padding: 6px 8px;
-    background: #FFF;
-    border-radius: 5px;
-    width: 100%;
-    box-sizing: border-box;
-    font-family: "Segoe UI", sans-serif;
-    font-size: 14px;
+  display: flex;
+  flex: 1;
+  padding: 6px 8px;
+  background: #fff;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+  font-size: 14px;
+  height: 100%;
+  width: 100%;
 }
 
 .mood-area2 {
-    display: flex;
-    flex: 1;
-    width: 678px;
-    height: 117px;
-    align-items: center;
-    background: #FFF;
-    position: relative;
-    border-radius: 5px 5px 5px 5px;
-    font-family: "Segoe UI", sans-serif;
-    font-size: 14px;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  background: #fff;
+  border-radius: 5px 5px 5px 5px;
+  font-family: "Segoe UI", sans-serif;
+  font-size: 14px;
+}
+.ma2-left {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+.ma2-right {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
 }
 
-.time-area {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    display: flex;
-    width: 339px;
-    height: 32px;
-    /* padding: 0px 0px 8px 0px; */
-    align-items: center;
-    gap: 8px;
-    border-top: 1px solid #CCD3E1;
-    border-right: 1px solid #CCD3E1;
-    background: #F3FAFF;
-    border-bottom-left-radius: 5px;
-    font-family: "Segoe UI", sans-serif;
-    font-size: 14px;
-    gap: 14px;
-}
-
-.language-area {
-    position: absolute;
-    top: 0;
-    right: 0;
-    display: flex;
-    width: 331px;
-    height: 39px;
-    align-items: center;
-    flex: 1 0 0;
-    align-self: stretch;
-    border-left: 1px solid #CCD3E1;
-    background: #F3FAFF;
-    border-top-right-radius: 5px;
-    font-family: "Segoe UI", sans-serif;
-    font-size: 14px;
-    gap: 14px;
-}
-
-.gender-area {
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    display: flex;
-    width: 331px;
-    height: 39px;
-    /* padding: 8px; */
-    align-items: center;
-    gap: 8px;
-    flex: 1 0 0;
-    align-self: stretch;
-    border-top: 1px solid #CCD3E1;
-    border-left: 1px solid #CCD3E1;
-    background: #F3FAFF;
-    font-family: "Segoe UI", sans-serif;
-    font-size: 14px;
-    gap: 14px;
-}
-
-.name-area {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    display: flex;
-    width: 331px;
-    height: 39px;
-    /* padding: 8px; */
-    align-items: center;
-    gap: 8px;
-    flex: 1 0 0;
-    align-self: stretch;
-    border-top: 1px solid #CCD3E1;
-    border-left: 1px solid #CCD3E1;
-    background: #F3FAFF;
-    border-bottom-right-radius: 5px;
-    font-family: "Segoe UI", sans-serif;
-    font-size: 14px;
-    gap: 14px;
+.profile-info-area {
+  display: flex;
+  min-height: 39px;
+  padding-left: 8px;
+  align-items: center;
+  flex: 1 0 0;
+  gap: 14px;
+  border: 1px solid #ccd3e1;
+  background: #f3faff;
+  font-family: "Segoe UI", sans-serif;
+  font-size: 14px;
 }
 
 .flag-icon {
-    width: 21px;
-    height: 15px;
-    position: relative;
-    left: 8px;
+  width: 21px;
+  height: 15px;
 }
 
 .arrow-group {
-    display: flex;
-    gap: 0; /* Keep them touching like the Skype UI */
-    margin-left: auto;
-    position: relative;
-    right: 8px;
+  display: flex;
+  gap: 0; /* Keep them touching like the Skype UI */
+  margin-left: auto;
+  position: relative;
+  right: 8px;
 }
 
-.left-arrow, .right-arrow {
-    display: flex;
-    width: 24px;  /* Adjusted for clickable area */
-    height: 18px;
-    justify-content: center;
-    align-items: center;
-    background: #FFF;
-    border: 1px solid #C9C9C9;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.25);
-    cursor: pointer;
+.left-arrow,
+.right-arrow {
+  display: flex;
+  width: 24px; /* Adjusted for clickable area */
+  height: 18px;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  border: 1px solid #c9c9c9;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.25);
+  cursor: pointer;
 }
 
 .left-arrow {
-    border-radius: 10px 0 0 10px;
+  border-radius: 10px 0 0 10px;
 }
 
 .right-arrow {
-    border-radius: 0 10px 10px 0;
-    margin-left: -1px; /* Overlap borders to prevent a double-thick line */
+  border-radius: 0 10px 10px 0;
+  margin-left: -1px; /* Overlap borders to prevent a double-thick line */
 }
 
 .language-icon {
-    width: 21px;
-    height: 20px;
-    position: relative;
-    left: 8px;
+  width: 21px;
 }
-
 .gender-icon {
-    position: relative;
-    left: 8px;
+  width: 24px;
+  margin-right: -4px;
 }
 
 .skype2-icon {
-    width: 21px;
-    position: relative;
-    left: 8px;
-    opacity: 0.3;
+  width: 21px;
+  opacity: 0.3;
 }
 
 .mood-bubble {
-    color: #000;
-    font-family: Verdana;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
+  color: #000;
+  font-family: Verdana;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
 
 .clapper-icon {
-    width: 19px;
-    height: 19px;
-    aspect-ratio: 1/1;
-    margin-left: auto;      /* Pushes it to the far right */
+  width: 19px;
+  height: 19px;
+  aspect-ratio: 1/1;
+  margin-left: auto; /* Pushes it to the far right */
 }
 
 .personalize-btn {
-    display: flex;
-    padding: 0 8px;
-    height: fit-content;
-    justify-content: center;
-    align-items: center;
-    gap: 6px;
-    border-radius: 12px;
-    border: 1px solid #C9C9C9;
-    background: #FFF;
-    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
-    cursor: pointer;
-    z-index: 5;
+  display: flex;
+  padding: 0 8px;
+  height: fit-content;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  border-radius: 12px;
+  border: 1px solid #c9c9c9;
+  background: #fff;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  z-index: 5;
 }
 
 .personalize-text {
-    color: #6B6B6B;
-    font-family: "Segoe UI", sans-serif;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
+  color: #6b6b6b;
+  font-family: "Segoe UI", sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
 
 .avatar-placeholder {
-  width: 88px;
   height: 88px;
-  background: #DCE6F2;
-  border: 1px solid #A5C7E9;
+  min-width: 88px;
+  background: #dce6f2;
+  border: 1px solid #a5c7e9;
   overflow: hidden; /* Add this to prevent image overflow */
   display: flex; /* Add this */
   align-items: center; /* Add this */
@@ -785,333 +722,327 @@
 }
 
 .august-placeholder {
-    width: 109px;
-    height: 109px;
-    background: #DCE6F2; /* Grey-blue for empty avatar */
-    border: 1px solid #A5C7E9;
-    position: relative;
-    top: 2px;
-    overflow: hidden;
+  min-width: 120px;
+  height: 120px;
+  background: #dce6f2; /* Grey-blue for empty avatar */
+  border: 1px solid #a5c7e9;
+  position: relative;
+  top: 2px;
+  overflow: hidden;
 }
 
 .august-icon {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .promo-link-row {
-    display: flex;
-    padding: 2px 4px 4px 4px;
-    align-items: flex-end;
-    gap: 2px;
-    align-self: stretch;
-    background: #C7DBEF;
-    margin-bottom: 8px;
-    border-radius: 0px 0px 5px 5px;
+  display: flex;
+  padding: 2px 4px 4px 4px;
+  align-items: flex-end;
+  gap: 2px;
+  align-self: stretch;
+  background: #c7dbef;
+  margin-bottom: 8px;
+  border-radius: 0px 0px 5px 5px;
 }
 
 .promo-text {
-    color: #07F;
-    font-family: "Segoe UI", sans-serif;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    opacity: 0.8;
+  color: #07f;
+  font-family: "Segoe UI", sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  opacity: 0.8;
 }
 
 .contacts-container {
   display: flex;
   flex-direction: column;
-  /* Remove flex-grow: 1 so it doesn't fill the page */
+  width: 100%;
   height: auto;
 }
 
 .search-bar-row {
   display: flex;
+  width: 100%;
   align-items: center;
   gap: 5px;
   margin-bottom: 8px;
 }
 
 .add-contact-btn {
-    display: flex;
-    padding: 2px 8px;
-    justify-content: center;
-    align-items: center;
-    gap: 4px;
-    border-radius: 20px;
-    background: #FFF;
-    border: 1px solid #C9C9C9;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.25);
-    cursor: pointer;
+  display: flex;
+  padding: 2px 8px;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  border-radius: 20px;
+  background: #fff;
+  border: 1px solid #c9c9c9;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.25);
+  cursor: pointer;
 }
 
 .add-user-icon {
-    display: flex;
-    width: 15px;
-    height: 15px;
-    /* padding: 7px 1px 1px 7px; */
+  display: flex;
+  width: 15px;
+  height: 15px;
+  /* padding: 7px 1px 1px 7px; */
 }
 
 .add-btn-text {
-    font-size: 14px; 
-    font-family: "Segoe UI", sans-serif;
-    color: #333;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
+  font-size: 14px;
+  font-family: "Segoe UI", sans-serif;
+  color: #333;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
 }
 
 .contact-search {
-    display: flex;
-    padding: 4px;
-    align-items: center;
-    gap: 10px;
-    flex: 1;
-    border-radius: 2px;
-    border: 1px solid #C9C9C9;
-    background: #FFF;
+  display: flex;
+  padding: 4px;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  border-radius: 2px;
+  border: 1px solid #c9c9c9;
+  background: #fff;
 }
 
 .contact-search::placeholder {
-    color: #A5A5A5;
-    font-family: "Segoe UI", sans-serif;
-    font-size: 11.5px;
-    font-style: normal;
-    font-weight: 350;
-    line-height: normal;
+  color: #a5a5a5;
+  font-family: "Segoe UI", sans-serif;
+  font-size: 11.5px;
+  font-style: normal;
+  font-weight: 350;
+  line-height: normal;
 }
 
 .tab-headers {
-    display: flex;
-    width: 100%;
-    margin-bottom: 0; /* Remove bottom margin so they touch the box */
-    align-items: flex-end;
+  display: flex;
+  width: 100%;
+  margin-bottom: 0; /* Remove bottom margin so they touch the box */
+  align-items: flex-end;
 }
 
 .tab-active {
-    display: flex;
-    padding: 6px 12px; /* Authentic Skype padding */
-    background: #FFF;
-    border: 1px solid #C9C9C9;
-    border-bottom: 1px solid #FFF; /* Masks the box border */
-    border-radius: 5px 5px 0 0;
-    margin-bottom: -1px; /* The "overlap" trick */
-    z-index: 2; /* Sits on top */
-    font-family: "Segoe UI", sans-serif;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 580;
-    line-height: normal;
-    color: #545454;
+  display: flex;
+  padding: 6px 12px; /* Authentic Skype padding */
+  background: #fff;
+  border: 1px solid #c9c9c9;
+  border-bottom: 1px solid #fff; /* Masks the box border */
+  border-radius: 5px 5px 0 0;
+  margin-bottom: -1px; /* The "overlap" trick */
+  z-index: 2; /* Sits on top */
+  font-family: "Segoe UI", sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 580;
+  line-height: normal;
+  color: #545454;
 }
 
 .tab {
-    display: flex;
-    width: 300px;
-    position: relative;
-    bottom: -1px;
-    left: -1px;
-    padding: 6px 12px;
-    background: #FFF; /* Inactive tabs are usually slightly darker */
-    border: 1px solid #C9C9C9;
-    border-radius: 5px 5px 0 0;
-    margin-bottom: 0; 
-    z-index: 1;
-    font-family: "Segoe UI", sans-serif;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 580;
-    line-height: normal;
-    color: #545454;
-    cursor: pointer;
+  display: flex;
+  width: 300px;
+  position: relative;
+  bottom: -1px;
+  left: -1px;
+  padding: 6px 12px;
+  background: #fff; /* Inactive tabs are usually slightly darker */
+  border: 1px solid #c9c9c9;
+  border-radius: 5px 5px 0 0;
+  margin-bottom: 0;
+  z-index: 1;
+  font-family: "Segoe UI", sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 580;
+  line-height: normal;
+  color: #545454;
+  cursor: pointer;
 }
 
 .contacts-list {
-  /* Remove flex-grow: 1 so it doesn't fill the page */
   height: auto;
-  border: 1px solid #C9C9C9;
-  background: #FFF;
+  border: 1px solid #c9c9c9;
+  background: #fff;
   border-radius: 0 5px 5px 5px;
   z-index: 1;
   padding: 2px;
   overflow-y: auto;
   transition: height 0.2s;
-}
-
-.contacts-list-scrollable {
-    flex: 1;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .contact-item {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-    padding: 3px 2px;
-    position: relative;
-    border-radius: 5px;
-    flex-shrink: 0;
-    width: 100%;
-    cursor: pointer;
-    background: #FFF;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 3px 2px;
+  position: relative;
+  border-radius: 5px;
+  flex-shrink: 0;
+  cursor: pointer;
+  background: #fff;
 }
 
 .contact-item:hover {
-    background: #f5f5f5;
+  background: #f5f5f5;
 }
 
 .contact-selected {
-    background: linear-gradient(180deg, #4ec3ff 0%, #1fb3ff 100%);
+  background: linear-gradient(180deg, #4ec3ff 0%, #1fb3ff 100%);
 }
 
 .contact-selected:hover {
-    background: linear-gradient(180deg, #4ec3ff 0%, #1fb3ff 100%);
+  background: linear-gradient(180deg, #4ec3ff 0%, #1fb3ff 100%);
 }
 
 .contact-status-icon {
-    position: relative;
-    width: 20px;
-    height: 20px;
-    flex-shrink: 0;
+  position: relative;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
 }
 
 .contact-status-icon img {
-    width: 100%;
-    height: 100%;
-    display: block;
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 .contact-name {
-    font-family: "Segoe UI", sans-serif;
-    font-weight: 400;
-    line-height: normal;
-    font-style: normal;
-    position: relative;
-    flex-shrink: 0;
-    font-size: 12px;
-    color: #000;
-    white-space: nowrap;
-    margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  font-weight: 400;
+  line-height: normal;
+  font-style: normal;
+  position: relative;
+  flex-shrink: 0;
+  font-size: 12px;
+  color: #000;
+  white-space: nowrap;
+  margin: 0;
 }
 
 .contact-selected .contact-name {
-    color: #FFF;
+  color: #fff;
 }
 
 .contact-status-message {
-    font-family: "Segoe UI", sans-serif;
-    font-weight: 300;
-    line-height: normal;
-    font-style: normal;
-    position: relative;
-    flex-shrink: 0;
-    font-size: 12px;
-    color: #6f6f6f;
-    white-space: nowrap;
-    margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  font-weight: 300;
+  line-height: normal;
+  font-style: normal;
+  position: relative;
+  flex-shrink: 0;
+  font-size: 12px;
+  color: #6f6f6f;
+  white-space: nowrap;
+  margin: 0;
 }
 
 .contact-selected .contact-status-message {
-    color: #efefef;
+  color: #efefef;
 }
 
 .usercount-footer {
-    display: flex;
-    align-items: center;
-    padding: 0 16px;
-    position: relative;
-    flex-shrink: 0;
-    width: 100%;
-    background: #FFF;
-    margin-bottom: 2px;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  position: relative;
+  flex-shrink: 0;
+  background: #fff;
+  margin-bottom: 2px;
 }
 
 .usercount-footer p {
-    font-family: "Segoe UI", sans-serif;
-    font-weight: 300;
-    line-height: normal;
-    font-style: normal;
-    position: relative;
-    flex-shrink: 0;
-    color: #a5a5a5;
-    font-size: 12px;
-    white-space: nowrap;
-    margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  font-weight: 300;
+  line-height: normal;
+  font-style: normal;
+  position: relative;
+  flex-shrink: 0;
+  color: #a5a5a5;
+  font-size: 12px;
+  white-space: nowrap;
+  margin: 0;
 }
 
 .popup-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.3);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999; /* Higher than other elements */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Higher than other elements */
 }
 
 /* The actual window */
 .popup-content {
-    background: white;
-    /* border-radius: 8px; */
-    /* box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); */
-    width: 753px;
-    height: 611px;
-    text-align: center;
-    gap: 48px;
+  background: white;
+  /* border-radius: 8px; */
+  /* box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); */
+  width: 753px;
+  height: 611px;
+  text-align: center;
+  gap: 48px;
 }
 
 .chat-date-divider {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px 0;
-    width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 0;
+  width: 100%;
 }
 
 .chat-date-divider hr {
-    flex: 1;
-    border: 0;
-    border-top: 1px solid #E0E0E0;
-    margin: 0 10px;
+  flex: 1;
+  border: 0;
+  border-top: 1px solid #e0e0e0;
+  margin: 0 10px;
 }
 
 .chat-date-divider span {
-    color: #888888;
-    font-family: "Segoe UI", Tahoma, sans-serif;
-    font-size: 11px;
-    /* font-weight: bold; */
-    text-transform: uppercase;
+  color: #888888;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  font-size: 11px;
+  /* font-weight: bold; */
+  text-transform: uppercase;
 }
 
 .director-panel {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100px;
-    height: 10px; /* Very thin sliver at the top */
-    background: transparent;
-    opacity: 0; /* Hidden from camera */
-    z-index: 9999;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100px;
+  height: 10px; /* Very thin sliver at the top */
+  background: transparent;
+  opacity: 0; /* Hidden from camera */
+  z-index: 9999;
 }
 
 .director-panel:hover {
-    opacity: 1; /* Only appears when you hover your mouse over the top left corner */
-    background: rgba(0,0,0,0.8);
-    height: auto;
+  opacity: 1; /* Only appears when you hover your mouse over the top left corner */
+  background: rgba(0, 0, 0, 0.8);
+  height: auto;
 }
 
 .sidebar-footer-nav {
   /* border-top: 1px solid #ccc; */
-  background: #DEF8FF;
+  background: #def8ff;
   /* padding: 4px; */
 }
 
@@ -1123,10 +1054,10 @@
   border-radius: 5px;
   margin-top: 4px;
   cursor: pointer;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: "Segoe UI", sans-serif;
   font-size: 13px;
   color: #444;
-  background: #FFF;
+  background: #fff;
 }
 
 .nav-item:hover {

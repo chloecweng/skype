@@ -1,7 +1,9 @@
 .add-contact-window {
   display: flex;
-  width: 753px;
-  /* min-height: 393px; */
+  width: 100%;
+  max-width: 753px;
+  box-sizing: border-box;
+  padding: 0 16px;
   flex-direction: column;
   align-items: center;
   gap: 48px;
@@ -355,7 +357,7 @@
   color: #000;
   white-space: nowrap;
   cursor: pointer;
-  margin-right: 8px
+  margin-right: 8px;
 }
 
 /* Progress Bar */
@@ -405,8 +407,11 @@
   position: relative;
   box-shadow: 2px 2px 1px 0px rgba(0, 0, 0, 0.5);
   width: 100%;
+  max-width: 100%;
+  min-width: 0;
   border-collapse: collapse;
   margin: 0 auto;
+  overflow-x: auto;
 }
 .results-table th,
 .results-table td {
@@ -414,10 +419,22 @@
   vertical-align: middle;
 }
 
-.results-table td:nth-child(1) { width: 140px; }
-.results-table td:nth-child(2) { width: 115px; }
-.results-table td:nth-child(3) { width: 230px; }
-.results-table td:nth-child(4) { width: 34px; }
+.results-table td:nth-child(1) {
+  min-width: 80px;
+  width: 140px;
+}
+.results-table td:nth-child(2) {
+  min-width: 80px;
+  width: 115px;
+}
+.results-table td:nth-child(3) {
+  min-width: 120px;
+  flex: 1;
+}
+.results-table td:nth-child(4) {
+  width: 34px;
+  flex-shrink: 0;
+}
 
 .column-labels {
   display: flex;
@@ -426,6 +443,12 @@
   flex-shrink: 0;
   /* border: 1px solid #c9c9c9; */
   width: 100%;
+}
+
+.column-labels tr {
+  display: flex;
+  width: 100%;
+  min-width: 0;
 }
 
 .column-header {
@@ -442,10 +465,29 @@
   color: #000;
 }
 
-.column-header:nth-child(1) { width: 119px; } /* Full Name */
-.column-header:nth-child(2) { width: 99px; } /* Skype Name */
-.column-header:nth-child(3) { width: 230px; }  /* Country - This takes the remaining space */
-.column-header:nth-child(4) { width: 34px; border-right: none; }
+.column-header:nth-child(1) {
+  min-width: 80px;
+  width: 119px;
+} /* Full Name */
+.column-header:nth-child(2) {
+  min-width: 80px;
+  width: 99px;
+} /* Skype Name */
+.column-header:nth-child(3) {
+  min-width: 120px;
+  flex: 1;
+} /* Country - takes remaining space */
+.column-header:nth-child(4) {
+  width: 34px;
+  flex-shrink: 0;
+  border-right: none;
+}
+
+.results-table tbody tr {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+}
 
 .result-row {
   background: #00abfb;

@@ -152,8 +152,10 @@ const createWindow = () => {
   const mainWindow = new BrowserWindow({
     width: 1158,
     height: 682,
+    minWidth: 800,
+    minHeight: 500,
     useContentSize: true, // Ensures the 1158x682 is the actual drawing area
-    resizable: false,
+    resizable: true,
     frame: true, // Default native title bar
     transparent: false,
     webPreferences: {

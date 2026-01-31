@@ -6,18 +6,24 @@
   max-width: 38rem;
   padding: 2rem;
 } */
-body, html {
+body,
+html {
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
   overflow: hidden; /* Prevents scrollbars on the main window */
-  font-family: 'Segoe UI';
+  font-family: "Segoe UI";
+}
+
+#root {
+  width: 100%;
+  height: 100%;
 }
 
 .app-wrapper {
-  width: 1158px;
-  height: 682px;
+  width: 100%;
+  height: 100%;
   margin: 0;
   padding: 0;
   display: flex;

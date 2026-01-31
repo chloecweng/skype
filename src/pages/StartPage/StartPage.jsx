@@ -978,263 +978,6 @@ const StartPage = () => {
     console.log("In video call");
     return (
       <div className="start-page-container">
-        <div className="skype-background-layer">
-          <div className="skype-sidebar">
-            {/* USER BOX */}
-            <div className="user-profile-card">
-              <div className="status-row">
-                <img src="/assets/online.svg" className="status-icon" alt="" />
-                <img
-                  src="/assets/polygon2.svg"
-                  className="polygon-icon"
-                  alt=""
-                />
-                <span className="user-display-name">HarborLine</span>
-              </div>
-              <div className="profile-content">
-                <div className="avatar-placeholder">
-                  <img
-                    src="/assets/james.png"
-                    className="james-profile"
-                    alt=""
-                  />
-                </div>
-                <div className="mood-area-container">
-                  <div className="mood-area">
-                    <div className="mood-bubble">¯\_(ツ)_/¯</div>
-                    <img
-                      src="/assets/clapper.png"
-                      className="clapper-icon"
-                      alt=""
-                    />
-                  </div>
-                  <button className="personalize-btn">
-                    <span className="personalize-text">Personalize ▾</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div className="promo-link-row">
-              <img src="/assets/landline.svg" className="promo-icon" alt="" />
-              <span className="promo-text">
-                Make your free call to an ordinary phone
-              </span>
-            </div>
-
-            <div className="contacts-container">
-              <div className="search-bar-row">
-                <button className="add-contact-btn" onClick={handleAddContact}>
-                  <img
-                    src="/assets/person.png"
-                    className="add-user-icon"
-                    alt=""
-                  />
-                  <span className="add-btn-text">New</span>
-                  <img
-                    src="/assets/polygon2-black.svg"
-                    className="dropdown-arrow-svg"
-                    style={{ width: "10px" }}
-                    alt=""
-                  />
-                </button>
-                <input
-                  type="text"
-                  className="contact-search"
-                  placeholder="Search Contacts..."
-                />
-              </div>
-              <div className="tab-headers">
-                <div className="tab-active">Contacts</div>
-                <div className="tab">Conversations</div>
-              </div>
-              <div className="contacts-list">
-                <div
-                  className="contacts-list-scrollable"
-                  onClick={closeContextMenu}
-                >
-                  {contacts
-                    .filter((contact) => !contact.blocked)
-                    .map((contact) => (
-                      <div
-                        key={contact.id}
-                        className={`contact-item ${selectedContactId === contact.id ? "contact-selected" : ""}`}
-                        onClick={() => handleContactClick(contact.id)}
-                        onContextMenu={(e) =>
-                          handleContactRightClick(e, contact.id)
-                        }
-                      >
-                        <div className="contact-status-icon">
-                          <img
-                            src={getStatusIcon(contact.status, contact.name)}
-                            alt=""
-                          />
-                        </div>
-                        <p className="contact-name">{contact.name}</p>
-                        <p className="contact-status-message">
-                          {contact.statusMessage}
-                        </p>
-                      </div>
-                    ))}
-                </div>
-                <div className="usercount-footer">
-                  <p>16,175,278 people online</p>
-                </div>
-                {/* NEW FOOTER NAVIGATION */}
-                <div className="sidebar-footer-nav">
-                  <div className="nav-item">
-                    <img
-                      src="/assets/magnifying-glass.png"
-                      className="nav-icon"
-                      alt=""
-                    />
-                    <span>Directory</span>
-                  </div>
-                  <div className="nav-item">
-                    <img
-                      src="/assets/shopping-bag.png"
-                      className="nav-icon"
-                      alt=""
-                    />
-                    <span>Shop</span>
-                  </div>
-                  <div
-                    className="nav-item"
-                    onClick={() => window.electronAPI.openBlockedWindow()}
-                  >
-                    <img
-                      src="/assets/gold-badge.png"
-                      className="nav-icon"
-                      alt=""
-                    />
-                    <span>Blocked users</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="chat-header">
-            <div className="status-row">
-              <img
-                src={
-                  selectedContact
-                    ? getStatusIcon(
-                        selectedContact.status,
-                        selectedContact.name,
-                      )
-                    : "/assets/busy.svg"
-                }
-                className="status-icon"
-                alt=""
-              />
-              <span className="user-display-name">
-                {selectedContact ? selectedContact.name : "August27"}
-              </span>
-              <div className="add-people-button">
-                <img src="/assets/add.svg" className="add-icon" alt="" />
-                <span className="add-people-text">Add people</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="chat-column">
-            <div className="black-bg">
-              <div className="august-profile-card-video">
-                <div className="video-container">
-                  {/* PHASE 1: Show flower ONLY if not connecting AND not playing video */}
-                  {!isConnecting && !isAugustVideoPlaying && (
-                    <img
-                      src="/assets/flower.png"
-                      className="placeholder-flower"
-                      alt="Profile"
-                    />
-                  )}
-
-                  {/* PHASE 2: Show loading GIF during the connection phase */}
-                  {isConnecting && (
-                    <div className="loading-overlay">
-                      <img
-                        src="/assets/loading.gif"
-                        className="loading-state"
-                        alt="Connecting..."
-                      />
-                    </div>
-                  )}
-
-                  {/* PHASE 3: The Video Element */}
-                  <video
-                    ref={remoteVideoRef}
-                    className={`video-call ${isAugustVideoPlaying ? "visible" : "hidden"}`}
-                    src="/assets/temp_clip.mov"
-                    playsInline
-                    muted
-                    onEnded={() => {
-                      setIsAugustVideoPlaying(false);
-                      setIsInVideoCall(false);
-                    }}
-                  />
-                </div>
-              </div>
-              <div className="self-view-card">
-                <video
-                  ref={selfVideoRef}
-                  className="video-self"
-                  autoPlay
-                  playsInline
-                  muted
-                />
-              </div>
-            </div>
-            <div className="video-call-controls">
-              <img
-                src="/assets/hangup-button.svg"
-                alt=""
-                onClick={() => {
-                  setIsInVideoCall(false);
-                  setIsAugustVideoPlaying(false);
-                }}
-                style={{ cursor: "pointer" }}
-              />
-              <img
-                src="/assets/stop-video.svg"
-                alt=""
-                onClick={() => setIsVideoEnabled(false)}
-                style={{ cursor: "pointer" }}
-              />
-            </div>
-          </div>
-        </div>
-        {notification.show && (
-          <div className="skype-toast">
-            <div className="toast-header">
-              <img src="/assets/skype-white.svg" height="12" alt="Skype" />
-            </div>
-
-            <div className="toast-content-reveal">
-              <div className="toast-body">
-                <img
-                  src="/assets/online.svg"
-                  className="toast-avatar"
-                  alt="status"
-                />
-                <div className="toast-text-content">
-                  <span className="toast-name">{notification.name}</span>
-                  <span className="toast-message">{notification.msg}</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="toast-footer"></div>
-          </div>
-        )}
-      </div>
-    );
-  }
-
-  return (
-    <div className="start-page-container">
-      <div className="skype-background-layer">
         <div className="skype-sidebar">
           {/* USER BOX */}
           <div className="user-profile-card">
@@ -1296,65 +1039,291 @@ const StartPage = () => {
               <div className="tab-active">Contacts</div>
               <div className="tab">Conversations</div>
             </div>
-            <div className="contacts-list">
-              <div className="contacts-list-scrollable">
-                {contacts
-                  .filter((contact) => !contact.blocked)
-                  .map((contact) => (
-                    <div
-                      key={contact.id}
-                      className={`contact-item ${selectedContactId === contact.id ? "contact-selected" : ""}`}
-                      onClick={() => handleContactClick(contact.id)}
-                      onContextMenu={(e) =>
-                        handleContactRightClick(e, contact.id)
-                      }
-                    >
-                      <div className="contact-status-icon">
-                        <img
-                          src={getStatusIcon(contact.status, contact.name)}
-                          alt=""
-                        />
-                      </div>
-                      <p className="contact-name">{contact.name}</p>
-                      <p className="contact-status-message">
-                        {contact.statusMessage}
-                      </p>
+            <div className="contacts-list" onClick={closeContextMenu}>
+              {contacts
+                .filter((contact) => !contact.blocked)
+                .map((contact) => (
+                  <div
+                    key={contact.id}
+                    className={`contact-item ${selectedContactId === contact.id ? "contact-selected" : ""}`}
+                    onClick={() => handleContactClick(contact.id)}
+                    onContextMenu={(e) =>
+                      handleContactRightClick(e, contact.id)
+                    }
+                  >
+                    <div className="contact-status-icon">
+                      <img
+                        src={getStatusIcon(contact.status, contact.name)}
+                        alt=""
+                      />
                     </div>
-                  ))}
-              </div>
+                    <p className="contact-name">{contact.name}</p>
+                    <p className="contact-status-message">
+                      {contact.statusMessage}
+                    </p>
+                  </div>
+                ))}
               <div className="usercount-footer">
                 <p>16,175,278 people online</p>
               </div>
-            </div>
-            {/* NEW FOOTER NAVIGATION */}
-            <div className="sidebar-footer-nav">
-              <div className="nav-item">
-                <img
-                  src="/assets/magnifying-glass.png"
-                  className="nav-icon"
-                  alt=""
-                />
-                <span>Directory</span>
-              </div>
-              <div className="nav-item">
-                <img
-                  src="/assets/shopping-bag.png"
-                  className="nav-icon"
-                  alt=""
-                />
-                <span>Shop</span>
-              </div>
-              <div
-                className="nav-item"
-                onClick={() => window.electronAPI.openBlockedWindow()}
-              >
-                <img src="/assets/gold-badge.png" className="nav-icon" alt="" />
-                <span>Blocked users</span>
+              {/* NEW FOOTER NAVIGATION */}
+              <div className="sidebar-footer-nav">
+                <div className="nav-item">
+                  <img
+                    src="/assets/magnifying-glass.png"
+                    className="nav-icon"
+                    alt=""
+                  />
+                  <span>Directory</span>
+                </div>
+                <div className="nav-item">
+                  <img
+                    src="/assets/shopping-bag.png"
+                    className="nav-icon"
+                    alt=""
+                  />
+                  <span>Shop</span>
+                </div>
+                <div
+                  className="nav-item"
+                  onClick={() => window.electronAPI.openBlockedWindow()}
+                >
+                  <img
+                    src="/assets/gold-badge.png"
+                    className="nav-icon"
+                    alt=""
+                  />
+                  <span>Blocked users</span>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
+        <div className="chat-header">
+          <div className="status-row">
+            <img
+              src={
+                selectedContact
+                  ? getStatusIcon(selectedContact.status, selectedContact.name)
+                  : "/assets/busy.svg"
+              }
+              className="status-icon"
+              alt=""
+            />
+            <span className="user-display-name">
+              {selectedContact ? selectedContact.name : "August27"}
+            </span>
+            <div className="add-people-button">
+              <img src="/assets/add.svg" className="add-icon" alt="" />
+              <span className="add-people-text">Add people</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="chat-column">
+          <div className="black-bg">
+            <div className="august-profile-card-video">
+              <div className="video-container">
+                {/* PHASE 1: Show flower ONLY if not connecting AND not playing video */}
+                {!isConnecting && !isAugustVideoPlaying && (
+                  <img
+                    src="/assets/flower.png"
+                    className="placeholder-flower"
+                    alt="Profile"
+                  />
+                )}
+
+                {/* PHASE 2: Show loading GIF during the connection phase */}
+                {isConnecting && (
+                  <div className="loading-overlay">
+                    <img
+                      src="/assets/loading.gif"
+                      className="loading-state"
+                      alt="Connecting..."
+                    />
+                  </div>
+                )}
+
+                {/* PHASE 3: The Video Element */}
+                <video
+                  ref={remoteVideoRef}
+                  className={`video-call ${isAugustVideoPlaying ? "visible" : "hidden"}`}
+                  src="/assets/temp_clip.mov"
+                  playsInline
+                  muted
+                  onEnded={() => {
+                    setIsAugustVideoPlaying(false);
+                    setIsInVideoCall(false);
+                  }}
+                />
+              </div>
+            </div>
+            <div className="self-view-card">
+              <video
+                ref={selfVideoRef}
+                className="video-self"
+                autoPlay
+                playsInline
+                muted
+              />
+            </div>
+          </div>
+          <div className="video-call-controls">
+            <img
+              src="/assets/hangup-button.svg"
+              alt=""
+              onClick={() => {
+                setIsInVideoCall(false);
+                setIsAugustVideoPlaying(false);
+              }}
+              style={{ cursor: "pointer" }}
+            />
+            <img
+              src="/assets/stop-video.svg"
+              alt=""
+              onClick={() => setIsVideoEnabled(false)}
+              style={{ cursor: "pointer" }}
+            />
+          </div>
+        </div>
+        {notification.show && (
+          <div className="skype-toast">
+            <div className="toast-header">
+              <img src="/assets/skype-white.svg" height="12" alt="Skype" />
+            </div>
+
+            <div className="toast-content-reveal">
+              <div className="toast-body">
+                <img
+                  src="/assets/online.svg"
+                  className="toast-avatar"
+                  alt="status"
+                />
+                <div className="toast-text-content">
+                  <span className="toast-name">{notification.name}</span>
+                  <span className="toast-message">{notification.msg}</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="toast-footer"></div>
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  return (
+    <div className="start-page-container">
+      <div className="skype-sidebar">
+        {/* USER BOX */}
+        <div className="user-profile-card">
+          <div className="status-row">
+            <img src="/assets/online.svg" className="status-icon" alt="" />
+            <img src="/assets/polygon2.svg" className="polygon-icon" alt="" />
+            <span className="user-display-name">HarborLine</span>
+          </div>
+          <div className="profile-content">
+            <div className="avatar-placeholder">
+              <img src="/assets/james.png" className="james-profile" alt="" />
+            </div>
+            <div className="mood-area-container">
+              <div className="mood-area">
+                <div className="mood-bubble">¯\_(ツ)_/¯</div>
+                <img
+                  src="/assets/clapper.png"
+                  className="clapper-icon"
+                  alt=""
+                />
+              </div>
+              <button className="personalize-btn">
+                <span className="personalize-text">Personalize ▾</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div className="promo-link-row">
+          <img src="/assets/landline.svg" className="promo-icon" alt="" />
+          <span className="promo-text">
+            Make your free call to an ordinary phone
+          </span>
+        </div>
+
+        <div className="contacts-container">
+          <div className="search-bar-row">
+            <button className="add-contact-btn" onClick={handleAddContact}>
+              <img src="/assets/person.png" className="add-user-icon" alt="" />
+              <span className="add-btn-text">New</span>
+              <img
+                src="/assets/polygon2-black.svg"
+                className="dropdown-arrow-svg"
+                style={{ width: "10px" }}
+                alt=""
+              />
+            </button>
+            <input
+              type="text"
+              className="contact-search"
+              placeholder="Search Contacts..."
+            />
+          </div>
+          <div className="tab-headers">
+            <div className="tab-active">Contacts</div>
+            <div className="tab">Conversations</div>
+          </div>
+          <div className="contacts-list">
+            {contacts
+              .filter((contact) => !contact.blocked)
+              .map((contact) => (
+                <div
+                  key={contact.id}
+                  className={`contact-item ${selectedContactId === contact.id ? "contact-selected" : ""}`}
+                  onClick={() => handleContactClick(contact.id)}
+                  onContextMenu={(e) => handleContactRightClick(e, contact.id)}
+                >
+                  <div className="contact-status-icon">
+                    <img
+                      src={getStatusIcon(contact.status, contact.name)}
+                      alt=""
+                    />
+                  </div>
+                  <p className="contact-name">{contact.name}</p>
+                  <p className="contact-status-message">
+                    {contact.statusMessage}
+                  </p>
+                </div>
+              ))}
+            <div className="usercount-footer">
+              <p>16,175,278 people online</p>
+            </div>
+          </div>
+          {/* NEW FOOTER NAVIGATION */}
+          <div className="sidebar-footer-nav">
+            <div className="nav-item">
+              <img
+                src="/assets/magnifying-glass.png"
+                className="nav-icon"
+                alt=""
+              />
+              <span>Directory</span>
+            </div>
+            <div className="nav-item">
+              <img src="/assets/shopping-bag.png" className="nav-icon" alt="" />
+              <span>Shop</span>
+            </div>
+            <div
+              className="nav-item"
+              onClick={() => window.electronAPI.openBlockedWindow()}
+            >
+              <img src="/assets/gold-badge.png" className="nav-icon" alt="" />
+              <span>Blocked users</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="chat-main">
         <div className="chat-header">
           <div className="august-profile-card">
             <div className="status-row">
@@ -1390,44 +1359,52 @@ const StartPage = () => {
                 )}
               </div>
               <div className="mood-area2">
-                <span className="status-message">
-                  {selectedContact?.statusMessage || ""}
-                </span>
-                <div className="time-area">
-                  <img
-                    src="/assets/usflag-icon.png"
-                    className="flag-icon"
-                    alt=""
-                  />
-                  <span>{selectedContact?.localTime || ""}</span>
-                </div>
-                <div className="language-area">
-                  <img
-                    src="/assets/language.svg"
-                    className="language-icon"
-                    alt=""
-                  />
-                  <span>{selectedContact?.language || ""}</span>
-                  <div className="arrow-group">
-                    <div className="left-arrow">
-                      <img src="/assets/left.svg" alt="" />
-                    </div>
-                    <div className="right-arrow">
-                      <img src="/assets/right.svg" alt="" />
-                    </div>
+                <div className="ma2-left">
+                  <span className="status-message">
+                    {selectedContact?.statusMessage || ""}
+                  </span>
+                  <div className="profile-info-area">
+                    <img
+                      src="/assets/gender.svg"
+                      className="gender-icon"
+                      alt=""
+                    />
+                    <span>{selectedContact?.gender || ""}</span>
                   </div>
                 </div>
-                <div className="gender-area">
-                  <img
-                    src="/assets/gender.svg"
-                    className="gender-icon"
-                    alt=""
-                  />
-                  <span>{selectedContact?.gender || ""}</span>
-                </div>
-                <div className="name-area">
-                  <img src="/assets/skype.png" className="skype2-icon" alt="" />
-                  <span>{selectedContact?.skypeName || ""}</span>
+                <div className="ma2-right">
+                  <div className="profile-info-area">
+                    <img
+                      src="/assets/usflag-icon.png"
+                      className="flag-icon"
+                      alt=""
+                    />
+                    <span>{selectedContact?.localTime || ""}</span>
+                  </div>
+                  <div className="profile-info-area">
+                    <img
+                      src="/assets/language.svg"
+                      className="language-icon"
+                      alt=""
+                    />
+                    <span>{selectedContact?.language || ""}</span>
+                    <div className="arrow-group">
+                      <div className="left-arrow">
+                        <img src="/assets/left.svg" alt="" />
+                      </div>
+                      <div className="right-arrow">
+                        <img src="/assets/right.svg" alt="" />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="profile-info-area">
+                    <img
+                      src="/assets/skype.png"
+                      className="skype2-icon"
+                      alt=""
+                    />
+                    <span>{selectedContact?.skypeName || ""}</span>
+                  </div>
                 </div>
               </div>
             </div>
