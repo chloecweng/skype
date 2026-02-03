@@ -150,8 +150,8 @@ ipcMain.on("answer-video-call", (event, callData) => {
 const createWindow = () => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 1158,
-    height: 800,
+    width: 1077,
+    height: 714,
     icon: path.join(__dirname, '../assets/windowicon.png'),  // or correct path from built main.js
     minWidth: 800,
     minHeight: 500,
@@ -194,7 +194,6 @@ function createCallWindow() {
     x: Math.round((screenWidth - 506) / 2),
     y: Math.round((screenHeight - 137) / 2),
     frame: false,
-    modal: true,
     alwaysOnTop: true,
     transparent: true,
     resizable: false,
