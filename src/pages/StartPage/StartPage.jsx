@@ -93,7 +93,7 @@ const StartPage = () => {
       // ✅ If he exists → FORCE unblock
       if (existing) {
         return prev.map((c) =>
-          c.id === "contact-august" ? { ...c, blocked: false } : c,
+          c.id === "contact-august" ? { ...c, blocked: false } : c
         );
       }
 
@@ -867,7 +867,7 @@ const StartPage = () => {
   useEffect(() => {
     const scene = SCENES[currentSceneKey];
     const august = contacts.find(
-      (c) => c.name === "August27" || c.skypeName === "Aug27",
+      (c) => c.name === "August27" || c.skypeName === "Aug27"
     );
 
     if (!august || selectedContactId !== august.id) return;
@@ -884,7 +884,7 @@ const StartPage = () => {
           return { ...contact, localTime: newTime };
         }
         return contact;
-      }),
+      })
     );
 
     // 2. Manage Chat History
@@ -944,7 +944,7 @@ const StartPage = () => {
 
       if (isToAugust) {
         const localTimeMatch = selectedContact.localTime?.match(
-          /\d{1,2}:\d{2}\s?[AP]M/,
+          /\d{1,2}:\d{2}\s?[AP]M/
         );
         messageTime = localTimeMatch ? localTimeMatch[0] : "3:31 PM";
       } else {
@@ -963,13 +963,13 @@ const StartPage = () => {
 
       setContactChatHistories((prev) => {
         const currentHistory = prev[selectedContactId] || [];
-        
+
         // Check if this is August in SCENE_5 and if the last message is NOT a system message or user message
         // (meaning this is the first message after unblocking)
-        const isFirstMessageAfterUnblock = 
-          isToAugust && 
+        const isFirstMessageAfterUnblock =
+          isToAugust &&
           currentSceneKey === "SCENE_5" &&
-          currentHistory.length > 0 && 
+          currentHistory.length > 0 &&
           currentHistory[currentHistory.length - 1].sender !== "SYSTEM" &&
           currentHistory[currentHistory.length - 1].sender !== "HarborLine";
 
@@ -979,8 +979,13 @@ const StartPage = () => {
             ...prev,
             [selectedContactId]: [
               ...currentHistory,
-              { id: `system-${Date.now()}`, sender: "SYSTEM", text: "TODAY", time: "" },
-              newMessage
+              {
+                id: `system-${Date.now()}`,
+                sender: "SYSTEM",
+                text: "TODAY",
+                time: "",
+              },
+              newMessage,
             ],
           };
         }
@@ -993,18 +998,23 @@ const StartPage = () => {
       });
 
       setChatHistory((prev) => {
-        const isFirstMessageAfterUnblock = 
-          isToAugust && 
+        const isFirstMessageAfterUnblock =
+          isToAugust &&
           currentSceneKey === "SCENE_5" &&
-          prev.length > 0 && 
+          prev.length > 0 &&
           prev[prev.length - 1].sender !== "SYSTEM" &&
           prev[prev.length - 1].sender !== "HarborLine";
 
         if (isFirstMessageAfterUnblock) {
           return [
             ...prev,
-            { id: `system-${Date.now()}`, sender: "SYSTEM", text: "TODAY", time: "" },
-            newMessage
+            {
+              id: `system-${Date.now()}`,
+              sender: "SYSTEM",
+              text: "TODAY",
+              time: "",
+            },
+            newMessage,
           ];
         }
 
@@ -1171,12 +1181,17 @@ const StartPage = () => {
 
         if (existing) {
           return prev.map((c) =>
-            c.id === contactId ? { ...c, blocked: false, localTime: "12:04 AM United States" } : c,
+            c.id === contactId
+              ? { ...c, blocked: false, localTime: "12:04 AM United States" }
+              : c
           );
         }
 
         if (contactId === "contact-august") {
-          return [...prev, { ...AUGUST_CONTACT, localTime: "12:04 AM United States" }];
+          return [
+            ...prev,
+            { ...AUGUST_CONTACT, localTime: "12:04 AM United States" },
+          ];
         }
 
         return prev;
@@ -1193,7 +1208,7 @@ const StartPage = () => {
     contacts.map((c) => ({
       id: c.id,
       blocked: c.blocked,
-    })),
+    }))
   );
 
   if (isInVideoCall) {
@@ -1321,92 +1336,159 @@ const StartPage = () => {
             </div>
           </div>
         </div>
-
-        <div className="chat-header">
-          <div className="status-row">
-            <img
-              src={
-                selectedContact
-                  ? getStatusIcon(selectedContact.status, selectedContact.name)
-                  : "/assets/busy.svg"
-              }
-              className="status-icon"
-              alt=""
-            />
-            <span className="user-display-name">
-              {selectedContact ? selectedContact.name : "August27"}
-            </span>
-            <div className="add-people-button">
-              <img src="/assets/add.svg" className="add-icon" alt="" />
-              <span className="add-people-text">Add people</span>
+        <div className="chat-main">
+          <div className="chat-header">
+            <div className="august-profile-card">
+              <div className="status-row">
+                <img
+                  src={
+                    selectedContact
+                      ? getStatusIcon(
+                          selectedContact.status,
+                          selectedContact.name
+                        )
+                      : "/assets/busy.svg"
+                  }
+                  className="status-icon"
+                  alt=""
+                />
+                <span className="user-display-name">
+                  {selectedContact ? selectedContact.name : "August27"}
+                </span>
+                <div className="add-people-button">
+                  <img src="/assets/add.svg" className="add-icon" alt="" />
+                  <span className="add-people-text">Add people</span>
+                </div>
+              </div>
+              <div className="profile-content">
+                <div className="august-placeholder">
+                  {selectedContact && (
+                    <img
+                      key={selectedContact.id}
+                      src={selectedContact.image || "/assets/flower.png"}
+                      className="august-icon"
+                      alt={selectedContact.name}
+                    />
+                  )}
+                </div>
+                <div className="mood-area2">
+                  <div className="ma2-left">
+                    <span className="status-message">
+                      {selectedContact?.statusMessage || ""}
+                    </span>
+                    <div className="profile-info-area">
+                      <img
+                        src="/assets/gender.svg"
+                        className="gender-icon"
+                        alt=""
+                      />
+                      <span>{selectedContact?.gender || ""}</span>
+                    </div>
+                  </div>
+                  <div className="ma2-right">
+                    <div className="profile-info-area">
+                      <img
+                        src="/assets/usflag-icon.png"
+                        className="flag-icon"
+                        alt=""
+                      />
+                      <span>{selectedContact?.localTime || ""}</span>
+                    </div>
+                    <div className="profile-info-area">
+                      <img
+                        src="/assets/language.svg"
+                        className="language-icon"
+                        alt=""
+                      />
+                      <span>{selectedContact?.language || ""}</span>
+                      <div className="arrow-group">
+                        <div className="left-arrow">
+                          <img src="/assets/left.svg" alt="" />
+                        </div>
+                        <div className="right-arrow">
+                          <img src="/assets/right.svg" alt="" />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="profile-info-area">
+                      <img
+                        src="/assets/skype.png"
+                        className="skype2-icon"
+                        alt=""
+                      />
+                      <span>{selectedContact?.skypeName || ""}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div className="chat-column">
-          <div className="black-bg">
-            <div className="august-profile-card-video">
-              <div className="video-container">
-                {/* PHASE 1: Show flower ONLY if not connecting AND not playing video */}
-                {!isConnecting && !isAugustVideoPlaying && (
-                  <img
-                    src="/assets/flower.png"
-                    className="placeholder-flower"
-                    alt="Profile"
-                  />
-                )}
-
-                {/* PHASE 2: Show loading GIF during the connection phase */}
-                {isConnecting && (
-                  <div className="loading-overlay">
+          <div className="chat-column">
+            <div className="black-bg">
+              <div className="august-profile-card-video">
+                <div className="video-container">
+                  {/* PHASE 1: Show flower ONLY if not connecting AND not playing video */}
+                  {!isConnecting && !isAugustVideoPlaying && (
                     <img
-                      src="/assets/loading.gif"
-                      className="loading-state"
-                      alt="Connecting..."
+                      src="/assets/flower.png"
+                      className="placeholder-flower"
+                      alt="Profile"
                     />
-                  </div>
-                )}
+                  )}
 
-                {/* PHASE 3: The Video Element */}
+                  {/* PHASE 2: Show loading GIF during the connection phase */}
+                  {isConnecting && (
+                    <div className="loading-overlay">
+                      <img
+                        src="/assets/loading.gif"
+                        className="loading-state"
+                        alt="Connecting..."
+                      />
+                    </div>
+                  )}
+
+                  {/* PHASE 3: The Video Element */}
+                  <video
+                    ref={remoteVideoRef}
+                    className={`video-call ${isAugustVideoPlaying ? "visible" : "hidden"}`}
+                    src="/assets/temp_clip.mov"
+                    playsInline
+                    muted
+                    onEnded={() => {
+                      setIsAugustVideoPlaying(false);
+                      setIsInVideoCall(false);
+                    }}
+                  />
+                </div>
+              </div>
+              <div className="self-view-card">
                 <video
-                  ref={remoteVideoRef}
-                  className={`video-call ${isAugustVideoPlaying ? "visible" : "hidden"}`}
-                  src="/assets/temp_clip.mov"
+                  ref={selfVideoRef}
+                  className="video-self"
+                  autoPlay
                   playsInline
                   muted
-                  onEnded={() => {
-                    setIsAugustVideoPlaying(false);
-                    setIsInVideoCall(false);
-                  }}
                 />
               </div>
             </div>
-            <div className="self-view-card">
-              <video
-                ref={selfVideoRef}
-                className="video-self"
-                autoPlay
-                playsInline
-                muted
+            <div className="video-call-controls">
+              <img
+                src="/assets/hangup-button.svg"
+                alt=""
+                onClick={() => {
+                  setIsInVideoCall(false);
+                  setIsAugustVideoPlaying(false);
+                }}
+                style={{ cursor: "pointer" }}
+              />
+              <img
+                src="/assets/stop-video.svg"
+                alt=""
+                onClick={() => setIsVideoEnabled(false)}
+                style={{ cursor: "pointer" }}
               />
             </div>
-          </div>
-          <div className="video-call-controls">
-            <img
-              src="/assets/hangup-button.svg"
-              alt=""
-              onClick={() => {
-                setIsInVideoCall(false);
-                setIsAugustVideoPlaying(false);
-              }}
-              style={{ cursor: "pointer" }}
-            />
-            <img
-              src="/assets/stop-video.svg"
-              alt=""
-              onClick={() => setIsVideoEnabled(false)}
-              style={{ cursor: "pointer" }}
-            />
           </div>
         </div>
         {notification.show && (
@@ -1554,7 +1636,7 @@ const StartPage = () => {
                   selectedContact
                     ? getStatusIcon(
                         selectedContact.status,
-                        selectedContact.name,
+                        selectedContact.name
                       )
                     : "/assets/busy.svg"
                 }

@@ -18,7 +18,7 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: 600px;
+  height: 500px;
   padding: 8px 8px 8px 8px;
   background: #fff;
   border: 1px solid #c9c9c9;
@@ -438,8 +438,7 @@
 
 .black-bg {
   background: linear-gradient(to bottom, #000000 0%, #3a3a3a 100%);
-  width: 777px;
-  height: 616px;
+  width: 100%;
   padding: 12px 48px;
   display: flex;
   flex-direction: column;
@@ -510,10 +509,10 @@
 }
 
 .video-call-controls {
+  padding-top: 8px;
   display: flex;
   align-items: center;
   gap: 12px;
-  background: #fffdf6;
   width: 100%;
   box-sizing: border-box;
 }
