@@ -12,7 +12,7 @@ html {
   padding: 0;
   width: 100%;
   height: 100%;
-  overflow: hidden; /* Prevents scrollbars on the main window */
+  /* overflow: hidden; */
   font-family: "Segoe UI";
 }
 
