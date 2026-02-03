@@ -1345,7 +1345,7 @@ const StartPage = () => {
           </div>
         </div>
         <div className="chat-main">
-          <div className="chat-header">
+          {/* <div className="chat-header">
             <div className="august-profile-card">
               <div className="status-row">
                 <img
@@ -1430,7 +1430,7 @@ const StartPage = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
 
           <div className="chat-column">
             <div className="black-bg">

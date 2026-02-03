@@ -194,6 +194,7 @@ function createCallWindow() {
     x: Math.round((screenWidth - 506) / 2),
     y: Math.round((screenHeight - 137) / 2),
     frame: false,
+    modal: true,
     alwaysOnTop: true,
     transparent: true,
     resizable: false,
