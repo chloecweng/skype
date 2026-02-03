@@ -1,5 +1,5 @@
 import React from "react";
-import "../StartPage/StartPage.css"; 
+import "../StartPage/StartPage.css";
 import "./CallPopup.css";
 
 const CallPopupWindow = () => {
@@ -8,31 +8,31 @@ const CallPopupWindow = () => {
   };
 
   const handleAnswerVideo = () => {
-    console.log('Answer video clicked');
-    
+    console.log("Answer video clicked");
+
     if (window.electronAPI && window.electronAPI.answerVideoCall) {
-        console.log('Sending answer-video-call');
-        window.electronAPI.answerVideoCall({
+      console.log("Sending answer-video-call");
+      window.electronAPI.answerVideoCall({
         contactName: "August27",
         callType: "video",
-        });
+      });
     } else {
-        console.log('electronAPI not available');
+      console.log("electronAPI not available");
     }
-    
+
     // Close the popup after a longer delay
     setTimeout(() => {
-        console.log('Closing popup window');
-        window.close();
+      console.log("Closing popup window");
+      window.close();
     }); // Increased delay
-    };
+  };
 
   return (
     <div className="call-window-wrapper" style={{ background: "transparent" }}>
       <div className="incoming-call-window">
         <div className="call-header">
           <div className="skype-call-logo">
-            <img src="/assets/skype-wordmark.svg" alt="Skype" />
+            <img src="./assets/skype-wordmark.svg" alt="Skype" />
           </div>
           <button className="close-x" onClick={handleDecline}>
             ×
@@ -47,26 +47,26 @@ const CallPopupWindow = () => {
         </div>
 
         <div className="call-footer-actions">
-            <div className="answer-button">
-                <img src="/assets/answer-button.svg" alt="" />
-            </div>
-            <div className="answer-video-button">
-                <img 
-                src="/assets/answer-w-video-button.svg" 
-                alt="" 
-                onClick={handleAnswerVideo}
-                style={{ cursor: 'pointer' }}
-                />
-            </div>
-            <div className="decline-button">
-                <img 
-                src="/assets/decline-button.svg" 
-                alt="" 
-                onClick={handleDecline}
-                style={{ cursor: 'pointer' }}
-                />
-            </div>
-</div>
+          <div className="answer-button">
+            <img src="./assets/answer-button.svg" alt="" />
+          </div>
+          <div className="answer-video-button">
+            <img
+              src="./assets/answer-w-video-button.svg"
+              alt=""
+              onClick={handleAnswerVideo}
+              style={{ cursor: "pointer" }}
+            />
+          </div>
+          <div className="decline-button">
+            <img
+              src="./assets/decline-button.svg"
+              alt=""
+              onClick={handleDecline}
+              style={{ cursor: "pointer" }}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );

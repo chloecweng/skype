@@ -9,8 +9,8 @@ const BlockedPage = () => {
       fullName: "August27",
       skypeName: "Aug27",
       location: "United States, Ohio",
-      flag: "/assets/usflag-icon.png",
-      profilePic: "/assets/flower.png",
+      flag: "./assets/usflag-icon.png",
+      profilePic: "./assets/flower.png",
     },
   ]);
   const [selectedBlockedId, setSelectedBlockedId] = useState(null);
@@ -40,7 +40,7 @@ const BlockedPage = () => {
       <div className="header-wrapper">
         <div className="header">
           <div className="addUserImg">
-            <img src="/assets/blocked-user-icon.png" alt="Blocked" />
+            <img src="./assets/blocked-user-icon.png" alt="Blocked" />
           </div>
           <div className="header-title">
             <p>Your Blocked Users</p>

@@ -151,7 +151,8 @@ const createWindow = () => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
     width: 1158,
-    height: 682,
+    height: 860,
+    icon: path.join(__dirname, '../assets/windowicon.png'),  // or correct path from built main.js
     minWidth: 800,
     minHeight: 500,
     useContentSize: true, // Ensures the 1158x682 is the actual drawing area

@@ -6,8 +6,9 @@
   "main": ".vite/build/main.js",
   "scripts": {
     "start": "electron-forge start",
-    "package": "electron-forge package",
-    "make": "electron-forge make",
+    "sync-assets": "cp -r assets/* public/assets/",
+    "package": "npm run sync-assets && electron-forge package",
+    "make": "npm run sync-assets && electron-forge make",
     "publish": "electron-forge publish",
     "lint": "echo \"No linting configured\""
   },

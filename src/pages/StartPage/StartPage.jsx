@@ -61,7 +61,7 @@ const StartPage = () => {
     language: "English",
     gender: "Male",
     localTime: "3:31 PM United States",
-    image: "/assets/flower.png",
+    image: "./assets/flower.png",
     blocked: false,
   };
 
@@ -123,7 +123,7 @@ const StartPage = () => {
     {
       id: "contact-1",
       name: "Nerylix",
-      image: "/assets/animal.jpg",
+      image: "./assets/animal.jpg",
       skypeName: "Nerylix",
       status: "offline",
       statusMessage: "Listening to Linkin Park Numb",
@@ -372,8 +372,8 @@ const StartPage = () => {
           ...prev,
           [newId]: contactData.chatHistory || [],
         }));
-        // Add contact to list
-        setContacts((prev) => [...prev, contactData]);
+        // Add contact to list (prepend so new contacts appear at top)
+        setContacts((prev) => [contactData, ...prev]);
         // Select the new contact
         setSelectedContactId(newId);
       });
@@ -401,19 +401,19 @@ const StartPage = () => {
 
   const getStatusIcon = (status, contactName) => {
     if (contactName === "August27" || contactName === "Aug27") {
-      return "/assets/online.svg";
+      return "./assets/online.svg";
     }
     switch (status) {
       case "online":
-        return "/assets/online.svg";
+        return "./assets/online.svg";
       case "busy":
-        return "/assets/busy.svg";
+        return "./assets/busy.svg";
       case "dnd":
-        return "/assets/dnd.svg";
+        return "./assets/dnd.svg";
       case "offline":
-        return "/assets/offline-icon.svg";
+        return "./assets/offline-icon.svg";
       default:
-        return "/assets/busy.svg";
+        return "./assets/busy.svg";
     }
   };
 
@@ -1219,19 +1219,27 @@ const StartPage = () => {
           {/* USER BOX */}
           <div className="user-profile-card">
             <div className="status-row">
-              <img src="/assets/online.svg" className="status-icon" alt="" />
-              <img src="/assets/polygon2.svg" className="polygon-icon" alt="" />
+              <img src="./assets/online.svg" className="status-icon" alt="" />
+              <img
+                src="./assets/polygon2.svg"
+                className="polygon-icon"
+                alt=""
+              />
               <span className="user-display-name">HarborLine</span>
             </div>
             <div className="profile-content">
               <div className="avatar-placeholder">
-                <img src="/assets/james.png" className="james-profile" alt="" />
+                <img
+                  src="./assets/james.png"
+                  className="james-profile"
+                  alt=""
+                />
               </div>
               <div className="mood-area-container">
                 <div className="mood-area">
                   <div className="mood-bubble">¯\_(ツ)_/¯</div>
                   <img
-                    src="/assets/clapper.png"
+                    src="./assets/clapper.png"
                     className="clapper-icon"
                     alt=""
                   />
@@ -1244,7 +1252,7 @@ const StartPage = () => {
           </div>
 
           <div className="promo-link-row">
-            <img src="/assets/landline.svg" className="promo-icon" alt="" />
+            <img src="./assets/landline.svg" className="promo-icon" alt="" />
             <span className="promo-text">
               Make your free call to an ordinary phone
             </span>
@@ -1254,13 +1262,13 @@ const StartPage = () => {
             <div className="search-bar-row">
               <button className="add-contact-btn" onClick={handleAddContact}>
                 <img
-                  src="/assets/person.png"
+                  src="./assets/person.png"
                   className="add-user-icon"
                   alt=""
                 />
                 <span className="add-btn-text">New</span>
                 <img
-                  src="/assets/polygon2-black.svg"
+                  src="./assets/polygon2-black.svg"
                   className="dropdown-arrow-svg"
                   style={{ width: "10px" }}
                   alt=""
@@ -1307,7 +1315,7 @@ const StartPage = () => {
               <div className="sidebar-footer-nav">
                 <div className="nav-item">
                   <img
-                    src="/assets/magnifying-glass.png"
+                    src="./assets/magnifying-glass.png"
                     className="nav-icon"
                     alt=""
                   />
@@ -1315,7 +1323,7 @@ const StartPage = () => {
                 </div>
                 <div className="nav-item">
                   <img
-                    src="/assets/shopping-bag.png"
+                    src="./assets/shopping-bag.png"
                     className="nav-icon"
                     alt=""
                   />
@@ -1326,7 +1334,7 @@ const StartPage = () => {
                   onClick={() => window.electronAPI.openBlockedWindow()}
                 >
                   <img
-                    src="/assets/gold-badge.png"
+                    src="./assets/gold-badge.png"
                     className="nav-icon"
                     alt=""
                   />
@@ -1347,7 +1355,7 @@ const StartPage = () => {
                           selectedContact.status,
                           selectedContact.name
                         )
-                      : "/assets/busy.svg"
+                      : "./assets/busy.svg"
                   }
                   className="status-icon"
                   alt=""
@@ -1356,7 +1364,7 @@ const StartPage = () => {
                   {selectedContact ? selectedContact.name : "August27"}
                 </span>
                 <div className="add-people-button">
-                  <img src="/assets/add.svg" className="add-icon" alt="" />
+                  <img src="./assets/add.svg" className="add-icon" alt="" />
                   <span className="add-people-text">Add people</span>
                 </div>
               </div>
@@ -1365,7 +1373,7 @@ const StartPage = () => {
                   {selectedContact && (
                     <img
                       key={selectedContact.id}
-                      src={selectedContact.image || "/assets/flower.png"}
+                      src={selectedContact.image || "./assets/flower.png"}
                       className="august-icon"
                       alt={selectedContact.name}
                     />
@@ -1378,7 +1386,7 @@ const StartPage = () => {
                     </span>
                     <div className="profile-info-area">
                       <img
-                        src="/assets/gender.svg"
+                        src="./assets/gender.svg"
                         className="gender-icon"
                         alt=""
                       />
@@ -1388,7 +1396,7 @@ const StartPage = () => {
                   <div className="ma2-right">
                     <div className="profile-info-area">
                       <img
-                        src="/assets/usflag-icon.png"
+                        src="./assets/usflag-icon.png"
                         className="flag-icon"
                         alt=""
                       />
@@ -1396,23 +1404,23 @@ const StartPage = () => {
                     </div>
                     <div className="profile-info-area">
                       <img
-                        src="/assets/language.svg"
+                        src="./assets/language.svg"
                         className="language-icon"
                         alt=""
                       />
                       <span>{selectedContact?.language || ""}</span>
                       <div className="arrow-group">
                         <div className="left-arrow">
-                          <img src="/assets/left.svg" alt="" />
+                          <img src="./assets/left.svg" alt="" />
                         </div>
                         <div className="right-arrow">
-                          <img src="/assets/right.svg" alt="" />
+                          <img src="./assets/right.svg" alt="" />
                         </div>
                       </div>
                     </div>
                     <div className="profile-info-area">
                       <img
-                        src="/assets/skype.png"
+                        src="./assets/skype.png"
                         className="skype2-icon"
                         alt=""
                       />
@@ -1431,7 +1439,7 @@ const StartPage = () => {
                   {/* PHASE 1: Show flower ONLY if not connecting AND not playing video */}
                   {!isConnecting && !isAugustVideoPlaying && (
                     <img
-                      src="/assets/flower.png"
+                      src="./assets/flower.png"
                       className="placeholder-flower"
                       alt="Profile"
                     />
@@ -1441,7 +1449,7 @@ const StartPage = () => {
                   {isConnecting && (
                     <div className="loading-overlay">
                       <img
-                        src="/assets/loading.gif"
+                        src="./assets/loading.gif"
                         className="loading-state"
                         alt="Connecting..."
                       />
@@ -1452,7 +1460,7 @@ const StartPage = () => {
                   <video
                     ref={remoteVideoRef}
                     className={`video-call ${isAugustVideoPlaying ? "visible" : "hidden"}`}
-                    src="/assets/temp_clip.mov"
+                    src="./assets/temp_clip.mov"
                     playsInline
                     muted
                     onEnded={() => {
@@ -1474,7 +1482,7 @@ const StartPage = () => {
             </div>
             <div className="video-call-controls">
               <img
-                src="/assets/hangup-button.svg"
+                src="./assets/hangup-button.svg"
                 alt=""
                 onClick={() => {
                   setIsInVideoCall(false);
@@ -1483,7 +1491,7 @@ const StartPage = () => {
                 style={{ cursor: "pointer" }}
               />
               <img
-                src="/assets/stop-video.svg"
+                src="./assets/stop-video.svg"
                 alt=""
                 onClick={() => setIsVideoEnabled(false)}
                 style={{ cursor: "pointer" }}
@@ -1494,13 +1502,13 @@ const StartPage = () => {
         {notification.show && (
           <div className="skype-toast">
             <div className="toast-header">
-              <img src="/assets/skype-white.svg" height="12" alt="Skype" />
+              <img src="./assets/skype-white.svg" height="12" alt="Skype" />
             </div>
 
             <div className="toast-content-reveal">
               <div className="toast-body">
                 <img
-                  src="/assets/online.svg"
+                  src="./assets/online.svg"
                   className="toast-avatar"
                   alt="status"
                 />
@@ -1524,19 +1532,19 @@ const StartPage = () => {
         {/* USER BOX */}
         <div className="user-profile-card">
           <div className="status-row">
-            <img src="/assets/online.svg" className="status-icon" alt="" />
-            <img src="/assets/polygon2.svg" className="polygon-icon" alt="" />
+            <img src="./assets/online.svg" className="status-icon" alt="" />
+            <img src="./assets/polygon2.svg" className="polygon-icon" alt="" />
             <span className="user-display-name">HarborLine</span>
           </div>
           <div className="profile-content">
             <div className="avatar-placeholder">
-              <img src="/assets/james.png" className="james-profile" alt="" />
+              <img src="./assets/james.png" className="james-profile" alt="" />
             </div>
             <div className="mood-area-container">
               <div className="mood-area">
                 <div className="mood-bubble">¯\_(ツ)_/¯</div>
                 <img
-                  src="/assets/clapper.png"
+                  src="./assets/clapper.png"
                   className="clapper-icon"
                   alt=""
                 />
@@ -1549,7 +1557,7 @@ const StartPage = () => {
         </div>
 
         <div className="promo-link-row">
-          <img src="/assets/landline.svg" className="promo-icon" alt="" />
+          <img src="./assets/landline.svg" className="promo-icon" alt="" />
           <span className="promo-text">
             Make your free call to an ordinary phone
           </span>
@@ -1558,10 +1566,10 @@ const StartPage = () => {
         <div className="contacts-container">
           <div className="search-bar-row">
             <button className="add-contact-btn" onClick={handleAddContact}>
-              <img src="/assets/person.png" className="add-user-icon" alt="" />
+              <img src="./assets/person.png" className="add-user-icon" alt="" />
               <span className="add-btn-text">New</span>
               <img
-                src="/assets/polygon2-black.svg"
+                src="./assets/polygon2-black.svg"
                 className="dropdown-arrow-svg"
                 style={{ width: "10px" }}
                 alt=""
@@ -1607,21 +1615,25 @@ const StartPage = () => {
           <div className="sidebar-footer-nav">
             <div className="nav-item">
               <img
-                src="/assets/magnifying-glass.png"
+                src="./assets/magnifying-glass.png"
                 className="nav-icon"
                 alt=""
               />
               <span>Directory</span>
             </div>
             <div className="nav-item">
-              <img src="/assets/shopping-bag.png" className="nav-icon" alt="" />
+              <img
+                src="./assets/shopping-bag.png"
+                className="nav-icon"
+                alt=""
+              />
               <span>Shop</span>
             </div>
             <div
               className="nav-item"
               onClick={() => window.electronAPI.openBlockedWindow()}
             >
-              <img src="/assets/gold-badge.png" className="nav-icon" alt="" />
+              <img src="./assets/gold-badge.png" className="nav-icon" alt="" />
               <span>Blocked users</span>
             </div>
           </div>
@@ -1638,7 +1650,7 @@ const StartPage = () => {
                         selectedContact.status,
                         selectedContact.name
                       )
-                    : "/assets/busy.svg"
+                    : "./assets/busy.svg"
                 }
                 className="status-icon"
                 alt=""
@@ -1647,7 +1659,7 @@ const StartPage = () => {
                 {selectedContact ? selectedContact.name : "August27"}
               </span>
               <div className="add-people-button">
-                <img src="/assets/add.svg" className="add-icon" alt="" />
+                <img src="./assets/add.svg" className="add-icon" alt="" />
                 <span className="add-people-text">Add people</span>
               </div>
             </div>
@@ -1656,7 +1668,7 @@ const StartPage = () => {
                 {selectedContact && (
                   <img
                     key={selectedContact.id}
-                    src={selectedContact.image || "/assets/flower.png"}
+                    src={selectedContact.image || "./assets/flower.png"}
                     className="august-icon"
                     alt={selectedContact.name}
                   />
@@ -1669,7 +1681,7 @@ const StartPage = () => {
                   </span>
                   <div className="profile-info-area">
                     <img
-                      src="/assets/gender.svg"
+                      src="./assets/gender.svg"
                       className="gender-icon"
                       alt=""
                     />
@@ -1679,7 +1691,7 @@ const StartPage = () => {
                 <div className="ma2-right">
                   <div className="profile-info-area">
                     <img
-                      src="/assets/usflag-icon.png"
+                      src="./assets/usflag-icon.png"
                       className="flag-icon"
                       alt=""
                     />
@@ -1687,23 +1699,23 @@ const StartPage = () => {
                   </div>
                   <div className="profile-info-area">
                     <img
-                      src="/assets/language.svg"
+                      src="./assets/language.svg"
                       className="language-icon"
                       alt=""
                     />
                     <span>{selectedContact?.language || ""}</span>
                     <div className="arrow-group">
                       <div className="left-arrow">
-                        <img src="/assets/left.svg" alt="" />
+                        <img src="./assets/left.svg" alt="" />
                       </div>
                       <div className="right-arrow">
-                        <img src="/assets/right.svg" alt="" />
+                        <img src="./assets/right.svg" alt="" />
                       </div>
                     </div>
                   </div>
                   <div className="profile-info-area">
                     <img
-                      src="/assets/skype.png"
+                      src="./assets/skype.png"
                       className="skype2-icon"
                       alt=""
                     />
@@ -1717,7 +1729,7 @@ const StartPage = () => {
 
         <div className="chat-column">
           <div className="skype-tab">
-            <img src="/assets/skype.png" className="skype-tab-icon" alt="" />
+            <img src="./assets/skype.png" className="skype-tab-icon" alt="" />
             <span className="skype-text">Skype</span>
           </div>
           <div className="chat-field">
@@ -1725,14 +1737,14 @@ const StartPage = () => {
               <div className="left-buttons">
                 <button className="skype-call-button">
                   <img
-                    src="/assets/call-button.svg"
+                    src="./assets/call-button.svg"
                     className="call-icon"
                     alt=""
                   />
                 </button>
                 <button className="skype-call-button">
                   <img
-                    src="/assets/video-call.svg"
+                    src="./assets/video-call.svg"
                     className="video-call-icon"
                     alt=""
                   />
@@ -1742,14 +1754,14 @@ const StartPage = () => {
                 <div className="info-dropdown-pill">
                   <div className="info-icon-wrapper">
                     <img
-                      src="/assets/ellipse2.svg"
+                      src="./assets/ellipse2.svg"
                       className="info-icon-svg"
                       alt=""
                     />
                     <span className="info-char">i</span>
                   </div>
                   <img
-                    src="/assets/polygon2.svg"
+                    src="./assets/polygon2.svg"
                     className="dropdown-arrow-svg"
                     alt=""
                   />
@@ -1760,7 +1772,7 @@ const StartPage = () => {
             {currentSceneKey === "SCENE_4" && (
               <div className="unread-alert-wrapper">
                 <img
-                  src="/assets/unread-messages-alert.svg"
+                  src="./assets/unread-messages-alert.svg"
                   alt="Unread messages"
                   className="unread-alert-img"
                 />
@@ -1801,7 +1813,7 @@ const StartPage = () => {
             <div className="message-box">
               <div className="show-messages">
                 <img
-                  src="/assets/clock.svg"
+                  src="./assets/clock.svg"
                   className="tool-icon-clock"
                   alt=""
                 />
@@ -1819,19 +1831,19 @@ const StartPage = () => {
                   <div className="message-tools">
                     <div className="tool-item">
                       <img
-                        src="/assets/smile.svg"
+                        src="./assets/smile.svg"
                         className="tool-icon"
                         alt=""
                       />
                       <img
-                        src="/assets/polygon2.svg"
+                        src="./assets/polygon2.svg"
                         className="tool-icon-small"
                         alt=""
                       />
                     </div>
                     <div className="tool-item">
                       <img
-                        src="/assets/file.svg"
+                        src="./assets/file.svg"
                         className="tool-icon"
                         alt=""
                       />
@@ -1839,7 +1851,7 @@ const StartPage = () => {
                     </div>
                     <div className="tool-item">
                       <img
-                        src="/assets/puzzle.svg"
+                        src="./assets/puzzle.svg"
                         className="tool-icon"
                         alt=""
                       />
@@ -1857,7 +1869,7 @@ const StartPage = () => {
                 </div>
                 <div className="message-button" onClick={handleSendMessage}>
                   <img
-                    src="/assets/icon.svg"
+                    src="./assets/icon.svg"
                     className="send-icon"
                     alt="Send"
                   />

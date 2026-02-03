@@ -25,11 +25,11 @@ const AddContactPage = () => {
 
   useEffect(() => {
     const imagesToPreload = [
-      "/assets/offline-icon.svg",
-      "/assets/checkmark.svg",
-      "/assets/flower.png"
+      "./assets/offline-icon.svg",
+      "./assets/checkmark.svg",
+      "./assets/flower.png",
     ];
-    
+
     imagesToPreload.forEach((src) => {
       const img = new Image();
       img.src = src;
@@ -79,9 +79,9 @@ const AddContactPage = () => {
         skypeName: "Aug27",
         fullName: "August27",
         country: "United States, Ohio",
-        language: 'English', // Add this
-        gender: 'Male', // Add this
-        localTime: '4:55 PM', // Add this
+        language: "English", // Add this
+        gender: "Male", // Add this
+        localTime: "4:55 PM", // Add this
         blocked: false,
       });
       setCurrentStep(4);
@@ -101,20 +101,20 @@ const AddContactPage = () => {
         name: selectedContact?.name || "August27",
         skypeName: selectedContact?.skypeName || "Aug27",
         status: "offline",
-        statusMessage: "", 
+        statusMessage: "",
         country: selectedContact?.country || "United States",
-        language: 'English',
-        gender: 'Male',
-        localTime: '3:31 PM', 
+        language: "English",
+        gender: "Male",
+        localTime: "3:31 PM",
         chatHistory: [
-          { 
+          {
             // Ensure every message has a unique ID for React's .map()
-            id: `first-msg-${Date.now()}`, 
-            sender: "HarborLine", 
+            id: `first-msg-${Date.now()}`,
+            sender: "HarborLine",
             // Trim the message or use "Hey." as a fallback
             text: message.trim() || "Hey.",
-            time: "3:31 PM", 
-          }
+            time: "3:31 PM",
+          },
         ],
       });
     }
@@ -139,7 +139,7 @@ const AddContactPage = () => {
             <div className="add-contact-container">
               <div className="contact-email-container">
                 <div className="online-icon">
-                  <img src="/assets/online.svg" alt="" />
+                  <img src="./assets/online.svg" alt="" />
                 </div>
                 <div className="contact-email">
                   <p className="contact-title">Add a Skype contact</p>
@@ -171,7 +171,7 @@ const AddContactPage = () => {
               <p className="or-text">...or</p>
               <div className="add-phone">
                 <div className="landline-icon">
-                  <img src="/assets/landline-plus.svg" alt="" />
+                  <img src="./assets/landline-plus.svg" alt="" />
                 </div>
                 <p className="phone-link">
                   Add an ordinary phone number as a SkypeOut contact
@@ -195,7 +195,7 @@ const AddContactPage = () => {
             <div className="add-contact-container">
               <div className="contact-email-container">
                 <div className="online-icon">
-                  <img src="/assets/online.svg" alt="" />
+                  <img src="./assets/online.svg" alt="" />
                 </div>
                 <div className="contact-email">
                   <p className="contact-title">Add a Skype contact</p>
@@ -229,8 +229,8 @@ const AddContactPage = () => {
               <div className="progress-bar-container">
                 <div className="progress-bar-background"></div>
                 <div
-                className="progress-bar-fill"
-                style={{ left: `${(loadingProgress / 100) * (524 - 107)}px` }}
+                  className="progress-bar-fill"
+                  style={{ left: `${(loadingProgress / 100) * (524 - 107)}px` }}
                 ></div>
               </div>
             </div>
@@ -251,7 +251,7 @@ const AddContactPage = () => {
             <div className="add-contact-container">
               <div className="contact-email-container">
                 <div className="online-icon">
-                  <img src="/assets/online.svg" alt="" />
+                  <img src="./assets/online.svg" alt="" />
                 </div>
                 <div className="contact-email">
                   <p className="contact-title">Add a Skype contact</p>
@@ -282,9 +282,11 @@ const AddContactPage = () => {
                   </p>
                 </div>
               </div>
-              <div className="progress-bar-placeholder" style={{ height: '4px', margin: '2px 0' }}></div>
+              <div
+                className="progress-bar-placeholder"
+                style={{ height: "4px", margin: "2px 0" }}
+              ></div>
               <table class="results-table">
-                
                 <thead className="column-labels">
                   <tr>
                     <th className="column-header">Full Name</th>
@@ -300,7 +302,7 @@ const AddContactPage = () => {
                     <td>
                       <div class="result-location">
                         <img
-                          src="/assets/usflag-icon.png"
+                          src="./assets/usflag-icon.png"
                           alt=""
                           className="country-flag"
                         />
@@ -309,10 +311,7 @@ const AddContactPage = () => {
                     </td>
                     <td>
                       <button class="info-btn" aria-label="View profile">
-                        <img
-                          src="/assets/flower.png"
-                          alt=""
-                        />
+                        <img src="./assets/flower.png" alt="" />
                       </button>
                     </td>
                   </tr>
@@ -344,16 +343,13 @@ const AddContactPage = () => {
               <div className="contact-message-wrapper">
                 <div className="contact-header">
                   <div className="online-icon-small">
-                    <img src="/assets/online.svg" alt="" />
+                    <img src="./assets/online.svg" alt="" />
                   </div>
                   <p className="contact-name-header">August27</p>
                 </div>
                 <div className="contact-message">
                   <div className="contact-profile-placeholder">
-                    <img
-                      src="/assets/flower.png"
-                      alt=""
-                    />
+                    <img src="./assets/flower.png" alt="" />
                   </div>
                   <textarea
                     className="first-message-input"
@@ -387,10 +383,7 @@ const AddContactPage = () => {
             <div className="completion-wrapper">
               <div className="hurray-banner">
                 <div className="checkmark-icon">
-                  <img
-                    src="/assets/checkmark.svg"
-                    alt=""
-                  />
+                  <img src="./assets/checkmark.svg" alt="" />
                 </div>
                 <p className="hurray-text">
                   Hurray! You've added August27 to your Contact list
@@ -403,10 +396,7 @@ const AddContactPage = () => {
                     status will appear as Offline.
                   </p>
                   <div className="offline-icon">
-                    <img
-                      src="/assets/offline-icon.svg"
-                      alt=""
-                    />
+                    <img src="./assets/offline-icon.svg" alt="" />
                   </div>
                 </div>
                 <div className="online-example">
@@ -414,7 +404,7 @@ const AddContactPage = () => {
                     When they've accepted, you'll see when they come online.
                   </p>
                   <div className="online-icon-small">
-                    <img src="/assets/online.svg" alt="" />
+                    <img src="./assets/online.svg" alt="" />
                   </div>
                 </div>
               </div>
@@ -454,7 +444,7 @@ const AddContactPage = () => {
       <div className="header-wrapper">
         <div className="header">
           <div className="addUserImg">
-            <img src="/assets/AddPeople.png" alt="" />
+            <img src="./assets/addpeople.png" alt="" />
           </div>
           <div className="header-title">
             <p>Add a Contact</p>

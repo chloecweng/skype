@@ -76,7 +76,7 @@
 .caller-avatar-large {
   width: 90px;
   height: 90px;
-  background: #eee url("/assets/flower.png") no-repeat center;
+  background: #eee url("./assets/flower.png") no-repeat center;
   background-size: cover;
   flex-shrink: 0;
 }
