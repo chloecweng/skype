@@ -1,6 +1,6 @@
 {
-  "name": "skype",
-  "productName": "skype",
+  "name": "Skype",
+  "productName": "Skype",
   "version": "1.0.0",
   "description": "My Electron application description",
   "main": ".vite/build/main.js",
