@@ -1,17 +1,22 @@
-/* The main container for the popup window */
+/* Dark mode call popup: semi-transparent dark background, white text */
+
+.call-window-wrapper {
+  background: transparent;
+}
+
 .incoming-call-window {
   width: 100%;
   height: 100%;
   max-width: 506px;
   max-height: 147px;
   min-height: 137px;
-  background: #ffffff;
-  border: 1px solid #383838;
+  background: rgba(49, 49, 49, 0.96);
   display: flex;
   flex-direction: column;
   border-radius: 8px;
   overflow: visible;
   box-sizing: border-box;
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 /* The thin top bar with the logo and X */
@@ -20,8 +25,8 @@
   justify-content: space-between;
   align-items: center;
   padding: 4px 10px;
-  background: #ffffff;
-  border-bottom: 1px solid #d2d2d2;
+  background: transparent;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   min-height: 28px;
   flex-shrink: 0;
 }
@@ -32,28 +37,21 @@
   gap: 6px;
   font-size: 12px;
   font-weight: bold;
-  color: white;
-}
-
-.skype-call-logo {
-  display: flex;
-  align-items: center;
+  color: #ffffff;
 }
 
 .skype-call-logo img {
-  height: 24px; /* Keeps the wordmark proportional */
+  height: 24px;
   width: auto;
-  filter: drop-shadow(
-    0px 1px 0px rgba(255, 255, 255, 0.8)
-  ); /* Subtle 2008-style "lift" */
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.4));
   user-select: none;
   pointer-events: none;
 }
 
 .close-x {
-  background: white;
-  border: 2px solid #bababa;
-  color: #808080;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: rgba(255, 255, 255, 0.9);
   cursor: pointer;
   font-size: 16px;
   width: 16px;
@@ -64,6 +62,10 @@
   justify-content: center;
   line-height: 1;
   padding: 0;
+}
+
+.close-x:hover {
+  background: rgba(255, 255, 255, 0.2);
 }
 
 /* The middle section with the avatar and text */
@@ -77,7 +79,7 @@
 .caller-avatar-large {
   width: 90px;
   height: 90px;
-  background: #eee;
+  background: rgba(255, 255, 255, 0.08);
   border-radius: 4px;
   flex-shrink: 0;
   overflow: hidden;
@@ -101,7 +103,7 @@
   font-size: 18px;
   font-weight: 400;
   margin: 0;
-  color: rgb(0, 0, 0);
+  color: rgba(255, 255, 255, 0.95);
   font-family: "Segoe UI", sans-serif;
   margin-top: -40px;
 }

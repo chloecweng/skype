@@ -44,7 +44,7 @@ const StartPage = () => {
     const handleKeyPress = (e) => {
       if (e.key === "n") {
         // Example: press 'n' for notification
-        triggerNotification("August27", "Hiiii");
+        triggerNotification("August27", ":)");
       }
     };
     window.addEventListener("keydown", handleKeyPress);

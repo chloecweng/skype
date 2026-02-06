@@ -28,7 +28,7 @@ const CallPopupWindow = () => {
   };
 
   return (
-    <div className="call-window-wrapper" style={{ background: "transparent" }}>
+    <div className="call-window-wrapper">
       <div className="incoming-call-window">
         <div className="call-header">
           <div className="skype-call-logo">
