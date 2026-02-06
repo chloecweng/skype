@@ -6,6 +6,7 @@
   max-height: 147px;
   min-height: 137px;
   background: #ffffff;
+  border: 1px solid #383838;
   display: flex;
   flex-direction: column;
   border-radius: 8px;
