@@ -10,14 +10,15 @@
 }
 
 .result-row {
-  background-color: #FFF;
-  width: fit-content;
+  background-color: #fff;
+  width: 100%;
 }
 .blocked-user-row {
   cursor: pointer;
   background-color: #e0e0e0;
 }
 
-.blocked-row-selected {
-  background-color: #00ABFB;
+/* Selected row color shared with AddContactPage - .results-table tbody tr.result-row-selected in AddContactPage.css */
+.results-table tbody tr.blocked-user-row.result-row-selected {
+  background-color: #00abfb;
 }

@@ -1,5 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./AddContactPage.css";
+
+const WINDOW_WIDTH = 753;
+const MIN_HEIGHT = 320;
+const HEIGHT_PADDING = 16;
 
 const AddContactPage = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -7,20 +11,34 @@ const AddContactPage = () => {
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [selectedContact, setSelectedContact] = useState(null);
   const [message, setMessage] = useState("");
+  const [selectedResultId, setSelectedResultId] = useState(null);
+  const contentRef = useRef(null);
 
-  // Resize window based on current step
+  // Allow document to size to content for measurement
   useEffect(() => {
-    if (window.electronAPI && window.electronAPI.resizeWindow) {
-      const stepHeights = {
-        1: 393,
-        2: 329,
-        3: 475,
-        4: 412,
-        5: 611,
-      };
-      const height = stepHeights[currentStep] || 600;
-      window.electronAPI.resizeWindow(753, height);
-    }
+    document.documentElement.classList.add("content-size-window");
+    document.body.classList.add("content-size-window");
+    const root = document.getElementById("root");
+    if (root) root.classList.add("content-size-window");
+    return () => {
+      document.documentElement.classList.remove("content-size-window");
+      document.body.classList.remove("content-size-window");
+      if (root) root.classList.remove("content-size-window");
+    };
+  }, []);
+
+  // Resize window to fit content after each step (and paint)
+  useEffect(() => {
+    if (!window.electronAPI?.resizeWindow) return;
+    const id = requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        const el = contentRef.current;
+        const contentHeight = el ? el.scrollHeight : document.body.scrollHeight;
+        const height = Math.max(MIN_HEIGHT, contentHeight + HEIGHT_PADDING);
+        window.electronAPI.resizeWindow(WINDOW_WIDTH, height);
+      });
+    });
+    return () => cancelAnimationFrame(id);
   }, [currentStep]);
 
   useEffect(() => {
@@ -70,6 +88,7 @@ const AddContactPage = () => {
   const handleStopSearch = () => {
     setCurrentStep(1);
     setLoadingProgress(0);
+    setSelectedResultId(null);
   };
 
   const handleAddSkypeContact = () => {
@@ -296,7 +315,12 @@ const AddContactPage = () => {
                   </tr>
                 </thead>
                 <tbody className="result-row">
-                  <tr>
+                  <tr
+                    className={
+                      selectedResultId === "aug27" ? "result-row-selected" : ""
+                    }
+                    onClick={() => setSelectedResultId("aug27")}
+                  >
                     <td>August27</td>
                     <td>Aug27</td>
                     <td>
@@ -440,7 +464,7 @@ const AddContactPage = () => {
   };
 
   return (
-    <div className="add-contact-window">
+    <div className="add-contact-window" ref={contentRef}>
       <div className="header-wrapper">
         <div className="header">
           <div className="addUserImg">

@@ -1,6 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "../AddContactPage/AddContactPage.css";
 import "./BlockedPage.css";
+
+const WINDOW_WIDTH = 753;
+const MIN_HEIGHT = 320;
+const HEIGHT_PADDING = 16;
 
 const BlockedPage = () => {
   const [blockedUsers, setBlockedUsers] = useState([
@@ -14,13 +18,34 @@ const BlockedPage = () => {
     },
   ]);
   const [selectedBlockedId, setSelectedBlockedId] = useState(null);
+  const contentRef = useRef(null);
 
+  // Allow document to size to content for measurement
   useEffect(() => {
-    if (window.electronAPI && window.electronAPI.resizeWindow) {
-      const height = 396;
-      window.electronAPI.resizeWindow(753, height);
-    }
+    document.documentElement.classList.add("content-size-window");
+    document.body.classList.add("content-size-window");
+    const root = document.getElementById("root");
+    if (root) root.classList.add("content-size-window");
+    return () => {
+      document.documentElement.classList.remove("content-size-window");
+      document.body.classList.remove("content-size-window");
+      if (root) root.classList.remove("content-size-window");
+    };
   }, []);
+
+  // Resize window to fit content (updates when blocked list changes)
+  useEffect(() => {
+    if (!window.electronAPI?.resizeWindow) return;
+    const id = requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        const el = contentRef.current;
+        const contentHeight = el ? el.scrollHeight : document.body.scrollHeight;
+        const height = Math.max(MIN_HEIGHT, contentHeight + HEIGHT_PADDING);
+        window.electronAPI.resizeWindow(WINDOW_WIDTH, height);
+      });
+    });
+    return () => cancelAnimationFrame(id);
+  }, [blockedUsers]);
 
   const handleUnblock = () => {
     if (!selectedBlockedId) return;
@@ -36,7 +61,7 @@ const BlockedPage = () => {
   };
 
   return (
-    <div className="add-contact-window">
+    <div className="add-contact-window" ref={contentRef}>
       <div className="header-wrapper">
         <div className="header">
           <div className="addUserImg">
@@ -75,7 +100,7 @@ const BlockedPage = () => {
             {blockedUsers.map((user) => (
               <tr
                 key={user.id}
-                className={`blocked-user-row ${selectedBlockedId === user.id ? "blocked-row-selected" : ""}`}
+                className={`blocked-user-row ${selectedBlockedId === user.id ? "result-row-selected" : ""}`}
                 onClick={() => setSelectedBlockedId(user.id)}
               >
                 <td>{user.fullName}</td>

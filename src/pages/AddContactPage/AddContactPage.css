@@ -10,7 +10,7 @@
   background: #fff;
   position: relative;
   border-radius: 8px;
-  overflow-y: auto;
+  overflow: hidden;
 }
 
 .header-wrapper {
@@ -403,7 +403,7 @@
   border: 1px solid #c9c9c9;
   display: flex;
   flex-direction: column;
-  height: 134px;
+  min-height: 134px;
   align-items: flex-start;
   position: relative;
   box-shadow: 2px 2px 1px 0px rgba(0, 0, 0, 0.5);
@@ -412,7 +412,6 @@
   min-width: 0;
   border-collapse: collapse;
   margin: 0 auto;
-  overflow-x: auto;
 }
 .results-table th,
 .results-table td {
@@ -488,16 +487,28 @@
   display: flex;
   width: 100%;
   min-width: 0;
-}
-
-.result-row {
-  background: #00abfb;
+  cursor: pointer;
+  background-color: #fff;
   border: 0.5px solid #c9c9c9;
   font-family: "Segoe UI", sans-serif;
   font-weight: 400;
   line-height: normal;
   font-style: normal;
   position: relative;
+  font-size: 12px;
+  color: #000;
+}
+
+.results-table tbody tr.result-row-selected {
+  background-color: #00abfb;
+}
+
+.result-row {
+  border: 0;
+  font-family: "Segoe UI", sans-serif;
+  font-weight: 400;
+  line-height: normal;
+  font-style: normal;
   font-size: 12px;
   color: #000;
   width: 100%;

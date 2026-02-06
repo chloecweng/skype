@@ -21,6 +21,15 @@ html {
   height: 100%;
 }
 
+/* Let add-contact and blocked modal windows size to their content */
+html.content-size-window,
+body.content-size-window,
+#root.content-size-window {
+  height: auto;
+  min-height: 0;
+  overflow: hidden;
+}
+
 .app-wrapper {
   width: 100%;
   height: 100%;

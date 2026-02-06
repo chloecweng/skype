@@ -40,7 +40,9 @@ const CallPopupWindow = () => {
         </div>
 
         <div className="call-body">
-          <div className="caller-avatar-large"></div>
+          <div className="caller-avatar-large">
+            <img src="./assets/flower.png" alt="August27" />
+          </div>
           <div className="call-info-text">
             <p className="caller-name-title">August27 is video calling</p>
           </div>
