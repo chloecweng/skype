@@ -5,6 +5,8 @@ import "./BlockedPage.css";
 const WINDOW_WIDTH = 753;
 const MIN_HEIGHT = 320;
 const HEIGHT_PADDING = 16;
+/** Extra height for OS window chrome (e.g. Windows title bar) so content isn't cut off */
+const WINDOW_FRAME_BUFFER = 50;
 
 const BlockedPage = () => {
   const [blockedUsers, setBlockedUsers] = useState([
@@ -40,7 +42,10 @@ const BlockedPage = () => {
       requestAnimationFrame(() => {
         const el = contentRef.current;
         const contentHeight = el ? el.scrollHeight : document.body.scrollHeight;
-        const height = Math.max(MIN_HEIGHT, contentHeight + HEIGHT_PADDING);
+        const height = Math.max(
+          MIN_HEIGHT,
+          contentHeight + HEIGHT_PADDING + WINDOW_FRAME_BUFFER
+        );
         window.electronAPI.resizeWindow(WINDOW_WIDTH, height);
       });
     });

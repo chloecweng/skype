@@ -375,26 +375,28 @@
 .progress-bar-background {
   position: absolute;
   height: 10px;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
+  right: 0;
   border-radius: 10px;
   top: -1px;
-  width: 524px;
-  background: #eee url("./assets/progress-bar-background.svg");
+  width: 100%;
+  background-color: #eee;
+  background-image: url("./assets/progress-bar-background.svg");
   background-size: cover;
 }
 
 .progress-bar-fill {
   position: absolute;
   height: 8px;
-  left: 0; /* This will be animated */
-  opacity: 0.583;
-  border-radius: 10px;
+  left: 0;
   top: 0;
-  width: 107px; /* Fixed width - doesn't grow */
-  background: url("./assets/progress-bar-foreground.svg");
+  min-width: 0;
+  border-radius: 10px;
+  /* Solid fallback so bar is visible when SVG fails to load (e.g. packaged app) */
+  background-color: rgba(0, 170, 251, 0.58);
+  background-image: url("./assets/progress-bar-foreground.svg");
   background-size: cover;
-  transition: left 0.1s ease; /* Animate position, not width */
+  transition: width 0.08s ease-out;
 }
 
 /* Results Table */

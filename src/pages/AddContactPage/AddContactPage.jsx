@@ -4,6 +4,8 @@ import "./AddContactPage.css";
 const WINDOW_WIDTH = 753;
 const MIN_HEIGHT = 320;
 const HEIGHT_PADDING = 16;
+/** Extra height for OS window chrome (e.g. Windows title bar) so content isn't cut off */
+const WINDOW_FRAME_BUFFER = 50;
 
 const AddContactPage = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -13,6 +15,7 @@ const AddContactPage = () => {
   const [message, setMessage] = useState("");
   const [selectedResultId, setSelectedResultId] = useState(null);
   const contentRef = useRef(null);
+  const loadingIntervalRef = useRef(null);
 
   // Allow document to size to content for measurement
   useEffect(() => {
@@ -34,7 +37,10 @@ const AddContactPage = () => {
       requestAnimationFrame(() => {
         const el = contentRef.current;
         const contentHeight = el ? el.scrollHeight : document.body.scrollHeight;
-        const height = Math.max(MIN_HEIGHT, contentHeight + HEIGHT_PADDING);
+        const height = Math.max(
+          MIN_HEIGHT,
+          contentHeight + HEIGHT_PADDING + WINDOW_FRAME_BUFFER
+        );
         window.electronAPI.resizeWindow(WINDOW_WIDTH, height);
       });
     });
@@ -54,29 +60,21 @@ const AddContactPage = () => {
     });
   }, []);
 
-  // Auto-advance from step 2 to step 3 after 3-5 seconds
+  // Auto-advance from step 2 to step 3 after ~4 seconds; progress bar animates in sync
   useEffect(() => {
-    if (currentStep === 2) {
-      setLoadingProgress(0);
-      const interval = setInterval(() => {
-        setLoadingProgress((prev) => {
-          if (prev >= 100) {
-            clearInterval(interval);
-            return 100;
-          }
-          return prev + 1;
-        });
-      }, 35);
-
-      const timeout = setTimeout(() => {
-        setCurrentStep(3);
-      }, 4000);
-
-      return () => {
-        clearInterval(interval);
-        clearTimeout(timeout);
-      };
-    }
+    if (currentStep !== 2) return;
+    setLoadingProgress(0);
+    const timeout = setTimeout(() => setCurrentStep(3), 4000);
+    loadingIntervalRef.current = setInterval(() => {
+      setLoadingProgress((prev) => (prev >= 100 ? 100 : prev + 1));
+    }, 40);
+    return () => {
+      clearTimeout(timeout);
+      if (loadingIntervalRef.current) {
+        clearInterval(loadingIntervalRef.current);
+        loadingIntervalRef.current = null;
+      }
+    };
   }, [currentStep]);
 
   const handleFind = () => {
@@ -249,8 +247,12 @@ const AddContactPage = () => {
                 <div className="progress-bar-background"></div>
                 <div
                   className="progress-bar-fill"
-                  style={{ left: `${(loadingProgress / 100) * (524 - 107)}px` }}
-                ></div>
+                  style={{ width: `${loadingProgress}%` }}
+                  role="progressbar"
+                  aria-valuenow={loadingProgress}
+                  aria-valuemin={0}
+                  aria-valuemax={100}
+                />
               </div>
             </div>
             <div className="footer">
