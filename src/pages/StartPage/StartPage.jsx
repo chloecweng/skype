@@ -403,8 +403,8 @@ const StartPage = () => {
           ...prev,
           [newId]: contactData.chatHistory || [],
         }));
-        // Add contact to list (prepend so new contacts appear at top)
-        setContacts((prev) => [contactData, ...prev]);
+        // Add contact to list (append so new contacts appear at bottom)
+        setContacts((prev) => [...prev, contactData]);
         // Select the new contact
         setSelectedContactId(newId);
       });
