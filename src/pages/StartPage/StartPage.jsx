@@ -1674,7 +1674,7 @@ const StartPage = () => {
                   <video
                     ref={remoteVideoRef}
                     className={`video-call ${isAugustVideoPlaying ? "visible" : "hidden"}`}
-                    src="./assets/main-clip-2.mp4"
+                    src="./assets/main-clip-3.mp4"
                     playsInline
                     muted
                     onEnded={() => {
