@@ -42,7 +42,7 @@ const StartPage = () => {
         prev.map((contact) => ({
           ...contact,
           localTime: getCurrentTimeWithLocation(),
-        }))
+        })),
       );
     };
 
@@ -124,7 +124,7 @@ const StartPage = () => {
       // ✅ If he exists → FORCE unblock
       if (existing) {
         return prev.map((c) =>
-          c.id === "contact-august" ? { ...c, blocked: false } : c
+          c.id === "contact-august" ? { ...c, blocked: false } : c,
         );
       }
 
@@ -453,7 +453,9 @@ const StartPage = () => {
   // 1. DATA CONFIGURATION
   const SCENES = {
     NORMAL: {
-      initialHistory: [{ sender: "HarborLine", text: "Hey.", time: getCurrentTime() }],
+      initialHistory: [
+        { sender: "HarborLine", text: "Hey.", time: getCurrentTime() },
+      ],
       incomingScript: [],
     },
     SCENE_2: {
@@ -478,7 +480,11 @@ const StartPage = () => {
           text: "Are yu there? Hello. Can u ucal tonite?",
           time: getCurrentTime(),
         },
-        { sender: "August27", text: "Can u call tonight.", time: getCurrentTime() },
+        {
+          sender: "August27",
+          text: "Can u call tonight.",
+          time: getCurrentTime(),
+        },
       ],
       incomingScript: [], // No new messages pop up here
     },
@@ -486,14 +492,38 @@ const StartPage = () => {
       initialHistory: [
         { sender: "August 27", text: "hey uhh", time: getCurrentTime() },
         { sender: "August 27", text: "r u arounfd", time: getCurrentTime() },
-        { sender: "August 27", text: "i thinmk i saw u??", time: getCurrentTime() },
+        {
+          sender: "August 27",
+          text: "i thinmk i saw u??",
+          time: getCurrentTime(),
+        },
         { sender: "August 27", text: "like just now", time: getCurrentTime() },
-        { sender: "August 27", text: "or am i mixign ppl", time: getCurrentTime() },
-        { sender: "August 27", text: "im standin out frint", time: getCurrentTime() },
-        { sender: "August 27", text: "frint of the place", time: getCurrentTime() },
+        {
+          sender: "August 27",
+          text: "or am i mixign ppl",
+          time: getCurrentTime(),
+        },
+        {
+          sender: "August 27",
+          text: "im standin out frint",
+          time: getCurrentTime(),
+        },
+        {
+          sender: "August 27",
+          text: "frint of the place",
+          time: getCurrentTime(),
+        },
         { sender: "August 27", text: "its dark tho", time: getCurrentTime() },
-        { sender: "August 27", text: "u were ther right", time: getCurrentTime() },
-        { sender: "August 27", text: "i swearr u were", time: getCurrentTime() },
+        {
+          sender: "August 27",
+          text: "u were ther right",
+          time: getCurrentTime(),
+        },
+        {
+          sender: "August 27",
+          text: "i swearr u were",
+          time: getCurrentTime(),
+        },
         {
           sender: "August 27",
           text: "i saw a jaket like urs",
@@ -501,14 +531,30 @@ const StartPage = () => {
         },
         { sender: "August 27", text: "then it movved", time: getCurrentTime() },
         { sender: "August 27", text: "my eyes r bad", time: getCurrentTime() },
-        { sender: "August 27", text: "but not thta bad", time: getCurrentTime() },
+        {
+          sender: "August 27",
+          text: "but not thta bad",
+          time: getCurrentTime(),
+        },
         { sender: "August 27", text: "hello??", time: getCurrentTime() },
         { sender: "August 27", text: "pls txt bak", time: getCurrentTime() },
         { sender: "August 27", text: "dont be weird", time: getCurrentTime() },
-        { sender: "August 27", text: "im not tryin be", time: getCurrentTime() },
-        { sender: "August 27", text: "i just wanna kno", time: getCurrentTime() },
+        {
+          sender: "August 27",
+          text: "im not tryin be",
+          time: getCurrentTime(),
+        },
+        {
+          sender: "August 27",
+          text: "i just wanna kno",
+          time: getCurrentTime(),
+        },
         { sender: "August 27", text: "if that was u", time: getCurrentTime() },
-        { sender: "August 27", text: "bc u lookd right", time: getCurrentTime() },
+        {
+          sender: "August 27",
+          text: "bc u lookd right",
+          time: getCurrentTime(),
+        },
         { sender: "August 27", text: "strait at me", time: getCurrentTime() },
         { sender: "August 27", text: "like dead on", time: getCurrentTime() },
         { sender: "August 27", text: "then u turnedd", time: getCurrentTime() },
@@ -516,35 +562,91 @@ const StartPage = () => {
         { sender: "August 27", text: "walkd off???", time: getCurrentTime() },
         { sender: "August 27", text: "my brain cant", time: getCurrentTime() },
         { sender: "August 27", text: "proccess that", time: getCurrentTime() },
-        { sender: "August 27", text: "did i do somethign", time: getCurrentTime() },
-        { sender: "August 27", text: "say somethin wrong", time: getCurrentTime() },
-        { sender: "August 27", text: "pls just say no", time: getCurrentTime() },
+        {
+          sender: "August 27",
+          text: "did i do somethign",
+          time: getCurrentTime(),
+        },
+        {
+          sender: "August 27",
+          text: "say somethin wrong",
+          time: getCurrentTime(),
+        },
+        {
+          sender: "August 27",
+          text: "pls just say no",
+          time: getCurrentTime(),
+        },
         { sender: "August 27", text: "or yes", time: getCurrentTime() },
-        { sender: "August 27", text: "anythign is bettr", time: getCurrentTime() },
+        {
+          sender: "August 27",
+          text: "anythign is bettr",
+          time: getCurrentTime(),
+        },
         { sender: "August 27", text: "than this", time: getCurrentTime() },
         { sender: "August 27", text: "im starin at", time: getCurrentTime() },
         { sender: "August 27", text: "the door still", time: getCurrentTime() },
-        { sender: "August 27", text: "peopl walk past", time: getCurrentTime() },
+        {
+          sender: "August 27",
+          text: "peopl walk past",
+          time: getCurrentTime(),
+        },
         { sender: "August 27", text: "none of them u", time: getCurrentTime() },
-        { sender: "August 27", text: "i feel so stupdi", time: getCurrentTime() },
-        { sender: "August 27", text: "like reall stupid", time: getCurrentTime() },
-        { sender: "August 27", text: "i thout we were", time: getCurrentTime() },
+        {
+          sender: "August 27",
+          text: "i feel so stupdi",
+          time: getCurrentTime(),
+        },
+        {
+          sender: "August 27",
+          text: "like reall stupid",
+          time: getCurrentTime(),
+        },
+        {
+          sender: "August 27",
+          text: "i thout we were",
+          time: getCurrentTime(),
+        },
         { sender: "August 27", text: "cool at least", time: getCurrentTime() },
         { sender: "August 27", text: "freinds maybe", time: getCurrentTime() },
         { sender: "August 27", text: "u said freinds", time: getCurrentTime() },
-        { sender: "August 27", text: "was that fake tho", time: getCurrentTime() },
-        { sender: "August 27", text: "bc it felt real", time: getCurrentTime() },
+        {
+          sender: "August 27",
+          text: "was that fake tho",
+          time: getCurrentTime(),
+        },
+        {
+          sender: "August 27",
+          text: "bc it felt real",
+          time: getCurrentTime(),
+        },
         { sender: "August 27", text: "to me i guess", time: getCurrentTime() },
-        { sender: "August 27", text: "my hands r shakn", time: getCurrentTime() },
+        {
+          sender: "August 27",
+          text: "my hands r shakn",
+          time: getCurrentTime(),
+        },
         { sender: "August 27", text: "im typign bad", time: getCurrentTime() },
         { sender: "August 27", text: "srry", time: getCurrentTime() },
-        { sender: "August 27", text: "im just confused", time: getCurrentTime() },
+        {
+          sender: "August 27",
+          text: "im just confused",
+          time: getCurrentTime(),
+        },
         { sender: "August 27", text: "and hurt a bit", time: getCurrentTime() },
-        { sender: "August 27", text: "pls dont ignroe", time: getCurrentTime() },
+        {
+          sender: "August 27",
+          text: "pls dont ignroe",
+          time: getCurrentTime(),
+        },
         { sender: "August 27", text: "me like this", time: getCurrentTime() },
         { sender: "August 27", text: "i paidd u", time: getCurrentTime() },
         { sender: "August 27", text: "remmebr", time: getCurrentTime() },
-        { sender: "August 27", text: "u said come bak", time: getCurrentTime() },
+        {
+          sender: "August 27",
+          text: "u said come bak",
+          time: getCurrentTime(),
+        },
         { sender: "August 27", text: "i beleived u", time: getCurrentTime() },
         { sender: "August 27", text: "im still here", time: getCurrentTime() },
         { sender: "August 27", text: "waitin", time: getCurrentTime() },
@@ -592,7 +694,12 @@ const StartPage = () => {
         },
       ],
       incomingScript: [
-        { sender: "August27", text: "u hate me", delay: 2000, time: getCurrentTime() },
+        {
+          sender: "August27",
+          text: "u hate me",
+          delay: 2000,
+          time: getCurrentTime(),
+        },
         {
           sender: "August27",
           text: "come bac;k please",
@@ -617,14 +724,24 @@ const StartPage = () => {
           delay: 11000,
           time: getCurrentTime(),
         },
-        { sender: "August27", text: "Miss yu", delay: 13000, time: getCurrentTime() },
+        {
+          sender: "August27",
+          text: "Miss yu",
+          delay: 13000,
+          time: getCurrentTime(),
+        },
         {
           sender: "August27",
           text: "Jamess I miss you..",
           delay: 16000,
           time: getCurrentTime(),
         },
-        { sender: "August27", text: "Helloooo", delay: 19000, time: getCurrentTime() },
+        {
+          sender: "August27",
+          text: "Helloooo",
+          delay: 19000,
+          time: getCurrentTime(),
+        },
         {
           sender: "August27",
           text: "Where rrr u?",
@@ -667,14 +784,38 @@ const StartPage = () => {
       initialHistory: [
         { sender: "August 27", text: "hey uhh", time: getCurrentTime() },
         { sender: "August 27", text: "r u arounfd", time: getCurrentTime() },
-        { sender: "August 27", text: "i thinmk i saw u??", time: getCurrentTime() },
+        {
+          sender: "August 27",
+          text: "i thinmk i saw u??",
+          time: getCurrentTime(),
+        },
         { sender: "August 27", text: "like just now", time: getCurrentTime() },
-        { sender: "August 27", text: "or am i mixign ppl", time: getCurrentTime() },
-        { sender: "August 27", text: "im standin out frint", time: getCurrentTime() },
-        { sender: "August 27", text: "frint of the place", time: getCurrentTime() },
+        {
+          sender: "August 27",
+          text: "or am i mixign ppl",
+          time: getCurrentTime(),
+        },
+        {
+          sender: "August 27",
+          text: "im standin out frint",
+          time: getCurrentTime(),
+        },
+        {
+          sender: "August 27",
+          text: "frint of the place",
+          time: getCurrentTime(),
+        },
         { sender: "August 27", text: "its dark tho", time: getCurrentTime() },
-        { sender: "August 27", text: "u were ther right", time: getCurrentTime() },
-        { sender: "August 27", text: "i swearr u were", time: getCurrentTime() },
+        {
+          sender: "August 27",
+          text: "u were ther right",
+          time: getCurrentTime(),
+        },
+        {
+          sender: "August 27",
+          text: "i swearr u were",
+          time: getCurrentTime(),
+        },
         {
           sender: "August 27",
           text: "i saw a jaket like urs",
@@ -682,14 +823,30 @@ const StartPage = () => {
         },
         { sender: "August 27", text: "then it movved", time: getCurrentTime() },
         { sender: "August 27", text: "my eyes r bad", time: getCurrentTime() },
-        { sender: "August 27", text: "but not thta bad", time: getCurrentTime() },
+        {
+          sender: "August 27",
+          text: "but not thta bad",
+          time: getCurrentTime(),
+        },
         { sender: "August 27", text: "hello??", time: getCurrentTime() },
         { sender: "August 27", text: "pls txt bak", time: getCurrentTime() },
         { sender: "August 27", text: "dont be weird", time: getCurrentTime() },
-        { sender: "August 27", text: "im not tryin be", time: getCurrentTime() },
-        { sender: "August 27", text: "i just wanna kno", time: getCurrentTime() },
+        {
+          sender: "August 27",
+          text: "im not tryin be",
+          time: getCurrentTime(),
+        },
+        {
+          sender: "August 27",
+          text: "i just wanna kno",
+          time: getCurrentTime(),
+        },
         { sender: "August 27", text: "if that was u", time: getCurrentTime() },
-        { sender: "August 27", text: "bc u lookd right", time: getCurrentTime() },
+        {
+          sender: "August 27",
+          text: "bc u lookd right",
+          time: getCurrentTime(),
+        },
         { sender: "August 27", text: "strait at me", time: getCurrentTime() },
         { sender: "August 27", text: "like dead on", time: getCurrentTime() },
         { sender: "August 27", text: "then u turnedd", time: getCurrentTime() },
@@ -697,35 +854,91 @@ const StartPage = () => {
         { sender: "August 27", text: "walkd off???", time: getCurrentTime() },
         { sender: "August 27", text: "my brain cant", time: getCurrentTime() },
         { sender: "August 27", text: "proccess that", time: getCurrentTime() },
-        { sender: "August 27", text: "did i do somethign", time: getCurrentTime() },
-        { sender: "August 27", text: "say somethin wrong", time: getCurrentTime() },
-        { sender: "August 27", text: "pls just say no", time: getCurrentTime() },
+        {
+          sender: "August 27",
+          text: "did i do somethign",
+          time: getCurrentTime(),
+        },
+        {
+          sender: "August 27",
+          text: "say somethin wrong",
+          time: getCurrentTime(),
+        },
+        {
+          sender: "August 27",
+          text: "pls just say no",
+          time: getCurrentTime(),
+        },
         { sender: "August 27", text: "or yes", time: getCurrentTime() },
-        { sender: "August 27", text: "anythign is bettr", time: getCurrentTime() },
+        {
+          sender: "August 27",
+          text: "anythign is bettr",
+          time: getCurrentTime(),
+        },
         { sender: "August 27", text: "than this", time: getCurrentTime() },
         { sender: "August 27", text: "im starin at", time: getCurrentTime() },
         { sender: "August 27", text: "the door still", time: getCurrentTime() },
-        { sender: "August 27", text: "peopl walk past", time: getCurrentTime() },
+        {
+          sender: "August 27",
+          text: "peopl walk past",
+          time: getCurrentTime(),
+        },
         { sender: "August 27", text: "none of them u", time: getCurrentTime() },
-        { sender: "August 27", text: "i feel so stupdi", time: getCurrentTime() },
-        { sender: "August 27", text: "like reall stupid", time: getCurrentTime() },
-        { sender: "August 27", text: "i thout we were", time: getCurrentTime() },
+        {
+          sender: "August 27",
+          text: "i feel so stupdi",
+          time: getCurrentTime(),
+        },
+        {
+          sender: "August 27",
+          text: "like reall stupid",
+          time: getCurrentTime(),
+        },
+        {
+          sender: "August 27",
+          text: "i thout we were",
+          time: getCurrentTime(),
+        },
         { sender: "August 27", text: "cool at least", time: getCurrentTime() },
         { sender: "August 27", text: "freinds maybe", time: getCurrentTime() },
         { sender: "August 27", text: "u said freinds", time: getCurrentTime() },
-        { sender: "August 27", text: "was that fake tho", time: getCurrentTime() },
-        { sender: "August 27", text: "bc it felt real", time: getCurrentTime() },
+        {
+          sender: "August 27",
+          text: "was that fake tho",
+          time: getCurrentTime(),
+        },
+        {
+          sender: "August 27",
+          text: "bc it felt real",
+          time: getCurrentTime(),
+        },
         { sender: "August 27", text: "to me i guess", time: getCurrentTime() },
-        { sender: "August 27", text: "my hands r shakn", time: getCurrentTime() },
+        {
+          sender: "August 27",
+          text: "my hands r shakn",
+          time: getCurrentTime(),
+        },
         { sender: "August 27", text: "im typign bad", time: getCurrentTime() },
         { sender: "August 27", text: "srry", time: getCurrentTime() },
-        { sender: "August 27", text: "im just confused", time: getCurrentTime() },
+        {
+          sender: "August 27",
+          text: "im just confused",
+          time: getCurrentTime(),
+        },
         { sender: "August 27", text: "and hurt a bit", time: getCurrentTime() },
-        { sender: "August 27", text: "pls dont ignroe", time: getCurrentTime() },
+        {
+          sender: "August 27",
+          text: "pls dont ignroe",
+          time: getCurrentTime(),
+        },
         { sender: "August 27", text: "me like this", time: getCurrentTime() },
         { sender: "August 27", text: "i paidd u", time: getCurrentTime() },
         { sender: "August 27", text: "remmebr", time: getCurrentTime() },
-        { sender: "August 27", text: "u said come bak", time: getCurrentTime() },
+        {
+          sender: "August 27",
+          text: "u said come bak",
+          time: getCurrentTime(),
+        },
         { sender: "August 27", text: "i beleived u", time: getCurrentTime() },
         { sender: "August 27", text: "im still here", time: getCurrentTime() },
         { sender: "August 27", text: "waitin", time: getCurrentTime() },
@@ -898,7 +1111,7 @@ const StartPage = () => {
   useEffect(() => {
     const scene = SCENES[currentSceneKey];
     const august = contacts.find(
-      (c) => c.name === "August27" || c.skypeName === "Aug27"
+      (c) => c.name === "August27" || c.skypeName === "Aug27",
     );
 
     if (!august || selectedContactId !== august.id) return;
@@ -1187,17 +1400,12 @@ const StartPage = () => {
 
         if (existing) {
           return prev.map((c) =>
-            c.id === contactId
-              ? { ...c, blocked: false }
-              : c
+            c.id === contactId ? { ...c, blocked: false } : c,
           );
         }
 
         if (contactId === "contact-august") {
-          return [
-            ...prev,
-            { ...AUGUST_CONTACT },
-          ];
+          return [...prev, { ...AUGUST_CONTACT }];
         }
 
         return prev;
@@ -1214,7 +1422,7 @@ const StartPage = () => {
     contacts.map((c) => ({
       id: c.id,
       blocked: c.blocked,
-    }))
+    })),
   );
 
   if (isInVideoCall) {
@@ -1466,7 +1674,7 @@ const StartPage = () => {
                   <video
                     ref={remoteVideoRef}
                     className={`video-call ${isAugustVideoPlaying ? "visible" : "hidden"}`}
-                    src="./assets/main-clip-1.mov"
+                    src="./assets/main-clip-2.mp4"
                     playsInline
                     muted
                     onEnded={() => {
@@ -1654,7 +1862,7 @@ const StartPage = () => {
                   selectedContact
                     ? getStatusIcon(
                         selectedContact.status,
-                        selectedContact.name
+                        selectedContact.name,
                       )
                     : "./assets/busy.svg"
                 }
