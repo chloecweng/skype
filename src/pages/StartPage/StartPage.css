@@ -490,7 +490,7 @@
 
 .video-call.visible {
   display: block;
-  width: 100%;
+  width: 101%;
   height: 101%;
   opacity: 1;
   z-index: 3;
